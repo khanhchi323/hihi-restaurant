@@ -5,10 +5,24 @@ import { Head } from '@inertiajs/vue3';
 
 <template>
     <Head title="Dashboard" />
+    
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>
+            <div class="flex space-x-4">
+                    <a  v-bind:href="Catogory.Index" class="font-semibold text-xl text-gray-800 leading-tight">Loại</a>
+                
+            <router-link to="/" class="font-semibold text-xl text-gray-800 leading-tight">Dashboard</router-link>
+            <!-- Các mục menu -->
+            
+                    <!-- Liên kết tới trang Sản phẩm -->
+                    <router-link to="/products" class="font-semibold text-xl text-gray-800 leading-tight">Sản phẩm</router-link>
+
+                    <!-- Liên kết tới trang Loại -->
+
+                    <!-- Liên kết tới trang Nhân viên -->
+                    <router-link to="/employees" class="font-semibold text-xl text-gray-800 leading-tight">Nhân viên</router-link>
+                </div>
         </template>
 
         <div class="py-12">

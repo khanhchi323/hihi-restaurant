@@ -33,5 +33,6 @@ Route::get('/dbconn', function(){
 });
 
 Route::get('/Admin/Category/Index', [CategoryController::class, 'index']) ->name('category.index');     
-Route::get('/Admin/Menu/Index', [MenuController::class, 'index']) -> name('category.index');
+Route::get('/Admin/Menu/Index', [MenuController::class, 'index']) -> name('menu.index');
+// Route::get('/Admin/Menu/Create', [MenuController::class, 'create'])->name('menu.create');
 require __DIR__.'/auth.php';

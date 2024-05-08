@@ -12,10 +12,10 @@ import { Head } from '@inertiajs/vue3';
             <div class="flex space-x-4">
                     <a  v-bind:href="'Catogory.Index'" class="font-semibold text-xl text-gray-800 leading-tight">Dashboard</a>
                     <a  v-bind:href="'Catogory.Index'" class="font-semibold text-xl text-gray-800 leading-tight">Categories</a>
-                    <a  v-bind:href="'Catogory.Index'" class="font-semibold text-xl text-gray-800 leading-tight">Menus</a>
+                    <a  v-bind:href="'Menu.Index'" class="font-semibold text-xl text-gray-800 leading-tight">Menus</a>
                     <a  v-bind:href="'Catogory.Index'" class="font-semibold text-xl text-gray-800 leading-tight">Clients</a>
                     <a  v-bind:href="'Catogory.Index'" class="font-semibold text-xl text-gray-800 leading-tight">Tables</a>
-                    <a  v-bind:href="'Catogory.Index'" class="font-semibold text-xl text-gray-800 leading-tight">REports</a>
+                    <a  v-bind:href="'Catogory.Index'" class="font-semibold text-xl text-gray-800 leading-tight">Reports</a>
                 </div>
         </template>
 
@@ -23,6 +23,7 @@ import { Head } from '@inertiajs/vue3';
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">You're logged in!</div>
+                    
                 </div>
             </div>
         </div>

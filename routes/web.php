@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\MenuController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -32,5 +33,5 @@ Route::get('/dbconn', function(){
 });
 
 Route::get('/Admin/Category/Index', [CategoryController::class, 'index']) ->name('category.index');     
-Route::get('/A');
+Route::get('/Admin/Menu/Index', [MenuController::class, 'index']) -> name('category.index');
 require __DIR__.'/auth.php';

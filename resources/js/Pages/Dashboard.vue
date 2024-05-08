@@ -10,7 +10,7 @@ import { Head } from '@inertiajs/vue3';
     <AuthenticatedLayout>
         <template #header>
             <div class="flex space-x-4">
-                    <a  v-bind:href="Catogory.Index" class="font-semibold text-xl text-gray-800 leading-tight">Loại</a>
+                    <a  v-bind:href="'Catogory.Index'" class="font-semibold text-xl text-gray-800 leading-tight">Loại</a>
                 
             <router-link to="/" class="font-semibold text-xl text-gray-800 leading-tight">Dashboard</router-link>
             <!-- Các mục menu -->

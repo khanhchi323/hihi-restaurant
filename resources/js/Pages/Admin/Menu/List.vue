@@ -1,6 +1,6 @@
 <template>
     <div class="mx-16 my-10">
-      <h1 class=" flex justify-center text-3xl font-bold mb-4">Menu List</h1>
+      <h1 class=" flex justify-center text-3xl font-bold mb-4 text-center">Menu List</h1>
   
       <!-- Danh sách các category -->
       <div class="flex space-x-4 mb-4">
@@ -11,8 +11,8 @@
             <option v-for="(category, index) in categories" :key="index" :value="category">{{ category }}</option>
         </select>
         </div>
-        <div class="w-1/3 text-right  ">
-            <a href="{{ route('menu.create') }}" class="btn btn-primary bg-green-400  hover:bg-green-700 p-3 font-bold rounded rounded-lg px-5 ">Add new category</a>  
+        <div class="w-1/3 text-right ">
+            <a href="{{ route('menu.create') }}" class="btn btn-primary bg-green-400  hover:bg-green-700 p-3 font-bold rounded rounded-lg px-5 ">Add</a>  
         </div>
       </div>
   
@@ -24,7 +24,7 @@
                 <th class="px-4 py-2 w-1/5">Name</th>
                 <th class="px-4 py-2 w-1/6">Price</th>
                 <th class="px-4 py-2 w-1/4">Image</th>
-                <th class="px-4 py-2 w-16">Active</th> <!-- Đặt kích thước cố định là 16px -->
+                <th class="px-4 py-2 w-16">Actions</th> <!-- Đặt kích thước cố định là 16px -->
               </tr>
         </thead>
         <tbody>

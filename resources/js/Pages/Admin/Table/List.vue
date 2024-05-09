@@ -15,7 +15,7 @@
               <th class="border px-4 py-2 w-32">ID</th>
               <th class="border px-4 py-2">No. Table</th>
               <th class="border px-4 py-2">Area</th>
-              <th class="border px-4 py-2">Active</th>
+              <th class="border px-4 py-2">Action</th>
             </tr>
           </thead>
           <!-- Table body -->

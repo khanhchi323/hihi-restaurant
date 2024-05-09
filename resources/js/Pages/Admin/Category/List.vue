@@ -11,20 +11,20 @@
       </div>
     </div>
 
-    <table class="w-full">
+    <table class="w-full ">
       <thead>
-          <tr>
-              <th class="px-4 py-2 w-16">ID</th> <!-- Đặt kích thước cố định là 16px -->
-              <th class="px-4 py-2 w-1/5">Category</th>
-              <th class="px-4 py-2 w-1/4">Image</th>
-              <th class="px-4 py-2 w-16">Active</th> <!-- Đặt kích thước cố định là 16px - px-->
+          <tr class="bg-gray-100">
+              <th class="px-4 py-2 border w-16">ID</th> <!-- Đặt kích thước cố định là 16px -->
+              <th class="px-4 py-2 border w-1/5">Category</th>
+              <th class="px-4 py-2 border w-1/4">Image</th>
+              <th class="px-4 py-2 border w-16">Actions</th> <!-- Đặt kích thước cố định là 16px - px-->
             </tr>
       </thead>
       <tbody>
         <tr v-for="menu in filteredMenus" :key="menu.id" class="text-center">
           <td class="border px-2 py-2 w-16">{{ menu.id }}</td>
           <td class="border px-4 py-2 w-2/5">{{ menu.category }}</td>
-          <th class="px-4 py-2 w-2/5 ">
+          <th class="px-4 py-2 border w-2/5 ">
               <img src="{{ menu.img }}" alt="Menu Image" style="width: 100px; height: 100px;">
           </th>
           <td class="border px-2 w-16">

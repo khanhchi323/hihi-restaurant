@@ -4,6 +4,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\TableController;
+use App\Http\Controllers\AreaController;
+
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +43,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/Admin/Table/List', [TableController::class, 'index']) ->name('table.list'); 
     Route::get('/Admin/Table/Create', [TableController::class, 'create']) ->name('table.create'); 
     Route::get('/Admin/Table/Edit', [TableController::class, 'edit']) ->name('table.edit'); 
+    //AREA
+    Route::get('/Admin/Area/List', [AreaController::class, 'index']) ->name('area.list');
+    Route::get('/Admin/Area/Create', [AreaController::class, 'index']) ->name('area.create');
+    Route::get('/Admin/Area/Edit', [AreaController::class, 'index']) ->name('area.edit');
+
     
 
 });

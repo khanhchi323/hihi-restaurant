@@ -1,7 +1,7 @@
 <template>
     <div class="w-full flex justify-center">
       <div class="m-4 w-2/5 items-center">
-        <h1 class="text-2xl font-bold mb-4">Edit Menu</h1>
+        <h1 class="text-2xl font-bold mb-4 text-center">Edit Menu </h1>
   
         <form @submit.prevent="handleSubmit">
           <div class="mb-4">

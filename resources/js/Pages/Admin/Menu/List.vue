@@ -11,8 +11,8 @@
             <option v-for="(category, index) in categories" :key="index" :value="category">{{ category }}</option>
         </select>
         </div>
-        <div class="w-1/3 text-center  ">
-            <a href="{{ route('menu.create') }}" class="btn btn-primary bg-green-400 p-3 rounded rounded-lg px-5 ">Add</a>  
+        <div class="w-1/3 text-right  ">
+            <a href="{{ route('menu.create') }}" class="btn btn-primary bg-green-400  hover:bg-green-700 p-3 font-bold rounded rounded-lg px-5 ">Add new category</a>  
         </div>
       </div>
   

@@ -11,5 +11,13 @@ class TableController extends Controller
     {
         $tables = Table::all();
         return  Inertia::render('Admin/Table/List', compact('tables'));
+
     }
-}
+    public function edit(){
+        return Inertia::render('Admin/Table/Edit');
+    }
+
+    public function create(){
+        return Inertia::render('Admin/Table/Create');
+}}
+

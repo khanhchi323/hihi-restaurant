@@ -1,7 +1,7 @@
 <template>
     <div class="w-full flex justify-center">
       <div class="m-4 w-2/5 items-center">
-        <h1 class="text-2xl font-bold mb-4">Create new category</h1>
+        <h1 class="text-2xl font-bold mb-4 text-center">Create new category</h1>
       <form @submit.prevent="handleSubmit" class="max-w-md">
         <div class="mb-4">
           <label for="name" class="block text-sm font-medium text-gray-700">Name:</label>

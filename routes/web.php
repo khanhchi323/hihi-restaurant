@@ -3,6 +3,8 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\TableController;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -34,6 +36,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/Admin/Menu/List', [MenuController::class, 'index']) ->name('menu.list'); 
     Route::get('/Admin/Menu/Create', [MenuController::class, 'create']) -> name('menu.create'); 
     Route::get('Admin/Menu/Edit', [MenuController::class, 'edit']) ->name('menu.edit');     
+
+    //TABLE
+    Route::get('/Admin/Table/List', [TableController::class, 'index']) ->name('table.list'); 
+    Route::get('/Admin/Table/Create', [TableController::class, 'create']) ->name('table.create'); 
+    Route::get('/Admin/Table/Edit', [TableController::class, 'edit']) ->name('table.edit'); 
+    
 
 });
 

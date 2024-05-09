@@ -10,13 +10,18 @@ use Inertia\Inertia;
 
 class CategoryController extends Controller
 {
+        //get 
+    public function index()
+    {
+        $categories = Category::all();
+        return  Inertia::render('Admin/Category/List', compact('categories'));
+    }
+
     public function create(){
         return Inertia::render('Admin/Category/Create');
     }
-
-        //get 
-    public function index(){
-        return Inertia::render('Admin/Category/Index');
+    public function edit(){
+        return Inertia::render('Admin/Category/Edit');
     }
 
     public function store(Request $request) : RedirectResponse {

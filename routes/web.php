@@ -25,6 +25,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
+    //CATEGORY
+    Route::get('/Admin/Category/List', [CategoryController::class, 'index']) ->name('category.list'); 
+    Route::get('/Admin/Category/Create', [CategoryController::class, 'create']) ->name('category.create'); 
+    Route::get('/Admin/Category/Edit', [CategoryController::class, 'edit']) ->name('category.edit');     
+
+    //MENU
+    Route::get('/Admin/Menu/List', [MenuController::class, 'index']) ->name('menu.list'); 
+    Route::get('/Admin/Menu/Create', [MenuController::class, 'create']) -> name('menu.create'); 
+    Route::get('/Admin/Meni/Edit', [MenuController::class, 'edit']) ->name('menu.edit');     
 
 });
 
@@ -32,7 +41,6 @@ Route::get('/dbconn', function(){
     return view('dbconn');
 });
 
-Route::get('/Admin/Category/Index', [CategoryController::class, 'index']) ->name('category.index');     
-Route::get('/Admin/Menu/Index', [MenuController::class, 'index']) -> name('menu.index');
+
 // Route::get('/Admin/Menu/Create', [MenuController::class, 'create'])->name('menu.create');
 require __DIR__.'/auth.php';

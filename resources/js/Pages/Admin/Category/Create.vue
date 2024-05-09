@@ -12,7 +12,7 @@
           <input type="file" id="image" @change="handleImageChange" class="mt-1 p-2 border rounded-md w-full">
           <img v-if="category.image" :src="category.image" alt="Category Image" class="mt-2" style="max-width: 100px; max-height: 100px;">
         </div>
-        <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Create Category</button>
+        <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Create</button>
       </form>
     </div>
   </div>

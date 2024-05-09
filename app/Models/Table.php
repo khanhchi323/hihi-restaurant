@@ -5,14 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Table extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'image'
+        'number', 'area_id'
        ];
-    public function menus()
+    public function area()
     {
-        return $this->hasMany(Menu::class);
+        return $this->belongsTo(Area::class);
+    }
+    public function areas()
+    {
+        return Area::all();
     }
 }

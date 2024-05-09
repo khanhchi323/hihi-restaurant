@@ -1,6 +1,6 @@
 <template>
-    <div class="m-2">
-      <h1 class="text-2xl font-bold mb-4">Menu List</h1>
+    <div class="mx-16 my-10">
+      <h1 class=" flex justify-center text-3xl font-bold mb-4">Menu List</h1>
   
       <!-- Danh sách các category -->
       <div class="flex space-x-4 mb-4">
@@ -12,7 +12,7 @@
         </select>
         </div>
         <div class="w-1/3 text-center  ">
-            <a href="{{ route('menu.create') }}" class="btn btn-primary bg-green-400 p-3 rounded rounded-lg ">Add new menu</a>  
+            <a href="{{ route('menu.create') }}" class="btn btn-primary bg-green-400 p-3 rounded rounded-lg px-5 ">Add</a>  
         </div>
       </div>
   

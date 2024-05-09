@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
     //MENU
     Route::get('/Admin/Menu/List', [MenuController::class, 'index']) ->name('menu.list'); 
     Route::get('/Admin/Menu/Create', [MenuController::class, 'create']) -> name('menu.create'); 
-    Route::get('/Admin/Meni/Edit', [MenuController::class, 'edit']) ->name('menu.edit');     
+    Route::get('Admin/Menu/Edit', [MenuController::class, 'edit']) ->name('menu.edit');     
 
 });
 

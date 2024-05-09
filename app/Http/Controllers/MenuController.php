@@ -13,11 +13,11 @@ class MenuController extends Controller
         $menus = Menu::all();
         return  Inertia::render('Admin/Menu/List', compact('menus'));
     }
-public function create(){
-    return Inertia::render('Admin/Menu/Create');
-}
+    public function create(){
+        return Inertia::render('Admin/Menu/Create');
+    }
 
-public function update(){
+public function edit(){
     return Inertia::render('Admin/Menu/Edit');
 }
 

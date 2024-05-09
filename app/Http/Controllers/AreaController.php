@@ -14,10 +14,10 @@ class AreaController extends Controller
         return  Inertia::render('Admin/Area/List', compact('areas'));
     }
     public function create(){
-        return Inertia::render('Admin/Menu/Create');
+        return Inertia::render('Admin/Area/Create');
     }
 
 public function edit(){
-    return Inertia::render('Admin/Menu/Edit');
+    return Inertia::render('Admin/Area/Edit');
 }
 }

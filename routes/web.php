@@ -45,8 +45,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/Admin/Table/Edit', [TableController::class, 'edit']) ->name('table.edit'); 
     //AREA
     Route::get('/Admin/Area/List', [AreaController::class, 'index']) ->name('area.list');
-    Route::get('/Admin/Area/Create', [AreaController::class, 'index']) ->name('area.create');
-    Route::get('/Admin/Area/Edit', [AreaController::class, 'index']) ->name('area.edit');
+    Route::get('/Admin/Area/Create', [AreaController::class, 'create']) ->name('area.create');
+    Route::get('/Admin/Area/Edit', [AreaController::class, 'edit']) ->name('area.edit');
 
     
 

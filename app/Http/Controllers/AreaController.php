@@ -13,4 +13,11 @@ class AreaController extends Controller
         $areas = Area::all();
         return  Inertia::render('Admin/Area/List', compact('areas'));
     }
+    public function create(){
+        return Inertia::render('Admin/Menu/Create');
+    }
+
+public function edit(){
+    return Inertia::render('Admin/Menu/Edit');
+}
 }

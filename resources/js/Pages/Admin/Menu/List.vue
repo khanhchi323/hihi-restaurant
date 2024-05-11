@@ -3,7 +3,8 @@
       <h1 class=" flex justify-center text-3xl font-bold mb-4 text-center">Menu List</h1>
   
       <!-- Danh sách các category -->
-      <div class="flex space-x-4 mb-4">
+      <div class="flex self-end
+       space-x-4 mb-4">
         <div class="w-2/3">
         <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
         <select id="category" v-model="selectedCategory" class="mt-1 p-2 border rounded-md w-64">

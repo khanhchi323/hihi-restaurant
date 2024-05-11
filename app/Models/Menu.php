@@ -9,7 +9,7 @@ class Menu extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'images','price', 'category_id'
+        'name', 'image','price', 'category_id'
        ];
     public function category()
     {

@@ -36,8 +36,9 @@ Route::middleware('auth')->group(function () {
 
     //MENU
     Route::get('/Admin/Menu/List', [MenuController::class, 'index']) ->name('menu.list'); 
-    Route::get('/Admin/Menu/Create', [MenuController::class, 'create']) -> name('menu.create'); 
+    Route::get('/Admin/Menu/Create', [MenuController::class, 'store']) -> name('menu.create'); 
     Route::get('Admin/Menu/Edit', [MenuController::class, 'edit']) ->name('menu.edit');     
+    Route::get('Admin/Menu/Test', [MenuController::class, 'allTest']) ->name('menu.test');     
 
     //TABLE
     Route::get('/Admin/Table/List', [TableController::class, 'index']) ->name('table.list'); 

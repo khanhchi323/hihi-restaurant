@@ -1,4 +1,11 @@
+  
+<script setup>
+  import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+  import { Head } from '@inertiajs/vue3';
+</script>
+
 <template>
+<AuthenticatedLayout>
     <div class="mx-16 my-10">
       <h1 class=" flex justify-center text-3xl font-bold mb-4 text-center">Menu List</h1>
   
@@ -48,36 +55,6 @@
       </table>
   </div>
       <!-- Button thêm menu mới -->
-   
+
+   </AuthenticatedLayout>
   </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        menus: [], // Dữ liệu các món ăn
-        categories: ['Thịt', 'Hải sản', 'Rau củ', 'Nước uống'], // Danh sách các category
-        selectedCategory: null // Category được chọn
-      };
-    },
-    computed: {
-      filteredMenus() {
-        // Lọc danh sách các món ăn theo category được chọn
-        if (!this.selectedCategory) {
-          return this.menus;
-        }
-        return this.menus.filter(menu => menu.category === this.selectedCategory);
-      }
-    },
-    mounted() {
-      // Trong mounted hook, bạn có thể thực hiện gọi API để lấy dữ liệu Menu từ backend
-      // Trong ví dụ này, tôi sẽ sử dụng dữ liệu mẫu
-      this.menus = [
-        { id: 1, category: 'Thịt', name: 'Menu 1', price: '1000', img: '' },
-        { id: 2, category: 'Thịt', name: 'Menu 11', price: '1000', img: '' },
-        { id: 3, category: 'Hải sản', name: 'Menu 2', price: '1000', img: '' },
-        { id: 4, category: 'Nước uống', name: 'Menu 3', price: '1000', img: '' }
-      ];
-    }
-  };
-  </script>

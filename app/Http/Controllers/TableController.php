@@ -19,5 +19,19 @@ class TableController extends Controller
 
     public function create(){
         return Inertia::render('Admin/Table/Create');
-}}
+}
+public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255|unique:tables,name',
+        ]);
+
+        $tables = Table::create($validatedData);
+
+        return response()->json([
+            'message' => 'Table created successfully!',
+            'table' => $table,
+        ]);
+    }
+}
 

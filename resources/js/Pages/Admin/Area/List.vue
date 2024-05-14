@@ -8,6 +8,7 @@ defineProps({
 
 const form = useForm();
 
+
 function deleteArea(id) {
     if (confirm("Are you sure you want to Delete")) {
         form.delete(route("areas.destroy", id));
@@ -66,11 +67,6 @@ function deleteArea(id) {
                                         >
                                             Delete
                                         </button>
-                                    </td>
-                                </tr>
-                                <tr v-if="isLoading">
-                                    <td colspan="3" class="text-center">
-                                        Loading...
                                     </td>
                                 </tr>
                             </tbody>

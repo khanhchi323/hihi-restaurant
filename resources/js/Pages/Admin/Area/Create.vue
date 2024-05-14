@@ -7,7 +7,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route("areas.store"));
+    form.post(route("area.store"));
 };
 </script>
 
@@ -47,7 +47,7 @@ const submit = () => {
                             </div>
                             <div class="flex items-center justify-between mb-6">
                                 <Link
-                                    className="px-6 py-2 text-white bg-green-500 rounded-md focus:outline-none"
+                                    className="px-6 py-2 text-white bg-red-500 rounded-md focus:outline-none"
                                     :href="route('area.list')"
                                 >
                                     Back</Link

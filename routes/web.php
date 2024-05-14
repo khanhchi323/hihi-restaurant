@@ -36,14 +36,18 @@ Route::middleware('auth')->group(function () {
 
     //MENU
     Route::get('/Admin/Menu/List', [MenuController::class, 'index']) ->name('menu.list'); 
-    Route::get('/Admin/Menu/Create', [MenuController::class, 'store']) -> name('menu.create'); 
+    Route::get('/Admin/Menu/Create', [MenuController::class, 'create']) -> name('menu.create'); 
     Route::get('Admin/Menu/Edit', [MenuController::class, 'edit']) ->name('menu.edit');     
-    Route::get('Admin/Menu/Test', [MenuController::class, 'allTest']) ->name('menu.test');     
+    Route::post('/Admin/Menu', [MenuController::class, 'store'])->name('menu.store');
+    Route::delete('Admin/Menu/{id}', [MenuController::class, 'destroy'])->name('menu.destroy');
 
     //TABLE
     Route::get('/Admin/Table/List', [TableController::class, 'index']) ->name('table.list'); 
     Route::get('/Admin/Table/Create', [TableController::class, 'create']) ->name('table.create'); 
     Route::get('/Admin/Table/Edit', [TableController::class, 'edit']) ->name('table.edit'); 
+    Route::post('/Admin/Table', [TableController::class, 'store'])->name('table.store');
+    Route::delete('Admin/Table/{id}', [TableController::class, 'destroy'])->name('table.destroy');
+
     //AREA
     Route::get('/Admin/Area/List', [AreaController::class, 'index']) ->name('area.list');
     Route::get('/Admin/Area/Create', [AreaController::class, 'create']) ->name('area.create');

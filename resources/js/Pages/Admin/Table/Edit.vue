@@ -1,6 +1,7 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, useForm, route } from "@inertiajs/inertia-vue3";
+import { defineProps } from "vue";
 
 const props = defineProps({
     Tables: Object,

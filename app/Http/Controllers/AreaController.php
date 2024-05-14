@@ -20,4 +20,17 @@ class AreaController extends Controller
 public function edit(){
     return Inertia::render('Admin/Area/Edit');
 }
+public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255|unique:areas,name',
+        ]);
+
+        $area = Area::create($validatedData);
+
+        return response()->json([
+            'message' => 'Area created successfully!',
+            'area' => $area,
+        ]);
+    }
 }

@@ -1,41 +1,68 @@
+<script setup>
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
+
+const form = useForm({
+    title: "",
+});
+
+const submit = () => {
+    form.post(route("areas.store"));
+};
+</script>
+
 <template>
-    <div class="w-full flex justify-center ">
-        <div class="m-4 w-2/5 items-center self-center">
-            <h1 class="text-2xl font-semibold mb-4 text-center">Add New Area</h1>
-      <form @submit.prevent="handleSubmit" class="w-full max-w-lg">
-        <div class="mb-4">
-          <label for="name" class="block text-sm font-medium text-gray-700">Area Name</label>
-          <input v-model="areaName" type="text" id="name" name="name" class="mt-1 p-2 border rounded-md w-full" required>
+    <Head title="Create Area" />
+
+    <AuthenticatedLayout>
+        <template #header>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                Create Area
+            </h2>
+        </template>
+        <div class="py-6 flex">
+            <div class="w-2/3 max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 bg-white border-b border-gray-200">
+                        <form name="createForm" @submit.prevent="submit">
+                            <div class="flex flex-col">
+                                <div class="mb-4">
+                                    <label for="title" class=""
+                                        >Name Area</label
+                                    >
+                                    <input
+                                        id="title"
+                                        type="text"
+                                        class="mt-1 block w-full rounded rounded-lg border-gray-400"
+                                        v-model="form.title"
+                                        autofocus
+                                    />
+                                    <span
+                                        class="text-red-600"
+                                        v-if="form.errors.title"
+                                    >
+                                        {{ form.errors.title }}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between mb-6">
+                                <Link
+                                    className="px-6 py-2 text-white bg-green-500 rounded-md focus:outline-none"
+                                    :href="route('area.list')"
+                                >
+                                    Back</Link
+                                >
+                                <button
+                                    type="submit"
+                                    class="px-6 py-2 font-bold text-white bg-green-500 rounded"
+                                >
+                                    Save
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="flex justify-end">
-          <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Create Area</button>
-        </div>
-      </form>
-    </div>
-</div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        areaName: '' // Biến để lưu trữ tên khu vực
-      };
-    },
-    methods: {
-      // Phương thức để xử lý việc tạo khu vực mới
-      handleSubmit() {
-        // Gửi yêu cầu tạo khu vực mới đến máy chủ (có thể sử dụng Axios hoặc fetch API)
-        // Ví dụ: axios.post('/api/areas', { name: this.areaName })
-        //   .then(response => {
-        //     // Sau khi tạo thành công, có thể điều hướng người dùng đến trang danh sách khu vực
-        //     this.$router.push('/areas');
-        //   })
-        //   .catch(error => {
-        //     console.error(error);
-        //   });
-      }
-    }
-  };
-  </script>
-  
+    </AuthenticatedLayout>
+</template>

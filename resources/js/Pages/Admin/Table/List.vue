@@ -1,4 +1,4 @@
-<script>
+<script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
 
@@ -17,8 +17,7 @@ function deleteTable(id) {
 
 <template>
   <Head title="List Table" />
-
-  <AuthenticatedLayout>
+<AuthenticatedLayout>
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
         Manage Table

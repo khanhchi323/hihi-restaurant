@@ -7,20 +7,20 @@ const props = defineProps({
 });
 
 // const form = useForm({
-//   title: props.area.title, 
-//   body: props.area.body,  
+//   title: props.area.title,
+//   body: props.area.body,
 // });
 
 const submit = () => {
-  form.put(route('area.update', props.area.id))
-    .then(() => {
-      // Redirect to list page after successful update
-      window.location.href = route('area.list')
-    })
-    .catch(error => {
-      // Handle errors here, e.g., display error messages
-      console.error('Error submitting form:', error)
-    })
+    form.put(route("area.update", props.area.id))
+        .then(() => {
+            // Redirect to list page after successful update
+            window.location.href = route("area.list");
+        })
+        .catch((error) => {
+            // Handle errors here, e.g., display error messages
+            console.error("Error submitting form:", error);
+        });
 };
 </script>
 
@@ -59,13 +59,9 @@ const submit = () => {
 
                                 <div class="mb-4">
                                     <Label for="body" value="Body" />
-
-                                    
                                 </div>
                             </div>
-                            <div
-                                class="flex items-center justify-between mb-6"
-                            >
+                            <div class="flex items-center justify-between mb-6">
                                 <Link
                                     class="px-6 py-2 text-white bg-blue-500 rounded-md focus:outline-none"
                                     :href="route('area.list')"

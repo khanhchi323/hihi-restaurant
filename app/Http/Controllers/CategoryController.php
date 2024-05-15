@@ -10,8 +10,6 @@ use Inertia\Inertia;
 
 class CategoryController extends Controller
 {
-
-    //tìm kiếm category theo id 
     public function show($id)
     {
         $category = Category::find(request("id"))->first();

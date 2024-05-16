@@ -17,10 +17,10 @@ class AreaController extends Controller
         return Inertia::render('Admin/Area/Create');
     }
 
-public function edit(){
+    public function edit(){
     return Inertia::render('Admin/Area/Edit');
-}
-public function store(Request $request)
+    }
+    public function store(Request $request)
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255|unique:areas,name',
@@ -32,5 +32,11 @@ public function store(Request $request)
             'message' => 'Area created successfully!',
             'area' => $area,
         ]);
+    }
+    public function destroy(Request $request, $id)
+    {
+        $area = Area::find($id);
+        $area->delete();
+        return redirect()->route("area.list")->with("success", "Xóa sản phẩm thành công"); // Assuming 'menu.index' shows the list after deletion
     }
 }

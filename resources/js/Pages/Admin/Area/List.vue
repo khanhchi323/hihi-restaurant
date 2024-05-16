@@ -9,7 +9,7 @@ defineProps({
 const form = useForm();
 
 
-function deleteArea(id) {
+function destroy(id) {
     if (confirm("Are you sure you want to Delete")) {
         form.delete(route("areas.destroy", id));
     }
@@ -62,7 +62,7 @@ function deleteArea(id) {
                                             >Edit</router-link
                                         >
                                         <button
-                                            @click="deleteArea(area.id)"
+                                            @click="destroy(area.id)"
                                             class="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600"
                                         >
                                             Delete

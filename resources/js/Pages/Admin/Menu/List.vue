@@ -1,17 +1,14 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, Link, useForm } from "@inertiajs/vue3";
-import { defineProps } from "vue";
+import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
+defineProps({
+    menus: Array,
+});
 
-// defineProps({
-//     menu: Array,
-// });
-
-// const form = useForm();
-
+const form = useForm();  
 function destroy(id) {
     if (confirm("Are you sure you want to delete?")) {
-        form.delete(route("menu.destroy", id));
+        form.delete(route("menu.destroy", id));  
     }
 }
 </script>
@@ -27,11 +24,11 @@ function destroy(id) {
         <div class="py-6">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 flex bg-white border-b border-gray-200">
-                        <div class="w-full">
+                    <div class="p-6 bg-white border-b border-gray-200">
+                        <div class="w-2/3">
                             <label
                                 for="category"
-                                class="block text-base font-medium text-gray-700"
+                                class="block text-sm font-medium text-gray-700"
                             >
                                 Category
                             </label>
@@ -50,9 +47,9 @@ function destroy(id) {
                                 </option>
                             </select>
                         </div>
-                        <div class="flex items-center text-right">
+                        <div class="flex items-center justify-between mb-6">
                             <Link
-                                class="px-6 py-2 text-white text-right bg-green-500 rounded-md focus:outline-none"
+                                class="px-6 py-2 text-white bg-green-500 rounded-md focus:outline-none"
                                 :href="route('menu.create')"
                             >
                                 Create

@@ -24,8 +24,26 @@ class MenuController extends Controller
         $menus = Menu::all();
         return Inertia::render('Admin/Menu/List', compact('menus'));
     }
-    public function create(){
+    public function create()
+    {
         return Inertia::render('Admin/Menu/Create');
+    }
+    public function edit()
+    {
+        return Inertia::render('Admin/Menu/Edit');
+    }
+    public function store(Request $request)
+    { {
+            $validatedData = $request->validate([
+                'name' => 'required|string|max:255|unique:menu,',
+            ]);
+
+            $menu = Menu::create($validatedData);
+            return response()->json([
+                'message' => 'Area created successfully!',
+                'menu' => $menu,
+            ]);
+        }
     }
     public function update(Request $request, $id)
     {
@@ -51,23 +69,6 @@ class MenuController extends Controller
     {
         $menu = Menu::find($id);
         $menu->delete();
-        return redirect()->route("menu.index")->with("success", "Xóa sản phẩm thành công"); // Assuming 'menu.index' shows the list after deletion
-    }
-
-    public function store(Request $request)
-    {
-        $input = request()->except("_token");
-
-        try {
-            $image = $request->file('images');
-            $storedPath = $image->move('images', $image->getClientOriginalName());
-            $input["images"] = $storedPath;
-
-            $menu = Menu::create($input);
-            return redirect()->route('menu.store')->with('success', 'Thêm sản phẩm thành công');
-        } catch (\Exception $e) {
-            // Handle create error with a flash message or redirect to an error page
-            return back()->withErrors(['create' => $e->getMessage()]);
-        }
+        return redirect()->route("menu.list")->with("success", "Xóa sản phẩm thành công"); // Assuming 'menu.index' shows the list after deletion
     }
 }

@@ -52,18 +52,18 @@ function destroy(id) {
                             <tbody>
                                 <tr
                                     v-for="menu in filteredMenus"
-                                    :key="menu.id"
+                                    :key="Category.id"
                                     class="text-center"
                                 >
                                     <td class="border px-2 py-2 w-16">
-                                        {{ menu.id }}
+                                        {{ Category.id }}
                                     </td>
                                     <td class="border px-4 py-2 w-2/5">
-                                        {{ menu.category }}
+                                        {{ Category.name }}
                                     </td>
                                     <th class="px-4 py-2 border w-2/5">
                                         <img
-                                            src="{{ menu.img }}"
+                                            src="{{ Category.img }}"
                                             alt="Menu Image"
                                             style="width: 100px; height: 100px"
                                         />

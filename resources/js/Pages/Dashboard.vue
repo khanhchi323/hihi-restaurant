@@ -10,12 +10,8 @@ import { Head } from '@inertiajs/vue3';
     <AuthenticatedLayout>
         <template #header>
             <div class="flex space-x-4">
-                    <a  v-bind:href="'Catogory.Index'" class="font-semibold text-xl text-gray-800 leading-tight">Dashboard</a>
-                    <a  v-bind:href="'Catogory.Index'" class="font-semibold text-xl text-gray-800 leading-tight">Categories</a>
-                    <a  v-bind:href="'Menu.Index'" class="font-semibold text-xl text-gray-800 leading-tight">Menus</a>
-                    <a  v-bind:href="'Catogory.Index'" class="font-semibold text-xl text-gray-800 leading-tight">Clients</a>
-                    <a  v-bind:href="'Catogory.Index'" class="font-semibold text-xl text-gray-800 leading-tight">Tables</a>
-                    <a  v-bind:href="'Catogory.Index'" class="font-semibold text-xl text-gray-800 leading-tight">Reports</a>
+                    <router-link v-bind:href="'Catogory.Index'" class="font-semibold text-xl text-gray-800 leading-tight">Dashboard</router-link>
+                    
                 </div>
         </template>
 

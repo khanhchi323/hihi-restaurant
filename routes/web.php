@@ -30,9 +30,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
     //CATEGORY
-    Route::get('/Admin/Category/List', [CategoryController::class, 'index']) ->name('category.list'); 
-    Route::get('/Admin/Category/Create', [CategoryController::class, 'create']) ->name('category.create'); 
-    Route::get('/Admin/Category/Edit', [CategoryController::class, 'edit']) ->name('category.edit');     
+    Route::get('/Admin/Category/List', [CategoryController::class, 'index'])->name('category.list'); 
+    Route::get('/Admin/Category/Create', [CategoryController::class, 'create'])->name('category.create'); 
+    Route::get('/Admin/Category/Edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');    
+    Route::post('/categories', [CategoryController::class, 'store'])->name('category.store');
+    Route::put('/categories/{id}', [CategoryController::class, 'update'])->name('category.update');
+    Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
+    Route::get('/Admin/Category/Show/{id}', [CategoryController::class, 'show'])->name('category.show');
+    
 
     //MENU
     Route::get('/Admin/Menu/List', [MenuController::class, 'index']) ->name('menu.list'); 

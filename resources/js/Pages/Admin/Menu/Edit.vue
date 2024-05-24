@@ -1,111 +1,55 @@
+//lỗi rùi
 <script setup>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, Link, useForm, route } from "@inertiajs/inertia-vue3";
-import { defineProps } from "vue";
+import { Head, useForm } from "@inertiajs/inertia-vue3";
+import { route } from "vue";
 
-const props = defineProps({
-    Menus: Object,
+// Lấy dữ liệu menu từ trang
+const { props } = usePage();
+const menu = props.menu;
+
+// Sử dụng form để chỉnh sửa thông tin
+const form = useForm({
+    name: menu.name,
+    // Các trường thông tin khác
 });
-// const form = useForm({
-//   title: props.area.title,
-//   body: props.area.body,
-// });
 
 const submit = () => {
-    form.put(route("menu.update", props.menu.id))
+    form.put(route("menu.update", menu.id))
         .then(() => {
-            // Redirect to list page after successful update
+            // Redirect về trang danh sách sau khi cập nhật thành công
             window.location.href = route("menu.list");
         })
         .catch((error) => {
-            // Handle errors here, e.g., display error messages
             console.error("Error submitting form:", error);
         });
 };
 </script>
+
 <template>
-    <Head title="Edit Table" />
+    <Head title="Edit Menu" />
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Edit Table
+                Edit Menu
             </h2>
         </template>
         <div class="py-6">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 bg-white border-b border-gray-200">
-                        <form name="createForm" @submit.prevent="submit">
-                            <div class="flex flex-col">
-                                <div class="mb-4">
-                                    <label
-                                        for="category"
-                                        class="block text-sm font-medium text-gray-700"
-                                        >Category</label
-                                    >
-                                    <select
-                                        id="category"
-                                        v-model="menu.category"
-                                        class="mt-1 p-2 border rounded-md w-full"
-                                    >
-                                        <option value="Thịt">Thịt</option>
-                                        <option value="Hải sản">Hải sản</option>
-                                        <option value="Rau củ">Rau củ</option>
-                                        <option value="Nước uống">
-                                            Nước uống
-                                        </option>
-                                    </select>
-                                </div>
-
-                                <div class="mb-4">
-                                    <label
-                                        for="price"
-                                        class="block text-sm font-medium text-gray-700"
-                                        >Price</label
-                                    >
-                                    <input
-                                        type="text"
-                                        id="price"
-                                        v-model="menu.price"
-                                        class="mt-1 p-2 border rounded-md w-full"
-                                    />
-                                </div>
-
-                                <div class="mb-4">
-                                    <label
-                                        for="image"
-                                        class="block text-sm font-medium text-gray-700"
-                                        >Image</label
-                                    >
-                                    <input
-                                        type="file"
-                                        id="image"
-                                        @change="handleImageChange"
-                                        accept="image/*"
-                                        class="mt-1 p-2 border rounded-md w-full"
-                                    />
-                                </div>
-                                <div
-                                    class="flex items-center justify-between mb-6"
-                                >
-                                    <Link
-                                        class="px-6 py-2 text-white bg-red-500 rounded-md focus:outline-none"
-                                        :href="route('table.list')"
-                                    >
-                                        Back
-                                    </Link>
-                                    <button
-                                        type="submit"
-                                        class="px-6 py-2 font-bold text-white bg-green-500 rounded"
-                                    >
-                                        Save
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+            <!-- Form chỉnh sửa menu -->
+            <form name="editForm" @submit.prevent="submit">
+                <!-- Các trường thông tin để chỉnh sửa -->
+                <div>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" v-model="form.name" />
                 </div>
-            </div>
+                <!-- Các trường thông tin khác -->
+                <!-- Ví dụ: -->
+                <!-- <div>
+                    <label for="price">Price:</label>
+                    <input type="text" id="price" v-model="form.price" />
+                </div> -->
+                <!-- Nút lưu -->
+                <button type="submit">Save</button>
+            </form>
         </div>
     </AuthenticatedLayout>
 </template>

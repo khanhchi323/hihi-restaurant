@@ -1,16 +1,34 @@
 <script setup>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
-defineProps({
-    menus: Array,
-});
+import Cookies from "js-cookie";
+import { ref, computed, onMounted } from "vue";
 
-const form = useForm();  
-function destroy(id) {
-    if (confirm("Are you sure you want to delete?")) {
-        form.delete(route("menu.destroy", id));  
+const menus = ref([]);
+const categories = ["Thịt", "Hải sản", "Rau củ", "Nước uống"];
+const selectedCategory = ref("");
+
+const filteredMenus = computed(() => {
+    if (!selectedCategory.value) {
+        return menus.value;
     }
-}
+    return menus.value.filter(
+        (menu) => menu.category === selectedCategory.value
+    );
+});
+const destroy = async (id) => {
+    // Gửi yêu cầu xóa đến máy chủ
+    try {
+        await $inertia.delete(route("menu.destroy", id));
+        // Cập nhật giao diện người dùng sau khi xóa thành công
+        menus.value = menus.value.filter((menu) => menu.id !== id);
+    } catch (error) {
+        console.error("Error deleting menu:", error);
+    }
+};
+onMounted(() => {
+    const cookiesMenus = JSON.parse(Cookies.get("menus") || "[]");
+    menus.value = cookiesMenus;
+});
 </script>
 
 <template>
@@ -94,12 +112,9 @@ function destroy(id) {
                                     />
                                 </td>
                                 <td class="border px-4 py-2">
-                                    <router-link
-                                        :to="'/menu/' + menu.id + '/edit'"
-                                        class="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
-                                    >
+                                    <Link class="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600" :href="route('menu.edit')">
                                         Edit
-                                    </router-link>
+                                      </Link>
                                     <button
                                         @click="destroy(menu.id)"
                                         class="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600"

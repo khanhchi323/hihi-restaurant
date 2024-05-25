@@ -30,6 +30,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
     //CATEGORY
+    Route::get('/categories', [CategoryController::class, 'index'])->name('category.list'); 
+    Route::get('/Admin/Category/List', 'CategoryController@index');
+
     Route::get('/Admin/Category/List', [CategoryController::class, 'index'])->name('category.list'); 
     Route::get('/Admin/Category/Create', [CategoryController::class, 'create'])->name('category.create'); 
     Route::get('/Admin/Category/Edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');    

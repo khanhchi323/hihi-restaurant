@@ -19,8 +19,8 @@ class CategoryController extends Controller
     //danh sach category
     public function index()
 {
-    $categories = DB::table('categories')->paginate(4); // Số category hiển thị trên mỗi trang là 10
-    return Inertia::render('Admin/Category/List', ['categories' => $categories]);
+    $categories['info'] = DB::table('categories')->paginate(4); // Số category hiển thị trên mỗi trang là 4
+    return Inertia::render('Admin/Category/List', $categories);
 }       
 
     public function create()

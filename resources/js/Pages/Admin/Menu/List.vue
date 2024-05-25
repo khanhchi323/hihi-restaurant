@@ -1,16 +1,35 @@
 <script setup>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue"
 import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
-defineProps({
-    menus: Array,
-});
+import Cookies from "js-cookie";
+import { ref, computed, onMounted } from "vue";
 
-const form = useForm();  
-function destroy(id) {
-    if (confirm("Are you sure you want to delete?")) {
-        form.delete(route("menu.destroy", id));  
+const menus = ref([]);
+const categories = ["Thịt", "Hải sản", "Rau củ", "Nước uống"];
+const selectedCategory = ref("");
+
+const filteredMenus = computed(() => {
+    if (!selectedCategory.value) {
+        return menus.value;
     }
-}
+    return menus.value.filter(
+        (menus) => menus.category === selectedCategory.value
+    );
+});
+const destroy = async (id) => {
+    // Gửi yêu cầu xóa đến máy chủ
+    try {
+        await $inertia.delete(route("menus.destroy", id));
+        // Cập nhật giao diện người dùng sau khi xóa thành công
+        menus.value = menus.value.filter((menus) => menus.id !== id);
+    } catch (error) {
+        console.error("Error deleting menus:", error);
+    }
+};
+onMounted(() => {
+    const cookiesMenus = JSON.parse(Cookies.get("menus") || "[]");
+    menus.value = cookiesMenus;
+});
 </script>
 
 <template>
@@ -50,7 +69,7 @@ function destroy(id) {
                         <div class="flex items-center justify-between mb-6">
                             <Link
                                 class="px-6 py-2 text-white bg-green-500 rounded-md focus:outline-none"
-                                :href="route('menu.create')"
+                                :href="route('menus.create')"
                             >
                                 Create
                             </Link>
@@ -58,7 +77,7 @@ function destroy(id) {
                     </div>
 
                     <table class="w-full">
-                        <thead>
+<thead>
                             <tr>
                                 <th class="px-4 py-2 w-16">ID</th>
                                 <th class="px-4 py-2 w-1/5">Category</th>
@@ -70,38 +89,35 @@ function destroy(id) {
                         </thead>
                         <tbody>
                             <tr
-                                v-for="menu in menus"
-                                :key="menu.id"
+                                v-for="menus in menus"
+                                :key="menus.id"
                                 class="text-center"
                             >
                                 <td class="border px-2 py-2 w-16">
-                                    {{ menu.id }}
+                                    {{ menus.id }}
                                 </td>
                                 <td class="border px-4 py-2 w-1/6">
-                                    {{ menu.category }}
+                                    {{ menus.category }}
                                 </td>
                                 <td class="border px-4 py-2 w-1/5">
-                                    {{ menu.name }}
+                                    {{ menus.name }}
                                 </td>
                                 <td class="border px-4 py-2 w-1/6">
-                                    {{ menu.price }}
+                                    {{ menus.price }}
                                 </td>
                                 <td class="px-4 py-2 w-1/6">
                                     <img
-                                        :src="menu.img"
+                                        :src="menus.img"
                                         alt="Menu Image"
                                         style="width: 100px; height: 100px"
                                     />
                                 </td>
                                 <td class="border px-4 py-2">
-                                    <router-link
-                                        :to="'/menu/' + menu.id + '/edit'"
-                                        class="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
-                                    >
+                                    <Link class="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600" :href="route('menu.edit')">
                                         Edit
-                                    </router-link>
+                                      </Link>
                                     <button
-                                        @click="destroy(menu.id)"
+                                        @click="destroy(menus.id)"
                                         class="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600"
                                     >
                                         Delete

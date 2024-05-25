@@ -16,12 +16,13 @@ class CategoryController extends Controller
     }
 
 
-    //danh sach category
+    // danh sach category
     public function index()
-{
-    $categories['info'] = DB::table('categories')->paginate(4); // Số category hiển thị trên mỗi trang là 4
-    return Inertia::render('Admin/Category/List', $categories);
-}       
+    {
+        $categories['info'] = DB::table('categories')->get(); 
+        return Inertia::render('Admin/Category/List', $categories);
+    }
+
 
     public function create()
     {
@@ -52,11 +53,11 @@ class CategoryController extends Controller
     }
 
     public function edit(Category $category)
-{
-    return Inertia::render('Admin/Category/Edit', [
-        'category' => $category
-    ]);
-}
+    {
+        return Inertia::render('Admin/Category/Edit', [
+            'category' => $category
+        ]);
+    }
 
 
 

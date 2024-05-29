@@ -1,6 +1,7 @@
 <script setup>
 import { defineProps, useForm } from "@inertiajs/inertia-vue3";
 import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+
 import { Head, Link } from "@inertiajs/inertia-vue3";
 
 // const props = defineProps({

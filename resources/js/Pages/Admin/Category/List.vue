@@ -1,17 +1,24 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, Link, usePage, useForm, Inertia } from "@inertiajs/inertia-vue3";
-import { ref, onMounted } from "vue";
+import { Head, Link, useForm, Inertia } from "@inertiajs/inertia-vue3";
+import { onMounted } from "vue";
 
-const { props } = usePage();
-
-const categories = ref(props.categories);
-
+const props = defineProps(["categories"]);
 const form = useForm();
 
 function routeToEdit(id) {
-    Inertia.visit(route("category.edit", { id: id }));
+    // Tạo URL chuyển hướng đến trang chỉnh sửa với id của category
+    const editUrl = route('category.edit', { id });
+
+    // Chuyển hướng đến trang chỉnh sửa
+    Inertia.visit(editUrl, {
+        // Truyền dữ liệu của category theo yêu cầu
+        data: {
+            category: props.categories.find(category => category.id === id)
+        }
+    });
 }
+
 
 function destroy(id) {
     if (confirm("Bạn có chắc chắn muốn xóa danh mục này không?")) {
@@ -24,6 +31,7 @@ function destroy(id) {
         });
     }
 }
+
 onMounted(() => {
     // Làm bất cứ điều gì bạn cần khi component được mounted
 });
@@ -65,7 +73,7 @@ onMounted(() => {
                             </thead>
                             <tbody>
                                 <tr
-                                    v-for="category in categories"
+                                    v-for="category in props.categories"
                                     :key="category.id"
                                     class="text-center"
                                 >
@@ -77,7 +85,7 @@ onMounted(() => {
                                     </td>
                                     <td class="border px-4 py-2">
                                         <img
-                                            :src="`/storage/${category.image}`"
+                                            :src="`/storage/app/public/${category.image}`"
                                             alt="Category Image"
                                             class="mx-auto"
                                             style="
@@ -90,18 +98,14 @@ onMounted(() => {
                                     <td class="border px-4 py-2">
                                         <div class="flex flex-col space-y-2">
                                             <Link
-                                                class="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
-                                                @click="
-                                                    () =>
-                                                        routeToEdit(category.id)
-                                                "
-                                            >
-                                                Chỉnh Sửa
-                                            </Link>
+                                            tabIndex="1"
+                                            className="px-4 py-2 text-sm text-white bg-blue-500 rounded"
+                                            :href="route('category.edit', category.id)"
+                                        >
+                                            Edit
+                                        </Link>
                                             <button
-                                                @click="
-                                                    () => destroy(category.id)
-                                                "
+                                                @click="destroy(category.id)"
                                                 class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
                                             >
                                                 Xóa
@@ -110,7 +114,10 @@ onMounted(() => {
                                     </td>
                                 </tr>
                                 <tr
-                                    v-if="categories && categories.length === 0"
+                                    v-if="
+                                        props.categories &&
+                                        props.categories.length === 0
+                                    "
                                 >
                                     <td
                                         colspan="4"

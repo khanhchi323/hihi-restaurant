@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class CategoryController extends Controller
@@ -17,12 +17,24 @@ class CategoryController extends Controller
 
 
     // danh sach category
+    // public function index()
+    // {
+    //     $categories['info'] = DB::table('categories')->get(); 
+    //     return Inertia::render('Admin/Category/List', $categories);
+    // }
     public function index()
     {
-        $categories['info'] = DB::table('categories')->get(); 
-        return Inertia::render('Admin/Category/List', $categories);
-    }
+        $categories = Category::all(); // hoặc paginate() nếu bạn muốn phân trang
 
+        // Thêm URL đầy đủ của hình ảnh vào từng đối tượng danh mục
+        foreach ($categories as $category) {
+            $category->image_url = Storage::url($category->image);
+        }
+
+        return Inertia::render('Admin/Category/List', [
+            'categories' => $categories
+        ]);
+    }
 
     public function create()
     {
@@ -52,13 +64,25 @@ class CategoryController extends Controller
         return redirect()->route('category.list')->with('success', 'Category created successfully!');
     }
 
+    // public function edit(Category $category)
+    // {
+    //     return Inertia::render('Admin/Category/Edit', [
+    //         'category' => $category
+    //     ]);
+    // }
     public function edit(Category $category)
     {
+        // Kiểm tra xem đối tượng Category đã tồn tại hay chưa
+        if (!$category) {
+            // Xử lý khi không tìm thấy đối tượng Category
+            abort(404); // Hoặc bất kỳ xử lý nào phù hợp với ứng dụng của bạn
+        }
+
+        // Trả về template Inertia với đối tượng Category để hiển thị thông tin chỉnh sửa
         return Inertia::render('Admin/Category/Edit', [
             'category' => $category
         ]);
     }
-
 
 
     public function update(Request $request, $id)
@@ -80,6 +104,7 @@ class CategoryController extends Controller
 
         return redirect()->route('category.list')->with('success', 'Category updated successfully!');
     }
+
 
 
     public function destroy($id)

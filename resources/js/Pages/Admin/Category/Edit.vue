@@ -1,23 +1,30 @@
 <script setup>
+import { defineProps, useForm } from "@inertiajs/inertia-vue3";
 import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import BreezeLabel from "@/Components/Label.vue";
-import BreezeInput from "@/Components/Input.vue";
-import BreezeTextArea from "@/Components/Textarea.vue";
-import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
+import { Head, Link } from "@inertiajs/inertia-vue3";
 
-const props = defineProps({
-  post: Object,
+// const props = defineProps({
+//   category: Object,
+// });
+
+// const editCategory = useForm({
+//   name: props.category.name,
+//   image: props.category.image,
+// });
+
+// const handleSubmit = () => {
+//   editCategory.put(route("category.update", { id: props.category.id }), editCategory.data);
+// };
+const form = useForm({
+    title: '',
+    body: ''
 });
 
-const editCategory = useForm({
-  name: props.category.name,
-  image: props.category.image,
-});
-
-const submit = () => {
-  form.put(route("category.update", props.category.id));
+const handleSubmit = () => {
+    form.post(route('category.store'));
 };
 </script>
+
 <template>
   <Head title="Edit Category" />
 
@@ -32,10 +39,10 @@ const submit = () => {
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
           <div class="p-6 bg-white border-b border-gray-200">
-            <div className="flex items-center justify-between mb-6">
+            <div class="flex items-center justify-between mb-6">
               <Link
-                className="px-6 py-2 text-white bg-blue-500 rounded-md focus:outline-none"
-                :href="route('posts.index')"
+                class="px-6 py-2 text-white bg-blue-500 rounded-md focus:outline-none"
+                :href="route('category.list')"
               >
                 Back
               </Link>
@@ -50,7 +57,7 @@ const submit = () => {
                 <input
                   type="text"
                   id="name"
-                  v-model="category.name"
+                  v-model="form.name"
                   class="mt-1 p-2 border rounded-md w-full"
                 />
               </div>
@@ -67,8 +74,8 @@ const submit = () => {
                   class="mt-1 p-2 border rounded-md w-full"
                 />
                 <img
-                  v-if="category.image"
-                  :src="category.image"
+                  v-if="form.image"
+                  :src="form.image"
                   alt="Category Image"
                   class="mt-2"
                   style="max-width: 100px; max-height: 100px"
@@ -87,5 +94,3 @@ const submit = () => {
     </div>
   </BreezeAuthenticatedLayout>
 </template>
-  
- 

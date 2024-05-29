@@ -28,47 +28,42 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    
-    //CATEGORY
-    Route::get('/categories', [CategoryController::class, 'index'])->name('category.list'); 
-    Route::get('/Admin/Category/List', 'CategoryController@index');
 
-    Route::get('/Admin/Category/List', [CategoryController::class, 'index'])->name('category.list'); 
-    Route::get('/Admin/Category/Create', [CategoryController::class, 'create'])->name('category.create'); 
-    Route::get('/Admin/Category/Edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');    
+    //CATEGORY
+    Route::get('/Admin/Category/List', [CategoryController::class, 'index'])->name('category.list');
+    Route::get('/Admin/Category/Create', [CategoryController::class, 'create'])->name('category.create');
+    Route::get('/Admin/Category/Edit', [CategoryController::class, 'edit'])->name('category.edit');
     Route::post('/categories', [CategoryController::class, 'store'])->name('category.store');
     Route::put('/categories/{id}', [CategoryController::class, 'update'])->name('category.update');
     Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
     Route::get('/Admin/Category/Show/{id}', [CategoryController::class, 'show'])->name('category.show');
     
 
+
     //MENU
-    Route::get('/Admin/Menu/List', [MenuController::class, 'index']) ->name('menu.list'); 
-    Route::get('/Admin/Menu/Create', [MenuController::class, 'create']) -> name('menu.create'); 
-    Route::get('Admin/Menu/Edit', [MenuController::class, 'edit']) ->name('menu.edit');     
+    Route::get('/Admin/Menu/List', [MenuController::class, 'index'])->name('menu.list');
+    Route::get('/Admin/Menu/Create', [MenuController::class, 'create'])->name('menu.create');
+    Route::get('Admin/Menu/Edit', [MenuController::class, 'edit'])->name('menu.edit');
     Route::post('/Admin/Menu', [MenuController::class, 'store'])->name('menu.store');
     Route::delete('Admin/Menu/{id}', [MenuController::class, 'destroy'])->name('menu.destroy');
 
     //TABLE
-    Route::get('/Admin/Table/List', [TableController::class, 'index']) ->name('table.list'); 
-    Route::get('/Admin/Table/Create', [TableController::class, 'create']) ->name('table.create'); 
-    Route::get('/Admin/Table/Edit', [TableController::class, 'edit']) ->name('table.edit'); 
+    Route::get('/Admin/Table/List', [TableController::class, 'index'])->name('table.list');
+    Route::get('/Admin/Table/Create', [TableController::class, 'create'])->name('table.create');
+    Route::get('/Admin/Table/Edit', [TableController::class, 'edit'])->name('table.edit');
     Route::post('/Admin/Table', [TableController::class, 'store'])->name('table.store');
     Route::delete('Admin/Table/{id}', [TableController::class, 'destroy'])->name('table.destroy');
 
     //AREA
-    Route::get('/Admin/Area/List', [AreaController::class, 'index']) ->name('area.list');
-    Route::get('/Admin/Area/Create', [AreaController::class, 'create']) ->name('area.create');
-    Route::get('/Admin/Area/Edit', [AreaController::class, 'edit']) ->name('area.edit');
-
-    
-
+    Route::get('/Admin/Area/List', [AreaController::class, 'index'])->name('area.list');
+    Route::get('/Admin/Area/Create', [AreaController::class, 'create'])->name('area.create');
+    Route::get('/Admin/Area/Edit', [AreaController::class, 'edit'])->name('area.edit');
 });
 
-Route::get('/dbconn', function(){
+Route::get('/dbconn', function () {
     return view('dbconn');
 });
 
 
 // Route::get('/Admin/Menu/Create', [MenuController::class, 'create'])->name('menu.create');
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

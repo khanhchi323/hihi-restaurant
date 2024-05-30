@@ -1,5 +1,5 @@
 <script setup>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, useForm, Inertia } from "@inertiajs/inertia-vue3";
 import { onMounted } from "vue";
 
@@ -39,7 +39,7 @@ onMounted(() => {
 
 <template>
     <Head title="List Category" />
-    <AuthenticatedLayout>
+    <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Quản Lý Danh Mục
@@ -54,7 +54,7 @@ onMounted(() => {
                                 class="px-6 py-2 text-white bg-green-500 rounded-md focus:outline-none"
                                 :href="route('category.create')"
                             >
-                                Tạo Mới
+                                Create
                             </Link>
                         </div>
 
@@ -62,10 +62,10 @@ onMounted(() => {
                             <thead>
                                 <tr class="bg-gray-100">
                                     <th class="px-4 py-2 border w-16">ID</th>
-                                    <th class="px-4 py-2 border w-1/4">
+                                    <th class="px-4 py-2 border w-1/2">
                                         Category
                                     </th>
-                                    <th class="px-4 py-2 border w-32">Image</th>
+                                    <th class="px-4 py-2 border w-1/2">Image</th>
                                     <th class="px-4 py-2 border w-32">
                                         Action
                                     </th>
@@ -108,7 +108,7 @@ onMounted(() => {
                                                 @click="destroy(category.id)"
                                                 class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
                                             >
-                                                Xóa
+                                                Delete
                                             </button>
                                         </div>
                                     </td>
@@ -132,5 +132,5 @@ onMounted(() => {
                 </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </BreezeAuthenticatedLayout>
 </template>

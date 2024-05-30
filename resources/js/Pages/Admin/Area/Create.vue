@@ -1,20 +1,27 @@
 <script setup>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
 
-const form = useForm({
-    title: "",
+const newArea = useForm({
+    name: "",
 });
 
 const submit = () => {
-    form.post(route("area.store"));
+    newArea.post(route("area.store"), {
+        onSuccess: () => {
+            newArea.reset();
+        },
+        onError: () => {
+            // Xử lý lỗi nếu cần thiết
+        },
+    });
 };
 </script>
 
 <template>
     <Head title="Create Area" />
 
-    <AuthenticatedLayout>
+    <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Create Area
@@ -27,27 +34,21 @@ const submit = () => {
                         <form name="createForm" @submit.prevent="submit">
                             <div class="flex flex-col">
                                 <div class="mb-4">
-                                    <label for="title" class=""
+                                    <label for="name" class=""
                                         >Name Area</label
                                     >
                                     <input
-                                        id="title"
+                                        id="name"
                                         type="text"
-                                        class="mt-1 block w-full rounded rounded-lg border-gray-400"
-                                        v-model="form.title"
+                                        class="mt-1 block w-full rounded-lg border-gray-400"
+                                        v-model="newArea.name"
                                         autofocus
                                     />
-                                    <span
-                                        class="text-red-600"
-                                        v-if="form.errors.title"
-                                    >
-                                        {{ form.errors.title }}
-                                    </span>
                                 </div>
                             </div>
                             <div class="flex items-center justify-between mb-6">
                                 <Link
-                                    className="px-6 py-2 text-white bg-red-500 rounded-md focus:outline-none"
+                                    class="px-6 py-2 text-white bg-red-500 rounded-md focus:outline-none"
                                     :href="route('area.list')"
                                 >
                                     Back</Link
@@ -64,5 +65,5 @@ const submit = () => {
                 </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </BreezeAuthenticatedLayout>
 </template>

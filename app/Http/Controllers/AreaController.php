@@ -1,42 +1,77 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Inertia\Inertia;
 use App\Models\Area;
 use Illuminate\Http\Request;
 
 class AreaController extends Controller
 {
-    
+    // Phương thức trả về danh sách các Area
     public function index()
     {
-        $areas = Area::all();
-        return  Inertia::render('Admin/Area/List', compact('areas'));
+        $areas = Area::all(); // hoặc paginate() nếu bạn muốn phân trang
+
+        return Inertia::render('Admin/Area/List', [
+            'areas' => $areas
+        ]);
     }
-    public function create(){
+
+    // Phương thức trả về trang tạo mới Area
+    public function create()
+    {
         return Inertia::render('Admin/Area/Create');
     }
 
-    public function edit(){
-    return Inertia::render('Admin/Area/Edit');
+    // Phương thức trả về trang chỉnh sửa Area
+    public function edit($id)
+{
+    $area = Area::find($id);
+
+    if (!$area) {
+        return redirect()->route('area.list')->with('error', 'Area not found.');
     }
+
+    return Inertia::render('Admin/Area/Edit', [
+        'area' => $area
+    ]);
+}
+
+
+    // Phương thức lưu trữ Area mới
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'name' => 'required|string|max:255|unique:areas,name',
         ]);
 
-        $area = Area::create($validatedData);
+       
 
-        return response()->json([
-            'message' => 'Area created successfully!',
-            'area' => $area,
-        ]);
+        return redirect()->route('area.list')->with('success', 'Area created successfully!');
     }
-    public function destroy(Request $request, $id)
+
+    // Phương thức cập nhật Area
+    public function update(Request $request, $id)
     {
-        $area = Area::find($id);
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $area = Area::findOrFail($id);
+
+        $area->name = $request->name;
+        $area->save();
+
+        return redirect()->route('area.list')->with('success', 'Area updated successfully!');
+    }
+
+    // Phương thức xóa Area
+    public function destroy($id)
+    {
+        $area = Area::findOrFail($id);
         $area->delete();
-        return redirect()->route("area.list")->with("success", "Xóa sản phẩm thành công"); // Assuming 'menu.index' shows the list after deletion
+
+        return redirect()->route('area.list')->with('success', 'Area deleted successfully!');
     }
 }

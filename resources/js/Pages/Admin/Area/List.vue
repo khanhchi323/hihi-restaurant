@@ -1,25 +1,32 @@
 <script setup>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
+import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import { Head, Link, useForm, Inertia } from "@inertiajs/inertia-vue3";
+import { onMounted } from "vue";
 
-defineProps({
-    areas: Array,
-});
-
+const props = defineProps(["areas"]);
 const form = useForm();
 
-
 function destroy(id) {
-    if (confirm("Are you sure you want to Delete")) {
-        form.delete(route("areas.destroy", id));
+    if (confirm("Bạn có chắc chắn muốn xóa danh mục này không?")) {
+        form.delete(route("area.destroy", id), {
+            onFinish: () => {
+                // Xử lý sau khi xóa, làm mới danh sách danh mục
+                Inertia.reload({ only: ["areas"] });
+                console.log("Area deleted successfully");
+            },
+        });
     }
 }
+
+onMounted(() => {
+    // Làm bất cứ điều gì bạn cần khi component được mounted
+});
 </script>
 
 <template>
     <Head title="List Area" />
 
-    <AuthenticatedLayout>
+    <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Manage Area
@@ -42,7 +49,7 @@ function destroy(id) {
                                 <tr>
                                     <th class="border px-4 py-2 w-32">ID</th>
                                     <th class="border px-4 py-2">Name</th>
-                                    <th class="border px-4 py-2 w-64">
+                                    <th class="border px-4 py-2 w-32">
                                         Action
                                     </th>
                                 </tr>
@@ -56,17 +63,35 @@ function destroy(id) {
                                         {{ area.name }}
                                     </td>
                                     <td class="border px-4 py-2">
-                                        <router-link
-                                            :to="'/Area/' + area.id + '/edit'"
-                                            class="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
-                                            >Edit</router-link
-                                        >
-                                        <button
-                                            @click="destroy(area.id)"
-                                            class="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600"
-                                        >
-                                            Delete
-                                        </button>
+                                        <div class="flex flex-col space-y-2">
+                                            <Link
+                                                tabIndex="1"
+                                                class="px-4 py-2 text-sm text-center text-white bg-blue-500 rounded"
+                                                :href="
+                                                    route('area.edit', area.id)
+                                                "
+                                            >
+                                                Edit
+                                            </Link>
+                                            <button
+                                                @click="destroy(area.id)"
+                                                class="px-2 py-1 bg-red-500 text-white text-center rounded hover:bg-red-600"
+                                            >
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr
+                                    v-if="
+                                        props.areas && props.areas.length === 0
+                                    "
+                                >
+                                    <td
+                                        colspan="4"
+                                        class="border px-4 py-2 text-center"
+                                    >
+                                        Không có danh mục nào.
                                     </td>
                                 </tr>
                             </tbody>
@@ -75,5 +100,5 @@ function destroy(id) {
                 </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </BreezeAuthenticatedLayout>
 </template>

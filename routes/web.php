@@ -33,11 +33,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/Admin/Category/List', [CategoryController::class, 'index'])->name('category.list');
     Route::get('/Admin/Category/Create', [CategoryController::class, 'create'])->name('category.create');
     Route::get('/Admin/Category/Edit', [CategoryController::class, 'edit'])->name('category.edit');
-    Route::post('/categories', [CategoryController::class, 'store'])->name('category.store');
-    Route::put('/categories/{id}', [CategoryController::class, 'update'])->name('category.update');
-    Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
+    Route::post('/Category', [CategoryController::class, 'store'])->name('category.store');
+    Route::put('/Category/{id}', [CategoryController::class, 'update'])->name('category.update');
+    Route::delete('/Category/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
     Route::get('/Admin/Category/Show/{id}', [CategoryController::class, 'show'])->name('category.show');
-    
+
 
 
     //MENU
@@ -58,6 +58,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/Admin/Area/List', [AreaController::class, 'index'])->name('area.list');
     Route::get('/Admin/Area/Create', [AreaController::class, 'create'])->name('area.create');
     Route::get('/Admin/Area/Edit', [AreaController::class, 'edit'])->name('area.edit');
+    Route::post('/Admin/Area', [AreaController::class, 'store'])->name('area.store');
+    Route::put('/Area/{id}', [AreaController::class, 'update'])->name('area.update');
+    Route::delete('/Area/{id}', [AreaController::class, 'destroy'])->name('area.destroy');
 });
 
 Route::get('/dbconn', function () {

@@ -52,6 +52,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/Admin/Table/Create', [TableController::class, 'create'])->name('table.create');
     Route::get('/Admin/Table/Edit', [TableController::class, 'edit'])->name('table.edit');
     Route::post('/Admin/Table', [TableController::class, 'store'])->name('table.store');
+    Route::put('/Table/{id}', [TableController::class, 'update'])->name('table.update');
     Route::delete('Admin/Table/{id}', [TableController::class, 'destroy'])->name('table.destroy');
 
     //AREA

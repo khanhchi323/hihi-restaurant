@@ -34,9 +34,7 @@ const submit = () => {
                         <form name="createForm" @submit.prevent="submit">
                             <div class="flex flex-col">
                                 <div class="mb-4">
-                                    <label for="name" class=""
-                                        >Name Area</label
-                                    >
+                                    <label for="name" class="">Name Area</label>
                                     <input
                                         id="name"
                                         type="text"

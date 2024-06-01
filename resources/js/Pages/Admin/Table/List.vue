@@ -1,24 +1,31 @@
 <script setup>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
-import { defineProps } from 'vue';
+import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import { Head, Link, useForm, Inertia } from "@inertiajs/inertia-vue3";
+import { onMounted } from "vue";
 
-defineProps({
-    tables: Array,
-});
-
+const props = defineProps(["tables"]);
 const form = useForm();
 
 function destroy(id) {
-    if (confirm("Are you sure you want to Delete?")) {
-        form.delete(route("tables.destroy", id));
+    if (confirm("Bạn có chắc chắn muốn xóa danh mục này không?")) {
+        form.delete(route("table.destroy", id), {
+            onFinish: () => {
+                // Xử lý sau khi xóa, làm mới danh sách danh mục
+                Inertia.reload({ only: ["tables"] });
+                console.log("Table deleted successfully");
+            },
+        });
     }
 }
+
+onMounted(() => {
+    // Làm bất cứ điều gì bạn cần khi component được mounted
+});
 </script>
 
 <template>
     <Head title="List Table" />
-    <AuthenticatedLayout>
+    <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Manage Table
@@ -47,32 +54,48 @@ function destroy(id) {
                                     <th class="border px-4 py-2">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="text-center">
                                 <tr v-for="table in tables" :key="table.id">
-                                    <td class="border px-4 py-2 text-center">
+                                    <td class="border px-4 py-2">
                                         {{ table.id }}
                                     </td>
                                     <td class="border px-4 py-2">
-                                        {{ table.name }}
+                                        {{ table.number }}
                                     </td>
                                     <td class="border px-4 py-2">
-                                        {{ table.area }}
+                                        <div class="flex flex-col space-y-2">
+                                            <Link
+                                                tabIndex="1"
+                                                class="px-4 py-2 text-sm text-center text-white bg-blue-500 rounded"
+                                                :href="
+                                                    route(
+                                                        'table.edit',
+                                                        table.id
+                                                    )
+                                                "
+                                            >
+                                                Edit
+                                            </Link>
+                                            <button
+                                                @click="destroy(table.id)"
+                                                class="px-2 py-1 bg-red-500 text-white text-center rounded hover:bg-red-600"
+                                            >
+                                                Delete
+                                            </button>
+                                        </div>
                                     </td>
-                                    <td class="border px-4 py-2">
-                                        <router-link
-                                            :to="
-                                                '/tables/' + table.id + '/edit'
-                                            "
-                                            class="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
-                                        >
-                                            Edit
-                                        </router-link>
-                                        <button
-                                            @click="destroy(table.id)"
-                                            class="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600"
-                                        >
-                                            Delete
-                                        </button>
+                                </tr>
+                                <tr
+                                    v-if="
+                                        props.tables &&
+                                        props.tables.length === 0
+                                    "
+                                >
+                                    <td
+                                        colspan="4"
+                                        class="border px-4 py-2 text-center"
+                                    >
+                                        Không có danh mục nào.
                                     </td>
                                 </tr>
                             </tbody>
@@ -81,5 +104,5 @@ function destroy(id) {
                 </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </BreezeAuthenticatedLayout>
 </template>

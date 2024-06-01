@@ -26,17 +26,17 @@ class AreaController extends Controller
 
     // Phương thức trả về trang chỉnh sửa Area
     public function edit($id)
-{
-    $area = Area::find($id);
+    {
+        $area = Area::find($id);
 
-    if (!$area) {
-        return redirect()->route('area.list')->with('error', 'Area not found.');
+        if (!$area) {
+            return redirect()->route('area.list')->with('error', 'Area not found.');
+        }
+
+        return Inertia::render('Admin/Area/Edit', [
+            'area' => $area
+        ]);
     }
-
-    return Inertia::render('Admin/Area/Edit', [
-        'area' => $area
-    ]);
-}
 
 
     // Phương thức lưu trữ Area mới
@@ -46,7 +46,10 @@ class AreaController extends Controller
             'name' => 'required|string|max:255|unique:areas,name',
         ]);
 
-       
+        $area = new Area();
+        $area->name = $request->name;
+        $area->save();
+
 
         return redirect()->route('area.list')->with('success', 'Area created successfully!');
     }

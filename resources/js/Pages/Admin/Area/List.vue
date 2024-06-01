@@ -54,7 +54,7 @@ onMounted(() => {
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="text-center">
                                 <tr v-for="area in areas" :key="area.id">
                                     <td class="border px-4 py-2">
                                         {{ area.id }}

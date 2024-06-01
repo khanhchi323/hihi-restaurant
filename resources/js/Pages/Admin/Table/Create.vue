@@ -2,15 +2,18 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 
-const form = useForm({
-    name: "",
-    area: "",
+const newTable = useForm({
+    number: "",
+    
 });
 
 const submit = () => {
-    form.post(route("table.store"), {
-        onFinish: () => {
-            form.reset();
+    newTable.post(route("table.store"), {
+        onSuccess: () => {
+            newTable.reset();
+        },
+        onError: () => {
+            // Xử lý lỗi nếu cần thiết
         },
     });
 };
@@ -38,27 +41,27 @@ const submit = () => {
                                     >
                                     <input
                                         type="text"
-                                        v-model="form.name"
-                                        id="name"
-                                        name="name"
+                                        v-model="newTable.number"
+                                        id="number"
+                                        name="number"
                                         class="mt-1 p-2 border rounded-md w-full"
                                     />
                                     <div
-                                        v-if="form.errors.name"
+                                        v-if="newTable.errors.number"
                                         class="text-red-600 mt-1"
                                     >
-                                        {{ form.errors.name }}
+                                        {{ newTable.errors.number }}
                                     </div>
                                 </div>
-                                <div class="mb-4">
+                                <!-- <div class="mb-4">
                                     <label
                                         for="area"
                                         class="block text-sm font-medium text-gray-700"
                                         >Area</label
                                     >
                                     <select
-                                        v-model="form.area"
-                                        id="area"
+                                        v-model="newTable.area"
+                                        id=""
                                         name="area"
                                         class="mt-1 p-2 border rounded-md w-full"
                                     >
@@ -67,12 +70,12 @@ const submit = () => {
                                         <option value="Area C">Area C</option>
                                     </select>
                                     <div
-                                        v-if="form.errors.area"
+                                        v-if="newTable.errors.area"
                                         class="text-red-600 mt-1"
                                     >
-                                        {{ form.errors.area }}
+                                        {{ newTable.errors.area }}
                                     </div>
-                                </div>
+                                </div> -->
                                 <div
                                     class="flex items-center justify-between mb-6"
                                 >

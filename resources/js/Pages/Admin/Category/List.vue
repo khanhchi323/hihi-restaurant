@@ -68,8 +68,16 @@ onMounted(() => {});
                                     <td class="border px-4 py-2">
                                         {{ category.name }}
                                     </td>
-                                    
-                                    
+                                    <td class="border px-4 py-2">
+                                        <img
+                                            :src="`/storage/${category.image}`"
+                                            alt="Category Image"
+                                            class="mx-auto"
+                                            style="
+                                                width: 100px;
+                                                height: 100px;
+                                                object-fit: cover;
+                                            "
                                         />
                                     </td>
                                     <td class="border px-4 py-2">

@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
@@ -43,73 +44,56 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
+        // Validate the request data
         $request->validate([
             'name' => 'required|string|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        
+    
+        // Initialize $imagePath to null
+        $imagePath = null;
+    
+        // Check if the request has a file and store it
         if ($request->hasFile('image')) {
+            // Store the file in the 'public' disk
             $imagePath = $request->file('image')->store('categories', 'public');
         }
-
-        // Create a new category
+    
+        // Create a new category and save it to the database
         $category = new Category();
         $category->name = $request->name;
-        $category->image = $imagePath;
+        $category->image = $imagePath; // chỉ lưu đường dẫn tương đối vào cơ sở dữ liệu
         $category->save();
-
-        // Redirect using Inertia
+    
+        // Redirect to the category list with a success message
         return redirect()->route('category.list')->with('success', 'Category created successfully!');
     }
-
-    // public function edit(Category $category)
-    // {
-    //     return Inertia::render('Admin/Category/Edit', [
-    //         'category' => $category
-    //     ]);
-    // }
+    
     public function edit(Category $category)
     {
-        // Kiểm tra xem đối tượng Category đã tồn tại hay chưa
         if (!$category) {
-            // Xử lý khi không tìm thấy đối tượng Category
-            abort(404); // Hoặc bất kỳ xử lý nào phù hợp với ứng dụng của bạn
+            abort(404);
         }
-
-        // Trả về template Inertia với đối tượng Category để hiển thị thông tin chỉnh sửa
         return Inertia::render('Admin/Category/Edit', [
             'category' => $category
         ]);
     }
 
-
-    public function update(Request $request, $id)
+    public function update($id, Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        Validator::make($request->all(), [
+            'name' => ['required'],
+            'image' => ['required'],
+        ])->validate();
 
-        $category = Category::findOrFail($id);
-
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('categories', 'public');
-            $category->image = $imagePath;
-        }
-
-        $category->name = $request->name;
-        $category->save();
-
-        return redirect()->route('category.list')->with('success', 'Category updated successfully!');
+        Category::find($id)->update($request->all());
+        return redirect()->route('category.list');
     }
-
-
 
     public function destroy($id)
     {
         $category = Category::findOrFail($id);
         $category->delete();
-
         return redirect()->route('category.list')->with('success', 'Category deleted successfully!');
     }
 }

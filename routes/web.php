@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function () {
     //CATEGORY
     Route::get('/Admin/Category/List', [CategoryController::class, 'index'])->name('category.list');
     Route::get('/Admin/Category/Create', [CategoryController::class, 'create'])->name('category.create');
-    Route::get('/Admin/Category/Edit', [CategoryController::class, 'edit'])->name('category.edit');
+    Route::get('/Admin/Category/Edit/{cate}', [CategoryController::class, 'edit'])->name('category.edit');
     Route::post('/Category', [CategoryController::class, 'store'])->name('category.store');
     Route::put('/Category/{id}', [CategoryController::class, 'update'])->name('category.update');
     Route::delete('/Category/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');

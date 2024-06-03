@@ -6,25 +6,10 @@ import { onMounted } from "vue";
 const props = defineProps(["categories"]);
 const form = useForm();
 
-function routeToEdit(id) {
-    // Tạo URL chuyển hướng đến trang chỉnh sửa với id của category
-    const editUrl = route('category.edit', { id });
-
-    // Chuyển hướng đến trang chỉnh sửa
-    Inertia.visit(editUrl, {
-        // Truyền dữ liệu của category theo yêu cầu
-        data: {
-            category: props.categories.find(category => category.id === id)
-        }
-    });
-}
-
-
 function destroy(id) {
     if (confirm("Bạn có chắc chắn muốn xóa danh mục này không?")) {
         form.delete(route("category.destroy", id), {
             onFinish: () => {
-                // Xử lý sau khi xóa, làm mới danh sách danh mục
                 Inertia.reload({ only: ["categories"] });
                 console.log("Category deleted successfully");
             },
@@ -32,9 +17,7 @@ function destroy(id) {
     }
 }
 
-onMounted(() => {
-    // Làm bất cứ điều gì bạn cần khi component được mounted
-});
+onMounted(() => {});
 </script>
 
 <template>
@@ -42,7 +25,7 @@ onMounted(() => {
     <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Quản Lý Danh Mục
+                Category Management
             </h2>
         </template>
         <div class="py-6">
@@ -65,7 +48,9 @@ onMounted(() => {
                                     <th class="px-4 py-2 border w-1/2">
                                         Category
                                     </th>
-                                    <th class="px-4 py-2 border w-1/2">Image</th>
+                                    <th class="px-4 py-2 border w-1/2">
+                                        Image
+                                    </th>
                                     <th class="px-4 py-2 border w-32">
                                         Action
                                     </th>
@@ -85,7 +70,7 @@ onMounted(() => {
                                     </td>
                                     <td class="border px-4 py-2">
                                         <img
-                                            :src="`/storage/app/public/${category.image}`"
+                                            :src="`/storage/${category.image}`"
                                             alt="Category Image"
                                             class="mx-auto"
                                             style="
@@ -98,12 +83,17 @@ onMounted(() => {
                                     <td class="border px-4 py-2">
                                         <div class="flex flex-col space-y-2">
                                             <Link
-                                            tabIndex="1"
-                                            className="px-4 py-2 text-sm text-white bg-blue-500 rounded"
-                                            :href="route('category.edit', category.id)"
-                                        >
-                                            Edit
-                                        </Link>
+                                                tabIndex="1"
+                                                className="px-4 py-2 text-sm text-white bg-blue-500 rounded"
+                                                :href="
+                                                    route(
+                                                        'category.edit',
+                                                        category.id
+                                                    )
+                                                "
+                                            >
+                                                Edit
+                                            </Link>
                                             <button
                                                 @click="destroy(category.id)"
                                                 class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"

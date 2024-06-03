@@ -1,41 +1,36 @@
 <script setup>
 import { defineProps, useForm } from "@inertiajs/inertia-vue3";
 import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import { Link } from "@inertiajs/inertia-vue3";
+import Head from "@inertiajs/inertia-vue3";
 
-import { Head, Link } from "@inertiajs/inertia-vue3";
-
-// const props = defineProps({
-//   category: Object,
-// });
-
-// const editCategory = useForm({
-//   name: props.category.name,
-//   image: props.category.image,
-// });
-
-// const handleSubmit = () => {
-//   editCategory.put(route("category.update", { id: props.category.id }), editCategory.data);
-// };
-const category = useForm({
-    name: "",
-    image: "",
+const props = defineProps({
+    category: Object,
 });
 
+const form = useForm({
+    name: props.category.name,
+    image: null,
+});
+
+const handleImageChange = (event) => {
+  form.image = event.target.files[0];
+};
+
 const handleSubmit = () => {
-    form.post(route("category.store"));
+  form.post(route("category.store"), {
+    forceFormData: true, 
+  });
 };
 </script>
-
 <template>
     <Head title="Edit Category" />
-
     <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Edit Category
             </h2>
         </template>
-
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -58,7 +53,7 @@ const handleSubmit = () => {
                                 <input
                                     type="text"
                                     id="name"
-                                    v-model="category.name"
+                                    v-model="form.name"
                                     class="mt-1 p-2 border rounded-md w-full"
                                 />
                             </div>

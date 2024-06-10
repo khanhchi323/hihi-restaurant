@@ -19,7 +19,11 @@
         "vue": "^3.4.0"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^6.5.2",
+        "@fortawesome/free-solid-svg-icons": "^6.5.2",
+        "@fortawesome/vue-fontawesome": "^3.0.8",
         "@inertiajs/inertia-vue3": "^0.6.0",
-        "js-cookie": "^3.0.5"
+        "js-cookie": "^3.0.5",
+        "primeicons": "^7.0.0"
     }
 }

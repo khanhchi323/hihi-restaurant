@@ -1,16 +1,18 @@
 <template>
   <div class="navbar">
-    <NavButton href="/" icon="fa-home" label="Home" />
-    <NavButton href="/menu" icon="fa-file-alt" label="Menu" />
-    <NavButton href="/payment" icon="fa-credit-card" label="Payment" />
-    <NavButton href="/orders" icon="fa-box" label="Orders" />
-    <NavButton href="/settings" icon="fa-cog" label="Settings" />
-    <div class="version">V.1.0</div>
+    <NavButton href="/" icon="fa-home" label="Home"/>
+    <NavButton href="./Pages/Public/Menu.vue" icon="fa-file-alt" label="Menu"/>  
+    <NavButton href="/payment" icon="fa-credit-card" label="Payment"/>
+    <NavButton href="/orders" icon="fa-box" label="Orders"/>
+    <NavButton href="/login" icon="fa-cog" label="Log In"/>
+    <NavButton href="/register" icon="fa-box" label="Register"/>
+    <NavButton href="/settings" icon="fa-cog" label="Settings"/>
   </div>
 </template>
 
 <script setup>
 import NavButton from './NavButton.vue';
+
 </script>
 
 <style scoped>
@@ -20,17 +22,11 @@ import NavButton from './NavButton.vue';
   left: 0;
   height: 100%;
   width: 100px;
-  background-color: #f8f9fa;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 20px;
-}
-
-.version {
-  margin-top: auto;
-  margin-bottom: 20px;
-  color: #adb5bd;
-  font-size: 0.9rem;
 }
 </style>

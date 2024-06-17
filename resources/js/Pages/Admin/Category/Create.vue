@@ -3,9 +3,9 @@ import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
 import { ref } from "vue";
 
-const newCategory = useForm({
+const form = useForm({
     name: "",
-    image: null, // Chỉnh sửa để lưu đối tượng tệp
+    image: null,
 });
 
 const imagePreview = ref("");
@@ -13,8 +13,8 @@ const imagePreview = ref("");
 const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-        newCategory.image = file; // Lưu đối tượng tệp
-        imagePreview.value = URL.createObjectURL(file); // Tạo URL xem trước
+        newCategory.image = file;
+        imagePreview.value = URL.createObjectURL(file);
     }
 };
 
@@ -74,7 +74,7 @@ const submit = () => {
                                     <input
                                         type="text"
                                         id="name"
-                                        v-model="newCategory.name"
+                                        v-model="form.name"
                                         class="mt-1 p-2 border rounded-md w-full"
                                     />
                                 </div>

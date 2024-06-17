@@ -1,38 +1,27 @@
 <script setup>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, Link, useForm, route } from "@inertiajs/inertia-vue3";
+import { defineProps, useForm } from "@inertiajs/inertia-vue3";
+import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import { Link } from "@inertiajs/inertia-vue3";
+import Head from "@inertiajs/inertia-vue3";
 
-// const props = defineProps({
-//     areas: Object,
-// });
-
-const area = useForm({
-  name: ""
+const props = defineProps({
+    area: Object,
 });
 
-// const submit = () => {
-//     form.put(route("area.update", props.area.id))
-//         .then(() => {
-//             // Redirect to list page after successful update
-//             window.location.href = route("area.list");
-//         })
-//         .catch((error) => {
-//             // Handle errors here, e.g., display error messages
-//             console.error("Error submitting form:", error);
-//         });
-// };
-const handleSubmit = () => {
-    editArea.put(route("area.update", { id: props.area.id }), {
-        onSuccess: () => {
-            window.location.href = route('area.list');
-        },
+const form = useForm({
+    area_name: props.area.area_name,
+});
+
+const submit = () => {
+    form.post(route("area.store"), {
+        forceFormData: true,
     });
 };
 </script>
 
 <template>
     <Head title="Edit Area" />
-    <AuthenticatedLayout>
+    <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Edit Area
@@ -42,24 +31,20 @@ const handleSubmit = () => {
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
-                        <form name="createForm" @submit.prevent="handleSubmit">
+                        <form name="createForm" @submit.prevent="submit">
                             <div class="flex flex-col">
                                 <div class="mb-4">
-                                    <Label for="name" value="name" />
+                                    <label
+                                        for="name"
+                                        class="block text-sm font-medium text-gray-700"
+                                        >Name Area:</label
+                                    >
                                     <Input
-                                        id="title"
+                                        id="name"
                                         type="text"
                                         class="mt-1 block w-full"
-                                        v-model="area.name"
-                                        autofocus
+                                        v-model="form.area_name"
                                     />
-
-                                    <!-- <span
-                                        class="text-red-600"
-                                        v-if="form.errors.title"
-                                    >
-                                        {{ form.errors.title }}
-                                    </span> -->
                                 </div>
                             </div>
                             <div class="flex items-center justify-between mb-6">
@@ -81,5 +66,5 @@ const handleSubmit = () => {
                 </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </BreezeAuthenticatedLayout>
 </template>

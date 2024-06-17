@@ -1,33 +1,28 @@
 <script setup>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, Link, useForm, route } from "@inertiajs/inertia-vue3";
-import { defineProps } from "vue";
+import { defineProps, useForm } from "@inertiajs/inertia-vue3";
+import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import { Link } from "@inertiajs/inertia-vue3";
+import Head from "@inertiajs/inertia-vue3";
 
 const props = defineProps({
-    Tables: Object,
+    table: Object,
 });
 
-// const form = useForm({
-//   title: props.area.title,
-//   body: props.area.body,
-// });
+const form = useForm({
+    table_name: props.table.table_name,
+    area_name: "",
+});
 
 const submit = () => {
-    form.put(route("table.update", props.table.id))
-        .then(() => {
-            // Redirect to list page after successful update
-            window.location.href = route("table.list");
-        })
-        .catch((error) => {
-            // Handle errors here, e.g., display error messages
-            console.error("Error submitting form:", error);
-        });
+    form.post(route("table.store"), {
+        forceFormData: true,
+    });
 };
 </script>
 
 <template>
     <Head title="Edit Table" />
-    <AuthenticatedLayout>
+    <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Edit Table
@@ -37,25 +32,33 @@ const submit = () => {
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
-                        <form name="createForm" @submit.prevent="submit">
+                        <form @submit.prevent="submit">
                             <div class="flex flex-col">
                                 <div class="mb-4">
                                     <label
-                                        for="area"
+                                        for="name"
                                         class="block text-sm font-medium text-gray-700"
-                                        >Area</label
+                                        >Name Table:</label
                                     >
-                                    <select
-                                        v-model="tableArea"
-                                        id="area"
-                                        name="area"
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        v-model="form.table_name"
                                         class="mt-1 p-2 border rounded-md w-full"
+                                    />
+                                </div>
+                                <div class="mb-4">
+                                    <label
+                                        for="name"
+                                        class="block text-sm font-medium text-gray-700"
+                                        >Name:</label
                                     >
-                                        <option value="Area A">Area A</option>
-                                        <option value="Area B">Area B</option>
-                                        <option value="Area C">Area C</option>
-                                        <!-- Thêm các tùy chọn khác nếu cần -->
-                                    </select>
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        v-model="form.area_name"
+                                        class="mt-1 p-2 border rounded-md w-full"
+                                    />
                                 </div>
                                 <div
                                     class="flex items-center justify-between mb-6"
@@ -79,5 +82,5 @@ const submit = () => {
                 </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </BreezeAuthenticatedLayout>
 </template>

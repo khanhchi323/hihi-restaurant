@@ -2,20 +2,13 @@
 import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
 
-const newArea = useForm({
-    name: "",
+const form = useForm({
+    area_name: "",
 });
 
-const submit = () => {
-    newArea.post(route("area.store"), {
-        onSuccess: () => {
-            newArea.reset();
-        },
-        onError: () => {
-            // Xử lý lỗi nếu cần thiết
-        },
-    });
-};
+function submit() {
+    form.post(route("area.store"));
+}
 </script>
 
 <template>
@@ -39,8 +32,7 @@ const submit = () => {
                                         id="name"
                                         type="text"
                                         class="mt-1 block w-full rounded-lg border-gray-400"
-                                        v-model="newArea.name"
-                                        autofocus
+                                        v-model="form.area_name"
                                     />
                                 </div>
                             </div>

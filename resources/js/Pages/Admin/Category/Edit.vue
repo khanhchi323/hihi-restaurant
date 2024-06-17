@@ -14,13 +14,13 @@ const form = useForm({
 });
 
 const handleImageChange = (event) => {
-  form.image = event.target.files[0];
+    form.image = event.target.files[0];
 };
 
 const handleSubmit = () => {
-  form.post(route("category.store"), {
-    forceFormData: true, 
-  });
+    form.post(route("category.store"), {
+        forceFormData: true,
+    });
 };
 </script>
 <template>
@@ -68,13 +68,6 @@ const handleSubmit = () => {
                                     id="image"
                                     @change="handleImageChange"
                                     class="mt-1 p-2 border rounded-md w-full"
-                                />
-                                <img
-                                    v-if="category.image"
-                                    :src="category.image"
-                                    alt="Category Image"
-                                    class="mt-2"
-                                    style="max-width: 100px; max-height: 100px"
                                 />
                             </div>
                             <button

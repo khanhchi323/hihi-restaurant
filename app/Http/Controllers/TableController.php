@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
 use App\Models\Table;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Validator;
 
 class TableController extends Controller
 {
@@ -16,9 +18,14 @@ class TableController extends Controller
             'tables' => $tables
         ]);
     }
-    public function edit()
+    public function edit(Table $table)
     {
-        return Inertia::render('Admin/Table/Edit');
+        if (!$table) {
+            abort(404);
+        }
+        return Inertia::render('Admin/Table/Edit', [
+            'table' => $table
+        ]);
     }
 
     public function create()
@@ -28,14 +35,21 @@ class TableController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'number' => 'required|string|max:255|unique:areas,name',
+            'table_name' => 'required|string|max:255',
+            'area_name' => 'required|string|max:255',
         ]);
 
-        $tables = new Table();
-        $tables->number = $request->number;
-        $tables->save();
-
+        $table = new Table();
+        $table->table_name = $request->table_name;
+        $table->area_name = $request->area_name;
+        $table->save();
 
         return redirect()->route('table.list')->with('success', 'Table created successfully!');
+    }
+    public function destroy($id)
+    {
+        $table = Table::findOrFail($id);
+        $table->delete();
+        return redirect()->route('table.list')->with('success', 'Table deleted successfully!');
     }
 }

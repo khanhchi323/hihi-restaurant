@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('tables', function (Blueprint $table) {
             $table->id();
-            $table->string('number');
-            $table->integer('area_id');
+            $table->string('table_name')->default('default_table_name'); // Added default value for 'table_name'
+            $table->integer('area_name');
             $table->timestamps();
         });
     }

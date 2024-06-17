@@ -7,10 +7,9 @@ const props = defineProps(["tables"]);
 const form = useForm();
 
 function destroy(id) {
-    if (confirm("Bạn có chắc chắn muốn xóa danh mục này không?")) {
+    if (confirm("Bạn có chắc chắn muốn xóa bàn này không?")) {
         form.delete(route("table.destroy", id), {
             onFinish: () => {
-                // Xử lý sau khi xóa, làm mới danh sách danh mục
                 Inertia.reload({ only: ["tables"] });
                 console.log("Table deleted successfully");
             },
@@ -18,9 +17,7 @@ function destroy(id) {
     }
 }
 
-onMounted(() => {
-    // Làm bất cứ điều gì bạn cần khi component được mounted
-});
+onMounted(() => {});
 </script>
 
 <template>
@@ -28,7 +25,7 @@ onMounted(() => {
     <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Manage Table
+                Table Management
             </h2>
         </template>
         <div class="py-6">
@@ -40,33 +37,41 @@ onMounted(() => {
                                 class="px-6 py-2 text-white bg-green-500 rounded-md focus:outline-none"
                                 :href="route('table.create')"
                             >
-                                Create
+                                Tạo mới
                             </Link>
                         </div>
-                        <table
-                            class="table-auto w-full border-collapse border border-gray-300"
-                        >
-                            <thead class="bg-gray-100">
-                                <tr>
-                                    <th class="border px-4 py-2 w-32">ID</th>
-                                    <th class="border px-4 py-2">No. Table</th>
-                                    <th class="border px-4 py-2">Area</th>
-                                    <th class="border px-4 py-2">Action</th>
+
+                        <table class="w-full table-fixed">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="px-4 py-2 border w-16">ID</th>
+                                    <th class="px-4 py-2 border">Tên bàn</th>
+                                    <th class="px-4 py-2 border">Khu vực</th>
+                                    <th class="px-4 py-2 border w-32">
+                                        Hành động
+                                    </th>
                                 </tr>
                             </thead>
-                            <tbody class="text-center">
-                                <tr v-for="table in tables" :key="table.id">
+                            <tbody>
+                                <tr
+                                    v-for="table in props.tables"
+                                    :key="table.id"
+                                    class="text-center"
+                                >
                                     <td class="border px-4 py-2">
                                         {{ table.id }}
                                     </td>
                                     <td class="border px-4 py-2">
-                                        {{ table.number }}
+                                        {{ table.table_name }}
+                                    </td>
+                                    <td class="border px-4 py-2">
+                                        {{ table.area_name }}
                                     </td>
                                     <td class="border px-4 py-2">
                                         <div class="flex flex-col space-y-2">
                                             <Link
                                                 tabIndex="1"
-                                                class="px-4 py-2 text-sm text-center text-white bg-blue-500 rounded"
+                                                class="px-4 py-2 text-sm text-white bg-blue-500 rounded"
                                                 :href="
                                                     route(
                                                         'table.edit',
@@ -78,7 +83,7 @@ onMounted(() => {
                                             </Link>
                                             <button
                                                 @click="destroy(table.id)"
-                                                class="px-2 py-1 bg-red-500 text-white text-center rounded hover:bg-red-600"
+                                                class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
                                             >
                                                 Delete
                                             </button>
@@ -95,7 +100,7 @@ onMounted(() => {
                                         colspan="4"
                                         class="border px-4 py-2 text-center"
                                     >
-                                        Không có danh mục nào.
+                                        Không có bàn nào.
                                     </td>
                                 </tr>
                             </tbody>

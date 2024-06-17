@@ -17,17 +17,11 @@ class CategoryController extends Controller
     }
 
 
-    // danh sach category
-    // public function index()
-    // {
-    //     $categories['info'] = DB::table('categories')->get(); 
-    //     return Inertia::render('Admin/Category/List', $categories);
-    // }
     public function index()
     {
-        $categories = Category::all(); // hoặc paginate() nếu bạn muốn phân trang
+        $categories = Category::all(); 
 
-        // Thêm URL đầy đủ của hình ảnh vào từng đối tượng danh mục
+   
         foreach ($categories as $category) {
             $category->image_url = Storage::url($category->image);
         }
@@ -44,31 +38,25 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        // Validate the request data
         $request->validate([
             'name' => 'required|string|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-    
-        // Initialize $imagePath to null
+
         $imagePath = null;
-    
-        // Check if the request has a file and store it
+
         if ($request->hasFile('image')) {
-            // Store the file in the 'public' disk
             $imagePath = $request->file('image')->store('categories', 'public');
         }
-    
-        // Create a new category and save it to the database
+
         $category = new Category();
         $category->name = $request->name;
-        $category->image = $imagePath; // chỉ lưu đường dẫn tương đối vào cơ sở dữ liệu
+        $category->image = $imagePath; 
         $category->save();
-    
-        // Redirect to the category list with a success message
+
         return redirect()->route('category.list')->with('success', 'Category created successfully!');
     }
-    
+
     public function edit(Category $category)
     {
         if (!$category) {

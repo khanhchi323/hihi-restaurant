@@ -1,7 +1,8 @@
 <script setup>
 import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, Link, useForm, Inertia } from "@inertiajs/inertia-vue3";
+import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
 import { onMounted } from "vue";
+import { Inertia } from "@inertiajs/inertia";
 
 const props = defineProps(["areas"]);
 const form = useForm();
@@ -10,7 +11,6 @@ function destroy(id) {
     if (confirm("Bạn có chắc chắn muốn xóa danh mục này không?")) {
         form.delete(route("area.destroy", id), {
             onFinish: () => {
-                // Xử lý sau khi xóa, làm mới danh sách danh mục
                 Inertia.reload({ only: ["areas"] });
                 console.log("Area deleted successfully");
             },
@@ -18,9 +18,7 @@ function destroy(id) {
     }
 }
 
-onMounted(() => {
-    // Làm bất cứ điều gì bạn cần khi component được mounted
-});
+onMounted(() => {});
 </script>
 
 <template>
@@ -60,7 +58,7 @@ onMounted(() => {
                                         {{ area.id }}
                                     </td>
                                     <td class="border px-4 py-2">
-                                        {{ area.name }}
+                                        {{ area.area_name }}
                                     </td>
                                     <td class="border px-4 py-2">
                                         <div class="flex flex-col space-y-2">

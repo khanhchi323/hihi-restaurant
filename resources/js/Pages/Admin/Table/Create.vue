@@ -1,102 +1,76 @@
 <script setup>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, Link, useForm } from "@inertiajs/vue3";
+import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
 
-const newTable = useForm({
-    number: "",
-    
+const form = useForm({
+    table_name: "",
+    area_name: "",
 });
 
-const submit = () => {
-    newTable.post(route("table.store"), {
-        onSuccess: () => {
-            newTable.reset();
-        },
-        onError: () => {
-            // Xử lý lỗi nếu cần thiết
-        },
-    });
-};
+function submit() {
+    form.post(route("table.store")); 
+}
 </script>
 
 <template>
-    <Head title="Create Table" />
-    <AuthenticatedLayout>
+    <Head title="Tạo mới bàn" />
+    <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Create Table
             </h2>
         </template>
-        <div class="py-6 flex">
-            <div class="w-2/3 max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="py-6">
+            <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
+                        <div class="flex items-center justify-between mb-6">
+                            <Link
+                                class="px-6 py-2 text-white bg-blue-500 rounded-md focus:outline-none"
+                                :href="route('table.list')"
+                            >
+                                Back
+                            </Link>
+                        </div>
                         <form @submit.prevent="submit">
-                            <div class="flex flex-col">
-                                <div class="mb-4">
-                                    <label
-                                        for="name"
-                                        class="block text-sm font-medium text-gray-700"
-                                        >No. Table</label
-                                    >
-                                    <input
-                                        type="text"
-                                        v-model="newTable.number"
-                                        id="number"
-                                        name="number"
-                                        class="mt-1 p-2 border rounded-md w-full"
-                                    />
-                                    <div
-                                        v-if="newTable.errors.number"
-                                        class="text-red-600 mt-1"
-                                    >
-                                        {{ newTable.errors.number }}
-                                    </div>
-                                </div>
-                                <!-- <div class="mb-4">
-                                    <label
-                                        for="area"
-                                        class="block text-sm font-medium text-gray-700"
-                                        >Area</label
-                                    >
-                                    <select
-                                        v-model="newTable.area"
-                                        id=""
-                                        name="area"
-                                        class="mt-1 p-2 border rounded-md w-full"
-                                    >
-                                        <option value="Area A">Area A</option>
-                                        <option value="Area B">Area B</option>
-                                        <option value="Area C">Area C</option>
-                                    </select>
-                                    <div
-                                        v-if="newTable.errors.area"
-                                        class="text-red-600 mt-1"
-                                    >
-                                        {{ newTable.errors.area }}
-                                    </div>
-                                </div> -->
-                                <div
-                                    class="flex items-center justify-between mb-6"
+                            <div class="mb-4">
+                                <label
+                                    for="table_name"
+                                    class="block text-gray-700"
+                                    >Tên bàn</label
                                 >
-                                    <Link
-                                        className="px-6 py-2 text-white bg-red-500 rounded-md focus:outline-none"
-                                        :href="route('table.list')"
-                                    >
-                                        Back</Link
-                                    >
-                                    <button
-                                        type="submit"
-                                        class="px-6 py-2 font-bold text-white bg-green-500 rounded"
-                                    >
-                                        Save
-                                    </button>
-                                </div>
+                                <input
+                                    v-model="form.table_name"
+                                    type="text"
+                                    id="table_name"
+                                    name="table_name"
+                                    class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                />
                             </div>
+                            <div class="mb-4">
+                                <label
+                                    for="area_name"
+                                    class="block text-gray-700"
+                                    >Khu vực</label
+                                >
+                                <input
+                                    v-model="form.area_name"
+                                    type="text"
+                                    id="area_name"
+                                    name="area_name"
+                                    class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                />
+                            </div>
+                            <button
+                                type="submit"
+                                class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+                            >
+                                Tạo
+                            </button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </BreezeAuthenticatedLayout>
 </template>

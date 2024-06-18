@@ -1,50 +1,74 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Menus;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Menu;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\DB;
 
 class MenuController extends Controller
 {
 
     public function show($id)
     {
-        $menuData = Menus::find($id)->first();
+        $menu = Category::findOrFail($id);
         $categories = Category::all();
-        return view("menu/edit", compact('menuData', 'categories'));
+        return Inertia::render('Admin/Menu/Edit', compact('menu'));
     }
 
     public function index()
     {
-        $menus = DB::table('menus') -> get() ;
-        return Inertia::render('Admin/Menu/List', compact('menus'));
+        $menus = Menu::all(); 
+
+   
+        foreach ($menus as $menu) {
+            $menu->image_url = Storage::url($menu->image);
+        }
+
+        return Inertia::render('Admin/Menu/List', [
+            'menus' => $menus
+        ]);
     }
     public function create()
     {
         return Inertia::render('Admin/Menu/Create');
     }
-    public function edit()
-    {
-        return Inertia::render('Admin/Menu/Edit');
-    }
+    
     public function store(Request $request)
-    { {
-            $validatedData = $request->validate([
-                'name' => 'required|string|max:255|unique:menu,',
-            ]);
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'category_id' => 'required|string|max:255',
+            'price' => 'required|string|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
 
-            $menu = Menus::create($validatedData);
-            return response()->json([
-                'message' => 'Area created successfully!',
-                'menu' => $menu,
-            ]);
+        $imagePath = null;
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('menus', 'public');
         }
+
+        $menu = new Category();
+        $menu->name = $request->name;
+        $menu->category_id = $request->category_id;
+        $menu->price = $request->price;
+        $menu->image = $imagePath; 
+        $menu->save();
+
+        return redirect()->route('menu.list')->with('success', 'Menu created successfully!');
+    }
+
+    public function edit(Menu $menu)
+    {
+        if (!$menu) {
+            abort(404);
+        }
+        return Inertia::render('Admin/Menu/Edit', [
+            'menu' => $menu
+        ]);
     }
     public function update(Request $request, $id)
     {
@@ -57,7 +81,7 @@ class MenuController extends Controller
                 $input["images"] = $storedPath;
             }
 
-            $menu = Menus::find($id);
+            $menu = Menu::find($id);
             $menu->update($input);
             return redirect()->route("menu.update", $id)->with("success", "Cập nhật sản phẩm thành công");
         } catch (\Exception $e) {
@@ -66,10 +90,10 @@ class MenuController extends Controller
         }
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $menu = Menus::find($id);
+        $menu = Menu::findOrFail($id);
         $menu->delete();
-        return redirect()->route("menu.list")->with("success", "Xóa sản phẩm thành công"); // Assuming 'menu.index' shows the list after deletion
+        return redirect()->route('menu.list')->with('success', 'Menu deleted successfully!');
     }
 }

@@ -29,13 +29,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     //CATEGORY
-    Route::resource('category', CategoryController::class);
+    // Route::resource('category', CategoryController::class);
     Route::get('/Admin/Category/List', [CategoryController::class, 'index'])->name('category.list');
     Route::get('/Admin/Category/Create', [CategoryController::class, 'create'])->name('category.create');
+    Route::post('/Admin/Category/Create', [CategoryController::class, 'store'])->name('category.store');
     Route::get('/Admin/Category/Edit/{cate}', [CategoryController::class, 'edit'])->name('category.edit');
-    Route::post('/Category', [CategoryController::class, 'store'])->name('category.store');
-    Route::put('/Category/{id}', [CategoryController::class, 'update'])->name('category.update');
-    Route::delete('/Category/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
+    Route::post('/Admin/Category/Edit/{id}', [CategoryController::class, 'update'])->name('category.update');
+    Route::delete('/Admin/Category/List{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
     Route::get('/Admin/Category/Show/{id}', [CategoryController::class, 'show'])->name('category.show');
 
 
@@ -51,7 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('table', TableController::class);
     Route::get('/Admin/Table/List', [TableController::class, 'index'])->name('table.list');
     Route::get('/Admin/Table/Create', [TableController::class, 'create'])->name('table.create');
-    Route::get('/Admin/Table/Edit/{id}', [TableController::class, 'edit'])->name('table.edit');
+    Route::get('/Admin/Table/Edit/{table}', [TableController::class, 'edit'])->name('table.edit');
     Route::post('/Table', [TableController::class, 'store'])->name('table.store');
     Route::put('/Table/{id}', [TableController::class, 'update'])->name('table.update');
     Route::delete('/Table/{id}', [TableController::class, 'destroy'])->name('table.destroy');
@@ -62,7 +62,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('area', AreaController::class);
     Route::get('/Admin/Area/List', [AreaController::class, 'index'])->name('area.list');
     Route::get('/Admin/Area/Create', [AreaController::class, 'create'])->name('area.create');
-    Route::get('/Admin/Area/Edit/{id}', [AreaController::class, 'edit'])->name('area.edit');
+    Route::get('/Admin/Area/Edit/{area}', [AreaController::class, 'edit'])->name('area.edit');
     Route::post('/Area', [AreaController::class, 'store'])->name('area.store');
     Route::put('/Area/{id}', [AreaController::class, 'update'])->name('area.update');
     Route::delete('/Area/{id}', [AreaController::class, 'destroy'])->name('area.destroy');

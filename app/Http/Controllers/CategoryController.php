@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 
 class CategoryController extends Controller
 {
@@ -19,9 +22,9 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::all(); 
+        $categories = Category::all();
 
-   
+
         foreach ($categories as $category) {
             $category->image_url = Storage::url($category->image);
         }
@@ -51,7 +54,7 @@ class CategoryController extends Controller
 
         $category = new Category();
         $category->name = $request->name;
-        $category->image = $imagePath; 
+        $category->image = $imagePath;
         $category->save();
 
         return redirect()->route('category.list')->with('success', 'Category created successfully!');
@@ -74,14 +77,41 @@ class CategoryController extends Controller
             'image' => ['required'],
         ])->validate();
 
-        Category::find($id)->update($request->all());
+        if ($request->hasFile('image')) {
+
+            // //xóa file ảnh cũ
+            // $images=Store::select('select image from posts where id= :id', ['id' => $id]);
+            // foreach ($images as $image) {
+            //     File::delete(public_path(path_delete.$image->image));
+            // }   
+            //lấy tên file ảnh mới và upload lên serve
+            $imagePath = $request->file('image')->store('categories', 'public');
+
+            Category::find($id)->update([
+                'name' => $request->name,
+                'image' => $imagePath,
+            ]);
+        } else
+            Category::find($id)->update([
+                'name' => $request->name,
+            ]);
         return redirect()->route('category.list');
     }
 
-    public function destroy($id)
+    // public function destroy($id)
+    // {
+    //     $category = Category::findOrFail($id);
+    //     $category->delete();
+    //     return redirect()->route('category.list')->with('success', 'Category deleted successfully!');
+    // }
+    public function destroy($id): RedirectResponse
     {
-        $category = Category::findOrFail($id);
-        $category->delete();
-        return redirect()->route('category.list')->with('success', 'Category deleted successfully!');
+
+        // $images=DB::select('select image from posts where id= :id', ['id' => $id]);
+        // foreach ($images as $image) {
+        //     File::delete(public_path(path_delete.$image->image));
+        // }   
+        Category::find($id)->delete();
+        return Redirect::route('category.list');
     }
 }

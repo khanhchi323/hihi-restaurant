@@ -8,33 +8,28 @@ const form = useForm({
     image: null,
 });
 
-const imagePreview = ref("");
-
 const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-        newCategory.image = file;
+        form.image = file;
         imagePreview.value = URL.createObjectURL(file);
     }
 };
 
 const submit = () => {
     const formData = new FormData();
-    formData.append("name", newCategory.name);
-    if (newCategory.image) {
-        formData.append("image", newCategory.image);
+    formData.append("name", form.name);
+    if (form.image) {
+        formData.append("image", form.image);
     }
 
-    newCategory.post(route("category.store"), {
+    form.post(route("category.store"), {
         data: formData,
         onSuccess: () => {
-            // Tuỳ chọn: Đặt lại form hoặc chuyển trang sau khi thành công
-            newCategory.reset();
+            form.reset();
             imagePreview.value = "";
         },
-        onError: () => {
-            // Xử lý lỗi nếu cần thiết
-        },
+        onError: () => {},
         preserveState: false,
         forceFormData: true,
     });
@@ -105,7 +100,7 @@ const submit = () => {
                                     type="submit"
                                     class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
                                 >
-                                    Tạo
+                                    Create
                                 </button>
                             </div>
                         </form>

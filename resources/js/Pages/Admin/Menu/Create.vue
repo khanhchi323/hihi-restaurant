@@ -1,37 +1,44 @@
 <script setup>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
-import Cookies from "js-cookie";
+import { ref } from "vue";
 
 const form = useForm({
     name: "",
-    category: "Thịt",
-    price: "",
+    category_id:"",
+    price:"",
     image: null,
 });
 
 const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            form.image = e.target.result;
-        };
-        reader.readAsDataURL(file);
+        form.image = file;
     }
 };
 
-const handleSubmit = () => {
-    const menus = JSON.parse(Cookies.get("menus") || "[]");
-    menus.push(form);
-    Cookies.set("menus", JSON.stringify(menus), { expires: 7 });
-    form.post(route("menu.store"));
+const submit = () => {
+    const formData = new FormData();
+    formData.append("name", form.name);
+    if (form.image) {
+        formData.append("image", form.image);
+    }
+
+    form.post(route("menu.store"), {
+        data: formData,
+        onSuccess: () => {
+            form.reset();
+        },
+        onError: () => {},
+        preserveState: false,
+        forceFormData: true,
+    });
 };
 </script>
 
 <template>
     <Head title="Create Menu" />
-    <AuthenticatedLayout>
+    <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Create Menu
@@ -41,7 +48,7 @@ const handleSubmit = () => {
             <div class="w-2/3 max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
-                        <form name="createForm" @submit.prevent="handleSubmit">
+                        <form name="createForm" @submit.prevent="submit">
                             <div class="mb-4">
                                 <label
                                     for="name"
@@ -57,23 +64,19 @@ const handleSubmit = () => {
                             </div>
                             <div class="mb-4">
                                 <label
-                                    for="category"
+                                    for="name"
                                     class="block text-sm font-medium text-gray-700"
                                     >Category</label
                                 >
-                                <select
-                                    id="category"
-                                    v-model="form.category"
+                                <input
+                                    type="text"
+                                    id="name"
+                                    v-model="form.category_id"
                                     class="mt-1 p-2 border rounded-md w-full"
-                                >
-                                    <option value="Thịt">Thịt</option>
-                                    <option value="Hải sản">Hải sản</option>
-                                    <option value="Rau củ">Rau củ</option>
-                                    <option value="Nước uống">Nước uống</option>
-                                </select>
+                                />
                             </div>
                             <div class="mb-4">
-<label
+                                <label
                                     for="price"
                                     class="block text-sm font-medium text-gray-700"
                                     >Price</label
@@ -118,5 +121,5 @@ const handleSubmit = () => {
                 </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </BreezeAuthenticatedLayout>
 </template>

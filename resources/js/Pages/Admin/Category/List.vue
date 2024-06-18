@@ -7,16 +7,10 @@ const props = defineProps(["categories"]);
 const form = useForm();
 
 function destroy(id) {
-    if (confirm("Bạn có chắc chắn muốn xóa danh mục này không?")) {
-        form.delete(route("category.destroy", id), {
-            onFinish: () => {
-                Inertia.reload({ only: ["categories"] });
-                console.log("Category deleted successfully");
-            },
-        });
+    if (confirm("Bạn có chắc chắn muốn xóa không?")) {
+        form.delete(route("category.destroy", id));
     }
 }
-
 onMounted(() => {});
 </script>
 

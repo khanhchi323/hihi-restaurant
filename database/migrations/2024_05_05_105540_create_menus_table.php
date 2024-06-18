@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('images');
+            $table->string('image');
             $table->integer('price');
-            // Khóa phụ tham chiếu đến cột id trong bảng categories
-            $table->foreignId('category_id')->constrained('categories');
+            $table->string('category_id');
             $table->timestamps();
         });
     }

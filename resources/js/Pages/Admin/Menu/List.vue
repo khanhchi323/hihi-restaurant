@@ -1,35 +1,24 @@
 <script setup>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue"
-import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
-import Cookies from "js-cookie";
-import { ref, computed, onMounted } from "vue";
+import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import { Head, Link, useForm, Inertia } from "@inertiajs/inertia-vue3";
+import { onMounted } from "vue";
 
-const menus = ref([]);
-const categories = ["Thịt", "Hải sản", "Rau củ", "Nước uống"];
-const selectedCategory = ref("");
+const props = defineProps(["menus"]);
+const form = useForm();
 
-const filteredMenus = computed(() => {
-    if (!selectedCategory.value) {
-        return menus.value;
+function destroy(id) {
+    if (confirm("Bạn có chắc chắn muốn xóa danh mục này không?")) {
+        form.delete(route("menu.destroy", id), {
+            onFinish: () => {
+                Inertia.reload({ only: ["menu"] });
+                console.log("Menu deleted successfully");
+            },
+        });
     }
-    return menus.value.filter(
-        (menus) => menus.category === selectedCategory.value
-    );
-});
-const destroy = async (id) => {
-    // Gửi yêu cầu xóa đến máy chủ
-    try {
-        await $inertia.delete(route("menus.destroy", id));
-        // Cập nhật giao diện người dùng sau khi xóa thành công
-        menus.value = menus.value.filter((menus) => menus.id !== id);
-    } catch (error) {
-        console.error("Error deleting menus:", error);
-    }
-};
-onMounted(() => {
-    const cookiesMenus = JSON.parse(Cookies.get("menus") || "[]");
-    menus.value = cookiesMenus;
-});
+}
+
+onMounted(() => {});
+
 </script>
 
 <template>
@@ -69,7 +58,7 @@ onMounted(() => {
                         <div class="flex items-center justify-between mb-6">
                             <Link
                                 class="px-6 py-2 text-white bg-green-500 rounded-md focus:outline-none"
-                                :href="route('menus.create')"
+                                :href="route('menu.create')"
                             >
                                 Create
                             </Link>
@@ -77,7 +66,7 @@ onMounted(() => {
                     </div>
 
                     <table class="w-full">
-<thead>
+                        <thead>
                             <tr>
                                 <th class="px-4 py-2 w-16">ID</th>
                                 <th class="px-4 py-2 w-1/5">Category</th>
@@ -87,43 +76,58 @@ onMounted(() => {
                                 <th class="px-4 py-2 w-16">Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-center">
                             <tr
-                                v-for="menus in menus"
-                                :key="menus.id"
+                                v-for="menu in menus"
+                                :key="menu.id"
                                 class="text-center"
                             >
                                 <td class="border px-2 py-2 w-16">
-                                    {{ menus.id }}
+                                    {{ menu.id }}
                                 </td>
                                 <td class="border px-4 py-2 w-1/6">
-                                    {{ menus.category }}
+                                    {{ menu.category }}
                                 </td>
                                 <td class="border px-4 py-2 w-1/5">
-                                    {{ menus.name }}
+                                    {{ menu.name }}
                                 </td>
                                 <td class="border px-4 py-2 w-1/6">
-                                    {{ menus.price }}
+                                    {{ menu.price }}
                                 </td>
                                 <td class="px-4 py-2 w-1/6">
                                     <img
-                                        :src="menus.img"
+                                        :src="menu.img"
                                         alt="Menu Image"
                                         style="width: 100px; height: 100px"
                                     />
                                 </td>
                                 <td class="border px-4 py-2">
-                                    <Link class="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600" :href="route('menu.edit')">
+                                    <Link
+                                        class="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+                                        :href="route('menu.edit')"
+                                    >
                                         Edit
-                                      </Link>
+                                    </Link>
                                     <button
-                                        @click="destroy(menus.id)"
+                                        @click="destroy(menu.id)"
                                         class="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600"
                                     >
                                         Delete
                                     </button>
                                 </td>
                             </tr>
+                            <tr
+                                    v-if="
+                                        props.menus && props.menus.length === 0
+                                    "
+                                >
+                                    <td
+                                        colspan="4"
+                                        class=" border px-4 py-2 text-center"
+                                    >
+                                        Không có danh mục nào
+                                    </td>
+                                </tr>
                         </tbody>
                     </table>
                 </div>

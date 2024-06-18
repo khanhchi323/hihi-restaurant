@@ -10,15 +10,19 @@ const props = defineProps({
 
 const form = useForm({
     name: props.category.name,
-    image: null,
+    image: props.category.image,
 });
 
 const handleImageChange = (event) => {
-    form.image = event.target.files[0];
+    const file = event.target.files[0];
+    if (file) {
+        form.image = file;
+        imagePreview.value = URL.createObjectURL(file);
+    }
 };
 
 const handleSubmit = () => {
-    form.post(route("category.store"), {
+    form.post(route("category.update", props.category.id), {
         forceFormData: true,
     });
 };
@@ -61,13 +65,27 @@ const handleSubmit = () => {
                                 <label
                                     for="image"
                                     class="block text-sm font-medium text-gray-700"
-                                    >Image:</label
+                                    >Ảnh:</label
                                 >
+                                <img
+                                    className="px-4 py-2 text-blue-800"
+                                    :src="`/storage/${props.category.image}`"
+                                    alt="image"
+                                    width="150"
+                                    height="150"
+                                />
                                 <input
                                     type="file"
                                     id="image"
                                     @change="handleImageChange"
                                     class="mt-1 p-2 border rounded-md w-full"
+                                />
+                                <img
+                                    v-if="imagePreview"
+                                    :src="imagePreview"
+                                    alt="Ảnh Danh Mục"
+                                    class="mt-2"
+                                    style="max-width: 100px; max-height: 100px"
                                 />
                             </div>
                             <button
@@ -83,3 +101,5 @@ const handleSubmit = () => {
         </div>
     </BreezeAuthenticatedLayout>
 </template>
+List:19 GET http://127.0.0.1:8000/storage/C:/xampp/tmp/phpD882.tmp 404 (Not
+Found)

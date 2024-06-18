@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Category;
 use App\Models\Table;
 use App\Models\Area;
+use App\Models\Menu;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +25,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Route::model('cate', Category::class);
-        Route::model('id', Table::class);
-        Route::model('id', Area::class);
+        Route::model('menu', Menu::class);
+        Route::model('table', Table::class);
+        Route::model('area', Area::class);
     }
 }

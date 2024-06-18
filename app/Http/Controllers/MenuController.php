@@ -31,6 +31,14 @@ class MenuController extends Controller
             'menus' => $menus
         ]);
     }
+    public function showall()
+    {
+        $menus = Menu::all();
+
+        return Inertia::render('Public/Menu', [
+            'menus' => $menus
+        ]);
+    }
     public function create()
     {
         return Inertia::render('Admin/Menu/Create');

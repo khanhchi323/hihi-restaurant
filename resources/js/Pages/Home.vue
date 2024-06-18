@@ -1,82 +1,63 @@
-<script >
-
-import { Head, Link } from '@inertiajs/vue3';
-import { defineProps } from 'vue';
-import Header from '@/Components/Header.vue';
-import Navbar from '@/Components/Navbar.vue';
-export default {
-  components: {
-    Header,
-    Navbar,
-  },    
-   methods: {
-    performSearch(query) {
-      // Thực hiện tìm kiếm với query được truyền vào
-      // Gửi yêu cầu AJAX đến API hoặc xử lý tìm kiếm theo ý định của bạn
-      // Hiển thị kết quả tìm kiếm hoặc cập nhật dữ liệu
-      console.log('Perform search with query:', query);
-    }
-   }
-};
-</script>
-
-<style>
-#navbar {
-  display: flex;
-}
-
-.nav-view {
-  margin-left: 200px; /* Độ rộng của navbar */
-  padding: 20px;
-  width: calc(100% - 200px);
-}
-</style>
-
 <script setup>
-    defineProps({
-        canLogin: {
-            type: Boolean,
-        },
-        canRegister: {
-            type: Boolean,
-        },
-        laravelVersion: {
-            type: String,
-            required: true,
-        },
-        phpVersion: {
-            type: String,
-            required: true,
-        },
-    });
-
-function handleImageError() {
-    document.getElementById('screenshot-container')?.classList.add('!hidden');
-    document.getElementById('docs-card')?.classList.add('!row-span-1');
-    document.getElementById('docs-card-content')?.classList.add('!flex-row');
-    document.getElementById('background')?.classList.add('!hidden');
-}
+import PublicLayout from "@/Layouts/PublicLayout.vue";
+import { Head } from "@inertiajs/inertia-vue3";
+import { ref } from "vue";
 </script>
 
 <template>
-    <Head title="Home"/>
-    <div class="bg-gray-50 text-black/50 dark:bg-b  lack dark:text-white/50">
-        
-        <div
-            class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white"
-        >
-            <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
-                
-
-                <main class="mt-2">
-                    <div>
-                        <Header />
-                        <Navbar />
-                        <router-view />
+    <PublicLayout>
+        <div>
+            <div
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4"
+            >
+                <div
+                    v-for="menu in $page.props.menus"
+                    :key="menu.id"
+                    class="text-center"
+                >
+                    <div
+                        class="text-red-600 border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-32 md:h-64"
+                    >
+                        {{ menu.name }}
                     </div>
-                </main> 
-
+                </div>
+            </div>
+            <div
+                class="text-red-600 border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-96 mb-4"
+            >
+                123456
+            </div>
+            <div class="grid grid-cols-2 gap-4 mb-4">
+                <div
+                    class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72"
+                ></div>
+                <div
+                    class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72"
+                ></div>
+                <div
+                    class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72"
+                ></div>
+                <div
+                    class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72"
+                ></div>
+            </div>
+            <div
+                class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-96 mb-4"
+            ></div>
+            <div class="grid grid-cols-2 gap-4">
+                <div
+                    class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72"
+                ></div>
+                <div
+                    class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72"
+                ></div>
+                <div
+                    class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72"
+                ></div>
+                <div
+                    class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72"
+                ></div>
             </div>
         </div>
-    </div>
+    </PublicLayout>
 </template>

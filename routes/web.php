@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('Admin/Menu/{id}', [MenuController::class, 'destroy'])->name('menu.destroy');
 
     //TABLE
+
     Route::resource('table', TableController::class);
     Route::get('/Admin/Table/List', [TableController::class, 'index'])->name('table.list');
     Route::get('/Admin/Table/Create', [TableController::class, 'create'])->name('table.create');
@@ -72,6 +73,8 @@ Route::middleware('auth')->group(function () {
 Route::get('/dbconn', function () {
     return view('dbconn');
 });
+
+Route::get('/Public/Menu', [CategoryController::class, 'index'])->name('menu');
 
 
 // Route::get('/Admin/Menu/Create', [MenuController::class, 'create'])->name('menu.create');

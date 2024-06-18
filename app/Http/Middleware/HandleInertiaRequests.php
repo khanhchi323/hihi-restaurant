@@ -2,9 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
+use Illuminate\Support\Facades\DB;
+
 
 class HandleInertiaRequests extends Middleware
 {
@@ -35,6 +38,7 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'menus' => DB::table('menus')->take(4)->get(),
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),

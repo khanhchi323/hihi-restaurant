@@ -1,7 +1,7 @@
 <template>
   <div class="navbar">
     <NavButton href="/" icon="fa-home" label="Home"/>
-    <NavButton href="./Pages/Public/Menu.vue" icon="fa-file-alt" label="Menu"/>  
+    <NavButton :href="route('menu')" icon="fa-file-alt" label="Menu"/>  
     <NavButton href="/payment" icon="fa-credit-card" label="Payment"/>
     <NavButton href="/orders" icon="fa-box" label="Orders"/>
     <NavButton href="/login" icon="fa-cog" label="Log In"/>

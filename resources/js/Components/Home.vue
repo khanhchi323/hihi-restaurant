@@ -1,0 +1,58 @@
+<template>
+    <div class="w-full">
+        <div class="w-full h-20 bg-neutral-300 mb-6"></div>
+        <div class="w-full h-12 bg-neutral-300 mb-6"></div>
+        <div class="w-full h-fit bg-neutral-300 mb-6">
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+            asjkdhkahkjsdajsdjdahjdkjajdakshdaskhds
+        </div>
+    </div>
+</template>

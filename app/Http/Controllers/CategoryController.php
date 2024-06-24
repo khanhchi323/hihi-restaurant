@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -13,17 +12,9 @@ use Illuminate\Support\Facades\Redirect;
 
 class CategoryController extends Controller
 {
-    public function show($id)
-    {
-        $category = Category::findOrFail($id);
-        return Inertia::render('Admin/Category/Edit', compact('category'));
-    }
-
-
     public function index()
     {
         $categories = Category::all();
-
 
         foreach ($categories as $category) {
             $category->image_url = Storage::url($category->image);
@@ -42,7 +33,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'category_name' => 'required|string|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -53,7 +44,7 @@ class CategoryController extends Controller
         }
 
         $category = new Category();
-        $category->name = $request->name;
+        $category->category_name = $request->category_name;
         $category->image = $imagePath;
         $category->save();
 
@@ -73,7 +64,7 @@ class CategoryController extends Controller
     public function update($id, Request $request)
     {
         Validator::make($request->all(), [
-            'name' => ['required'],
+            'category_name' => ['required'],
             'image' => ['required'],
         ])->validate();
 
@@ -88,12 +79,12 @@ class CategoryController extends Controller
             $imagePath = $request->file('image')->store('categories', 'public');
 
             Category::find($id)->update([
-                'name' => $request->name,
+                'category_name' => $request->category_name,
                 'image' => $imagePath,
             ]);
         } else
             Category::find($id)->update([
-                'name' => $request->name,
+                'category_name' => $request->category_name,
             ]);
         return redirect()->route('category.list');
     }

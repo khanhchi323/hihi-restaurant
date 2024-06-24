@@ -2,19 +2,13 @@
 import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
 import { onMounted } from "vue";
-import { Inertia } from "@inertiajs/inertia";
 
 const props = defineProps(["areas"]);
 const form = useForm();
 
 function destroy(id) {
-    if (confirm("Bạn có chắc chắn muốn xóa danh mục này không?")) {
-        form.delete(route("area.destroy", id), {
-            onFinish: () => {
-                Inertia.reload({ only: ["areas"] });
-                console.log("Area deleted successfully");
-            },
-        });
+    if (confirm("Bạn có chắc chắn muốn xóa không?")) {
+        form.delete(route("area.destroy", id));
     }
 }
 
@@ -23,11 +17,10 @@ onMounted(() => {});
 
 <template>
     <Head title="List Area" />
-
     <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Manage Area
+                Area Management
             </h2>
         </template>
         <div class="py-6">
@@ -39,8 +32,8 @@ onMounted(() => {});
                                 class="px-6 py-2 text-white bg-green-500 rounded-md focus:outline-none"
                                 :href="route('area.create')"
                             >
-                                Create</Link
-                            >
+                                Create
+                            </Link>
                         </div>
                         <table class="w-full bg-gray-100">
                             <thead>
@@ -53,7 +46,7 @@ onMounted(() => {});
                                 </tr>
                             </thead>
                             <tbody class="text-center">
-                                <tr v-for="area in areas" :key="area.id">
+                                <tr v-for="area in props.areas" :key="area.id">
                                     <td class="border px-4 py-2">
                                         {{ area.id }}
                                     </td>

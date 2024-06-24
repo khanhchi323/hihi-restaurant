@@ -3,7 +3,7 @@ import { defineProps, useForm } from "@inertiajs/inertia-vue3";
 import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Link } from "@inertiajs/inertia-vue3";
 import Head from "@inertiajs/inertia-vue3";
-
+import { ref } from "vue";
 const props = defineProps({
     category: Object,
 });
@@ -21,11 +21,12 @@ const handleImageChange = (event) => {
     }
 };
 
-const handleSubmit = () => {
+const submit = () => {
     form.post(route("category.update", props.category.id), {
         forceFormData: true,
     });
 };
+const imagePreview = ref(null);
 </script>
 <template>
     <Head title="Edit Category" />
@@ -35,19 +36,11 @@ const handleSubmit = () => {
                 Edit Category
             </h2>
         </template>
-        <div class="py-12">
+        <div class="py-6">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
-                        <div class="flex items-center justify-between mb-6">
-                            <Link
-                                class="px-6 py-2 text-white bg-blue-500 rounded-md focus:outline-none"
-                                :href="route('category.list')"
-                            >
-                                Back
-                            </Link>
-                        </div>
-                        <form @submit.prevent="handleSubmit" class="max-w-md">
+                        <form @submit.prevent="submit" class="max-w-md">
                             <div class="mb-4">
                                 <label
                                     for="name"
@@ -88,12 +81,20 @@ const handleSubmit = () => {
                                     style="max-width: 100px; max-height: 100px"
                                 />
                             </div>
-                            <button
-                                type="submit"
-                                class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
-                            >
-                                Save
-                            </button>
+                            <div class="flex items-center justify-between mb-6">
+                                <Link
+                                    class="px-6 py-2 text-white bg-blue-500 rounded-md focus:outline-none"
+                                    :href="route('category.list')"
+                                >
+                                    Back
+                                </Link>
+                                <button
+                                    type="submit"
+                                    class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+                                >
+                                    Save
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -101,5 +102,3 @@ const handleSubmit = () => {
         </div>
     </BreezeAuthenticatedLayout>
 </template>
-List:19 GET http://127.0.0.1:8000/storage/C:/xampp/tmp/phpD882.tmp 404 (Not
-Found)

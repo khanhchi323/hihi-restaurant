@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 
 class TableController extends Controller
 {
@@ -46,10 +48,26 @@ class TableController extends Controller
 
         return redirect()->route('table.list')->with('success', 'Table created successfully!');
     }
-    public function destroy($id)
+
+    public function update(Request $request, $id)
     {
-        $table = Table::findOrFail($id);
-        $table->delete();
-        return redirect()->route('table.list')->with('success', 'Table deleted successfully!');
+        $request->validate([
+            'area_name' => 'required|string|max:255',
+        ]);
+        $table = Table::find($id);
+        if (!$table) {
+            return redirect()->route('table.list')->with('error', 'Table not found!');
+        }
+
+        $table->table_name = $request->table_name;
+        $table->area_name = $request->area_name;
+        $table->save();
+
+        return redirect()->route('table.list')->with('success', 'Table updated successfully!');
+    }
+    public function destroy($id): RedirectResponse
+    {   
+        Table::find($id)->delete();
+        return Redirect::route('table.list');
     }
 }

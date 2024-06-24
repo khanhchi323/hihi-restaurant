@@ -8,16 +8,16 @@ import NavbarCustom from "@/Components/NavbarCustom.vue";
 </script>
 
 <template>
-    <Head title="HomeTest" />
+    <Head title="Home" />
     <div class="flex">
-        <div class="fixed top-0 left-0 w-[6%] bg-slate-50 h-[100vh]">
+        <div class="fixed top-0 left-0 w-[6%] bg-white h-[100vh]">
             <NavbarCustom />
         </div>
-        <div class="ml-[6%] w-[70%] bg-slate-200 px-6 ">
-            <Home/>
+        <div class="ml-[6%] w-[70%] bg-slate-100 px-6 h-full">
+            <Home />
         </div>
-        <div class="fixed top-0 right-0 w-[24%] bg-orange-100 h-[100vh] px-4">
-            <Order/>
+        <div class="fixed top-0 right-0 w-[24%] h-[100vh] px-4">
+            <Order />
         </div>
     </div>
 </template>

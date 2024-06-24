@@ -4,7 +4,6 @@ import { Head, Link, useForm, Inertia } from "@inertiajs/inertia-vue3";
 import { onMounted } from "vue";
 
 const props = defineProps(["menus"]);
-
 </script>
 
 <template>

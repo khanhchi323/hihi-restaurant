@@ -4,10 +4,10 @@ import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
 import { ref } from "vue";
 
 const form = useForm({
-    name: "",
+    category_name: "",
     image: null,
 });
-
+const imagePreview = ref(null);
 const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -18,7 +18,7 @@ const handleImageChange = (event) => {
 
 const submit = () => {
     const formData = new FormData();
-    formData.append("name", form.name);
+    formData.append("category_name", form.category_name);
     if (form.image) {
         formData.append("image", form.image);
     }
@@ -69,7 +69,7 @@ const submit = () => {
                                     <input
                                         type="text"
                                         id="name"
-                                        v-model="form.name"
+                                        v-model="form.category_name"
                                         class="mt-1 p-2 border rounded-md w-full"
                                     />
                                 </div>

@@ -1,6 +1,6 @@
 <script setup>
 import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, Link, useForm, Inertia } from "@inertiajs/inertia-vue3";
+import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
 import { onMounted } from "vue";
 
 const props = defineProps(["categories"]);
@@ -11,6 +11,7 @@ function destroy(id) {
         form.delete(route("category.destroy", id));
     }
 }
+
 onMounted(() => {});
 </script>
 
@@ -60,7 +61,7 @@ onMounted(() => {});
                                         {{ category.id }}
                                     </td>
                                     <td class="border px-4 py-2">
-                                        {{ category.name }}
+                                        {{ category.category_name }}
                                     </td>
                                     <td class="border px-4 py-2">
                                         <img

@@ -9,8 +9,8 @@ class Area extends Model
 {
     use HasFactory;
     protected $fillable = ['name'];
-    
-    public function tables()
+
+    public function table()
     {
         return $this->hasMany(Table::class);
     }

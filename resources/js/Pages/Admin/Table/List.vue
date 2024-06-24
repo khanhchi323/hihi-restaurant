@@ -7,13 +7,8 @@ const props = defineProps(["tables"]);
 const form = useForm();
 
 function destroy(id) {
-    if (confirm("Bạn có chắc chắn muốn xóa bàn này không?")) {
-        form.delete(route("table.destroy", id), {
-            onFinish: () => {
-                Inertia.reload({ only: ["tables"] });
-                console.log("Table deleted successfully");
-            },
-        });
+    if (confirm("Bạn có chắc chắn muốn xóa không?")) {
+        form.delete(route("table.destroy", id));
     }
 }
 
@@ -35,9 +30,9 @@ onMounted(() => {});
                         <div class="flex items-center justify-between mb-6">
                             <Link
                                 class="px-6 py-2 text-white bg-green-500 rounded-md focus:outline-none"
-                                :href="route('table.create')"
+                                :href="route('table.create')"   
                             >
-                                Tạo mới
+                                Create
                             </Link>
                         </div>
 

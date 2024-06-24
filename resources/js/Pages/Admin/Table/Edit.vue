@@ -10,11 +10,11 @@ const props = defineProps({
 
 const form = useForm({
     table_name: props.table.table_name,
-    area_name: "",
+    area_name:props.table.area_name ,
 });
 
 const submit = () => {
-    form.post(route("table.store"), {
+    form.post(route("table.update", props.table.id), {
         forceFormData: true,
     });
 };

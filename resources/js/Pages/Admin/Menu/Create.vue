@@ -5,21 +5,24 @@ import { ref } from "vue";
 
 const form = useForm({
     name: "",
-    category_id:"",
-    price:"",
+    category_name: "",
+    price: "",
     image: null,
 });
-
+const imagePreview = ref(null);
 const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
         form.image = file;
+        imagePreview.value = URL.createObjectURL(file);
     }
 };
 
 const submit = () => {
     const formData = new FormData();
-    formData.append("name", form.name);
+    formData.append("menu_name", form.menu_name);
+    formData.append("category_name", form.category_name);
+    formData.append("price", form.price);
     if (form.image) {
         formData.append("image", form.image);
     }
@@ -71,7 +74,7 @@ const submit = () => {
                                 <input
                                     type="text"
                                     id="name"
-                                    v-model="form.category_id"
+                                    v-model="form.category_name"
                                     class="mt-1 p-2 border rounded-md w-full"
                                 />
                             </div>
@@ -92,14 +95,23 @@ const submit = () => {
                                 <label
                                     for="image"
                                     class="block text-sm font-medium text-gray-700"
-                                    >Image</label
+                                    >Ảnh:</label
                                 >
                                 <input
                                     type="file"
                                     id="image"
                                     @change="handleImageChange"
-                                    accept="image/*"
                                     class="mt-1 p-2 border rounded-md w-full"
+                                />
+                                <img
+                                    v-if="imagePreview"
+                                    :src="imagePreview"
+                                    alt="Ảnh Danh Mục"
+                                    class="mt-2"
+                                    style="
+                                        max-width: 100px;
+                                        max-height: 100px;
+                                    "
                                 />
                             </div>
                             <div class="flex items-center justify-between mb-6">

@@ -38,7 +38,7 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
-            'menus' => DB::table('menus')->take(4)->get(),
+            'menus' => DB::table('menus')->take(8)->get(),
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),

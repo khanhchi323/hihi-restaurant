@@ -1,27 +1,18 @@
-<script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
-</script>
-
 <template>
-    <Head title="Dashboard" />
-    
-
-    <AuthenticatedLayout>
-        <template #header>
-            <div class="flex space-x-4">
-                    <router-link v-bind:href="'Catogory.Index'" class="font-semibold text-xl text-gray-800 leading-tight">Dashboard</router-link>
-                    
-                </div>
-        </template>
-
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">You're logged in!</div>
-                    
-                </div>
-            </div>
+    <div>
+        <div class="w-[76%] bg-slate-100 px-6 h-full">
+            <Home />
         </div>
-    </AuthenticatedLayout>
+        <div class="fixed top-0 right-0 w-[24%] h-[100vh] px-4">
+            <Order />
+        </div>
+    </div>
 </template>
+<script setup>
+import { Head } from "@inertiajs/vue3";
+import Header from "@/Components/Header.vue";
+import Navbar from "@/Components/Navbar.vue";
+import Home from "@/Components/Home.vue";
+import Order from "@/Components/Order.vue";
+import NavbarCustom from "@/Components/NavbarCustom.vue";
+</script>

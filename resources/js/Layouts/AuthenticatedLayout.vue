@@ -35,7 +35,7 @@ const showingNavigationDropdown = ref(false);
                                     :href="route('dashboard')"
                                     :active="route().current('dashboard')"
                                 >
-                                    Dashboard
+                                    Menu for Staff
                                 </NavLink>
                             </div>
 
@@ -82,6 +82,7 @@ const showingNavigationDropdown = ref(false);
                                     Table
                                 </NavLink>
                             </div>
+                            
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ms-6">

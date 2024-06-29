@@ -10,7 +10,7 @@ const props = defineProps({
 
 const form = useForm({
     table_name: props.table.table_name,
-    area_name:props.table.area_name ,
+    area_name: props.table.area_name,
 });
 
 const submit = () => {
@@ -29,7 +29,7 @@ const submit = () => {
             </h2>
         </template>
         <div class="py-6">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 w-2/3">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
                         <form @submit.prevent="submit">
@@ -64,7 +64,7 @@ const submit = () => {
                                     class="flex items-center justify-between mb-6"
                                 >
                                     <Link
-                                        class="px-6 py-2 text-white bg-blue-500 rounded-md focus:outline-none"
+                                        class="px-6 py-2 text-white bg-red-500 rounded-md focus:outline-none"
                                         :href="route('table.list')"
                                     >
                                         Back

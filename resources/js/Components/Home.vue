@@ -104,7 +104,7 @@
                     class="bg-white rounded-lg shadow-md p-2"
                 >
                     <img
-                        :src="menu.image"
+                        :src="`/storage/${menu.image}`"
                         alt="Menu Image"
                         class="h-44 w-full object-cover shadow-lg"
                     />

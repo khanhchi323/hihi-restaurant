@@ -40,10 +40,10 @@ onMounted(() => {});
                             <thead>
                                 <tr class="bg-gray-100">
                                     <th class="px-4 py-2 border w-16">ID</th>
-                                    <th class="px-4 py-2 border">Tên bàn</th>
-                                    <th class="px-4 py-2 border">Khu vực</th>
+                                    <th class="px-4 py-2 border">Table</th>
+                                    <th class="px-4 py-2 border">Area</th>
                                     <th class="px-4 py-2 border w-32">
-                                        Hành động
+                                        Action
                                     </th>
                                 </tr>
                             </thead>

@@ -12,7 +12,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
+Route::get('/Staff/Menu', function () {
     return Inertia::render('Home', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -21,7 +21,7 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
+Route::get('/Staff/Menu', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -68,13 +68,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/Admin/Area/Show/{id}', [AreaController::class, 'show'])->name('area.show');
 
     //Order
-    Route::get('/Public/Order', [OrderController::class, 'index'])->name('order');
+    // Route::get('/Public/Menu', [MenuController::class, 'index'])->name('menu');
 });
 Route::get('/dbconn', function () {
     return view('dbconn');
 });
 
-Route::get('/Public/Menu', [MenuController::class, 'index'])->name('menu');
-
+Route::get('/123', function () {
+    return Inertia::render('Menu');
+});
 
 require __DIR__ . '/auth.php';

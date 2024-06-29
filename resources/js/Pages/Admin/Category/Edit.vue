@@ -9,7 +9,7 @@ const props = defineProps({
 });
 
 const form = useForm({
-    name: props.category.name,
+    category_name: props.category.category_name,
     image: props.category.image,
 });
 
@@ -37,7 +37,7 @@ const imagePreview = ref(null);
             </h2>
         </template>
         <div class="py-6">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-7xl sm:px-6 w-2/3">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
                         <form @submit.prevent="submit" class="max-w-md">
@@ -50,7 +50,7 @@ const imagePreview = ref(null);
                                 <input
                                     type="text"
                                     id="name"
-                                    v-model="form.name"
+                                    v-model="form.category_name"
                                     class="mt-1 p-2 border rounded-md w-full"
                                 />
                             </div>
@@ -62,7 +62,7 @@ const imagePreview = ref(null);
                                 >
                                 <img
                                     className="px-4 py-2 text-blue-800"
-                                    :src="`/storage/${props.category.image}`"
+                                    :src="`/storage/${category.image}`"
                                     alt="image"
                                     width="150"
                                     height="150"
@@ -83,7 +83,7 @@ const imagePreview = ref(null);
                             </div>
                             <div class="flex items-center justify-between mb-6">
                                 <Link
-                                    class="px-6 py-2 text-white bg-blue-500 rounded-md focus:outline-none"
+                                    class="px-6 py-2 text-white bg-red-500 rounded-md focus:outline-none"
                                     :href="route('category.list')"
                                 >
                                     Back

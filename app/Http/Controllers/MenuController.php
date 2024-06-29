@@ -30,7 +30,7 @@ class MenuController extends Controller
     {
         $menus = Menu::all();
 
-        return Inertia::render('Public/Menu', [
+        return Inertia::render('Admin/Menu', [
             'menus' => $menus
         ]);
     }

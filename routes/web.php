@@ -13,16 +13,16 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return Inertia::render('Home', [
+    return Inertia::render('Home');
+});
+
+Route::get('/Admin/Menu', function () {
+    return Inertia::render('Dashboard', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
-
-Route::get('/Staff/Menu', function () {
-    return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -67,8 +67,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/Admin/Area/List{id}', [AreaController::class, 'destroy'])->name('area.destroy');
     Route::get('/Admin/Area/Show/{id}', [AreaController::class, 'show'])->name('area.show');
 
-    //Order
-    // Route::get('/Public/Menu', [MenuController::class, 'index'])->name('menu');
+    
 });
 Route::get('/dbconn', function () {
     return view('dbconn');

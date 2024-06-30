@@ -108,24 +108,16 @@
                         alt="Menu Image"
                         class="h-44 w-full object-cover shadow-lg"
                     />
-                    <h2
+                    <div
                         class="text-lg text-center font-semibold text-gray-800 mt-2"
                     >
                         {{ menu.menu_name }}
-                    </h2>
-                    <p class="text-gray-500">
+                    </div>
+                    <div class="text-gray-500">
                         {{ menu.description }}
-                    </p>
-                    <p class="text-orange-400 font-bold">
+                    </div>
+                    <div class="text-orange-500 font-bold text-bottom">
                         Price: {{ menu.price }}
-                    </p>
-                    <div class="text-center">
-                        <button
-                            @click="addToOrder(menu)"
-                            class="mt-4 bg-white text-orange-400 border-solid border-2 border-orange-400 text-red py-2 px-4 rounded"
-                        >
-                            Add to Order
-                        </button>
                     </div>
                 </div>
             </div>
@@ -133,9 +125,7 @@
     </div>
 </template>
 
-<script setup>
-// Your script logic here
-</script>
+<script setup></script>
 
 <style>
 .hover\\:text-white:hover .icon-text {

@@ -1,0 +1,26 @@
+<template>
+  <div class="thumbnail max-w-xs rounded overflow-hidden shadow-lg m-4">
+    <img class="w-full" :src="thumbnailImage" alt="Thumbnail">
+    <div class="px-6 py-4">
+      <div class="font-bold text-xl mb-2">{{ title }}</div>
+      <p class="text-gray-700 text-base">{{ description }}</p>
+    </div>
+  </div>
+</template>
+
+<script setup>
+const props = defineProps({
+  thumbnailImage: {
+    type: String,
+    required: true
+  },
+  title: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  }
+});
+</script>

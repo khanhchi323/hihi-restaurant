@@ -1,23 +1,66 @@
 <script setup>
-import { Head } from "@inertiajs/vue3";
-import Header from "@/Components/Header.vue";
-import Navbar from "@/Components/Navbar.vue";
-import Home from "@/Components/Home.vue";
-import Order from "@/Components/Order.vue";
+import Banner from "@/Components/Banner.vue";
+import Thumbnail from "@/Components/Thumbnail.vue";
 import NavbarCustom from "@/Components/NavbarCustom.vue";
+import bannerImage from "/public/images/bannertest.jpg";
+
+const thumbnails = [
+    {
+        image: "path/to/your/thumbnail-image1.jpg",
+        title: "Thumbnail 1",
+        description: "Description for thumbnail 1",
+    },
+    {
+        image: "path/to/your/thumbnail-image2.jpg",
+        title: "Thumbnail 2",
+        description: "Description for thumbnail 2",
+    },
+    {
+        image: "path/to/your/thumbnail-image3.jpg",
+        title: "Thumbnail 3",
+        description: "Description for thumbnail 3",
+    },
+];
 </script>
 
 <template>
-    <Head title="Home" />
-    <div class="flex">
-        <div class="fixed top-0 left-0 w-[6%] bg-white h-[100vh]">
+    <div class="home flex min-h-screen overflow-hidden">
+        <div class="w-[6%]">
             <NavbarCustom />
         </div>
-        <div class="ml-[6%] w-[70%] bg-slate-100 px-6 h-full">
-            <Home />
-        </div>
-        <div class="fixed top-0 right-0 w-[24%] h-[100vh] px-4">
-            <Order />
+
+        <!-- Nội dung chính ở giữa -->
+        <div
+            class="main-content flex-1 flex flex-col items-center justify-center"
+        >
+            <div class="w-[80%]">
+                <img
+                    :src="bannerImage"
+                    alt="Banner Image"
+                    class="w-full object-cover"
+                />
+            </div>
+            <div class="thumbnails flex flex-wrap justify-center mt-8 px-4">
+                <Thumbnail
+                    v-for="(thumbnail, index) in thumbnails"
+                    :key="index"
+                    :thumbnailImage="thumbnail.image"
+                    :title="thumbnail.title"
+                    :description="thumbnail.description"
+                />
+            </div>
         </div>
     </div>
 </template>
+
+<style scoped>
+.home {
+    text-align: center;
+}
+
+.main-content img {
+    max-height: 50vh;
+    width: 94%;
+    object-fit: cover;
+}
+</style>

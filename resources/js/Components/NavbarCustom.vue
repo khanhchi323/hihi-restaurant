@@ -58,29 +58,29 @@ import Logo from "/public/images/logohihi.png";
                         class="absolute top-0 left-12 w-[3px] h-0 bg-red-500 bg-line transition-all"
                     ></div>
                 </a>
-                <!-- Contact Icon -->
+                <!-- Booking -->
                 <a
-                    href="#"
+                    href="./Booking.vue"
                     class="group relative flex items-center justify-center mb-2 icon"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                        class="icon size-6 my-4 group-hover:orangered"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        class="icon size-6 my-4 group-hover:text-orangered"
                     >
                         <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"
+                            fill-rule="evenodd"
+                            d="M3 1a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V3a2 2 0 00-2-2H3zm14 2v4a2 2 0 01-2 2H5a2 2 0 01-2-2V3a2 2 0 012-2h4a1 1 0 010 2H5v4h12V5a1 1 0 012 0z"
+                            clip-rule="evenodd"
                         />
+                        <path d="M10 14a1 1 0 100-2 1 1 0 000 2z" />
                     </svg>
                     <div
                         class="absolute top-0 left-12 w-[3px] h-0 bg-red-500 bg-line transition-all"
                     ></div>
                 </a>
+
                 <!-- Users Icon -->
                 <a
                     href="#"

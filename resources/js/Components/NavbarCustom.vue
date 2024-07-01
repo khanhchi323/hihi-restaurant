@@ -69,7 +69,7 @@ import Logo from "/public/images/logohihi.png";
                         viewBox="0 0 24 24"
                         stroke-width="1.5"
                         stroke="currentColor"
-                        class="size-6"
+                        class="icon size-6 my-4 group-hover:text-orangered"
                     >
                         <path
                             stroke-linecap="round"
@@ -79,7 +79,7 @@ import Logo from "/public/images/logohihi.png";
                     </svg>
 
                     <div
-                        class="absolute top-0 left-12 w-[3px] h-0 bg-red-500 bg-line transition-all"
+                    class="absolute top-0 left-12 w-[3px] h-0 bg-red-500 bg-line transition-all"
                     ></div>
                 </a>
 

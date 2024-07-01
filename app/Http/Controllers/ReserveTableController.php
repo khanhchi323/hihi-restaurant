@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\ReserveTable;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -10,7 +11,7 @@ class ReserveTableController extends Controller
     // Hiển thị danh sách đặt bàn
     public function index()
     {
-        
+
         $reservations = ReserveTable::all();
         return Inertia::render('Admin/Reservation/List', [
             'reservations' => $reservations
@@ -20,7 +21,7 @@ class ReserveTableController extends Controller
     // Hiển thị form thêm đặt bàn
     public function create()
     {
-        return Inertia::render('reservations.create');
+        return Inertia::render('Admin/Reservation/Create');
     }
 
     // Lưu thông tin đặt bàn mới

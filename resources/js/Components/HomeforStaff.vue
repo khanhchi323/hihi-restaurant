@@ -14,16 +14,15 @@
             </div>
             <div>
                 <Link
-                                class="px-6 py-2 text-white bg-green-500 rounded-md focus:outline-none"
-                                :href="route('reservation.list')"
-                            >
-                                Reservation
-                            </Link>
+                    class="px-6 py-3 text-white font-bold bg-green-500 rounded-md focus:outline-none"
+                    :href="route('reservation.list')"
+                >
+                    Reservation
+                </Link>
             </div>
-            
-            </div>          
+        </div>
         <!-- Icon -->
-        <div class="w-full h-16 my-6 flex justify-center items-center">
+        <div class="w-full h-16 my-2 flex justify-center items-center">
             <div class="grid grid-cols-5 gap-6">
                 <div
                     class="flex flex-col items-center border hover:bg-orange-500 bg-white shadow-lg rounded-lg w-32 transition duration-300 hover:text-white"
@@ -129,7 +128,7 @@
 </template>
 
 <script setup>
-import {Link}    from  "@inertiajs/inertia-vue3";
+import { Link } from "@inertiajs/inertia-vue3";
 </script>
 
 <style>

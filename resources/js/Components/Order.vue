@@ -1,11 +1,13 @@
 <template>
-    <div class="flex justify-between flex-col">
+    <div class="flex justify-between flex-col mt-20">
         <!-- Current Order -->
         <div>
-            <div class="w-full h-12 mb-4 mt-6">
+            <div class="w-full h-12 bg-white p-2">
                 <b class="text-xl text-gray-800">Current Order</b>
             </div>
-            <div class="text-gray-800 w-full h-64 overflow-y-auto bg-white">
+            <div
+                class="text-gray-800 w-full h-64 overflow-y-auto bg-white p-2 rounded-md"
+            >
                 <div
                     v-for="item in orderItems"
                     :key="item.id"
@@ -42,25 +44,25 @@
         </div>
         <!-- Order Summary -->
         <div>
-            <div class="bg-white rounded-lg shadow-md p-6">
-                <div class="flex justify-between mb-4">
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <div class="flex justify-between">
                     <span class="font-bold text-gray-700">Subtotal</span>
                     <span class="text-gray-700">{{
                         formatCurrency(subtotal)
                     }}</span>
                 </div>
-                <div class="flex justify-between mb-4">
+                <div class="flex justify-between">
                     <span class="font-bold text-gray-700">Discount sales</span>
                     <span class="text-red-500">-5000.00</span>
                     <!-- Assuming fixed discount -->
                 </div>
-                <div class="flex justify-between mb-4">
+                <div class="flex justify-between">
                     <span class="font-bold text-gray-700">Total sales tax</span>
                     <span class="text-gray-700">{{
                         formatCurrency(totalSalesTax)
                     }}</span>
                 </div>
-                <hr class="my-4" />
+                <hr class="my-2" />
                 <div class="flex justify-between font-bold text-lg">
                     <span>Total</span>
                     <span class="text-green-500">{{

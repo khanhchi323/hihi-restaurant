@@ -12,13 +12,13 @@
                     Discover whatever you need easily
                 </p>
             </div>
-            <div class="rounded-md p-2 font-bold bg-orange-500 text-white">
-                <Button
-                   
-                    @click="goToReservations"
-                    >
-                    Create
-                </Button>
+            <div>
+                <Link
+                                class="px-6 py-2 text-white bg-green-500 rounded-md focus:outline-none"
+                                :href="route('reservation.list')"
+                            >
+                                Reservation
+                            </Link>
             </div>
             
             </div>          
@@ -128,14 +128,8 @@
     </div>
 </template>
 
-<script >
-export default {
-    methods: {
-        goToReservations() {
-            this.$router.index('/Admin/Reservation/List');  
-        }
-    }
-};
+<script setup>
+import {Link}    from  "@inertiajs/inertia-vue3";
 </script>
 
 <style>

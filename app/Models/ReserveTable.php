@@ -18,8 +18,7 @@ class ReserveTable extends Model
         'reservation_time',
         'number_of_guests',
         'table_id',
-        'special_requests',
-        'assigned_staff',
+        
     ];
 
     public function table()

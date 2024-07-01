@@ -59,7 +59,7 @@ class MenuController extends Controller
         $menu->category_name = $request->category_name;
         $menu->price = $request->price;
         $menu->image = $imagePath;
-        $menu->save();
+        $menu->save();      
 
         return redirect()->route('menu.list')->with('success', 'Menu created successfully!');
     }

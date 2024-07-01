@@ -1,3 +1,13 @@
+<script setup>
+import { ref, defineEmits } from "vue";
+import { Link } from "@inertiajs/inertia-vue3";
+
+const emit = defineEmits(["add-to-order"]);
+
+const addToOrder = (menu) => {
+    emit("add-to-order", menu);
+};
+</script>
 <template>
     <div class="w-full h-full">
         <!-- Header section -->
@@ -5,7 +15,7 @@
             class="w-full h-20 p-4 bg-slate-100 flex items-center justify-between"
         >
             <div>
-                <h1 class="text-3xl font-bold text-gray-700">
+                <h1 class="text-3xl text-gray-700 font-semibold">
                     Welcome to our service!
                 </h1>
                 <p class="text-sm text-gray-500">
@@ -65,7 +75,7 @@
                 </div>
                 <div
                     class="flex flex-col items-center border hover:bg-orange-500 bg-white shadow-lg rounded-lg w-32 transition duration-300 hover:text-white"
-                    @click="filterByCategory('beef')"
+                    @click="filterByCategory('fish')"
                 >
                     <div class="flex items-center">
                         <img
@@ -78,6 +88,7 @@
                 </div>
                 <div
                     class="flex flex-col items-center border hover:bg-orange-500 bg-white shadow-lg rounded-lg w-32 transition duration-300 hover:text-white"
+                    @click="filterByCategory('beverage')"
                 >
                     <div class="flex items-center">
                         <img
@@ -116,7 +127,7 @@
                     <div class="text-center">
                         <button
                             @click="addToOrder(menu)"
-                            class="mt-4 bg-white text-orange-400 border-solid border-2 border-orange-400 text-red py-2 px-4 rounded"
+                            class="mt-4 bg-white text-orange-600 border-solid hover:text-white hover:border-white hover:bg-orange-600 border-2 border-orange-400 text-red py-1 px-4 rounded"
                         >
                             Add to Order
                         </button>
@@ -126,10 +137,6 @@
         </div>
     </div>
 </template>
-
-<script setup>
-import { Link } from "@inertiajs/inertia-vue3";
-</script>
 
 <style>
 .hover\\:text-white:hover .icon-text {

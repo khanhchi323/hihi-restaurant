@@ -6,6 +6,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\TableController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReserveTableController;
 use App\Models\Menu;
 use Illuminate\Console\View\Components\Task;
 use Illuminate\Foundation\Application;
@@ -18,7 +19,7 @@ Route::get('/', function () {
 
 Route::get('/Admin/Menu', function () {
     return Inertia::render('Dashboard', [
-        'canLogin' => Route::has('login'),
+        'canLogin' => Route::has('login'),  
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
@@ -66,6 +67,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/Admin/Area/Edit/{id}', [AreaController::class, 'update'])->name('area.update');
     Route::delete('/Admin/Area/List{id}', [AreaController::class, 'destroy'])->name('area.destroy');
     Route::get('/Admin/Area/Show/{id}', [AreaController::class, 'show'])->name('area.show');
+
+    //Reservation
+    Route::get('/Admin/Reservation/List', [ReserveTableController::class, 'index'])->name('reservation.list');
+    Route::get('/Admin/Reservation/Create', [ReserveTableController::class, 'create'])->name('reservation.create');
+
+    
 
     
 });

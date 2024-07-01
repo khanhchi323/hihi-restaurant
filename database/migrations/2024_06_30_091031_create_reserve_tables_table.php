@@ -15,12 +15,10 @@ return new class extends Migration
             $table->id('reservation_id');
             $table->string('customer_name');
             $table->string('phone_number');
-            $table->string('email');
             $table->date('reservation_date');
             $table->time('reservation_time');
             $table->integer('number_of_guests');
             $table->unsignedBigInteger('table_id');
-            $table->text('special_requests')->nullable();
             $table->string('assigned_staff');
             $table->foreign('table_id')->references('id')->on('tables');
             $table->timestamps();

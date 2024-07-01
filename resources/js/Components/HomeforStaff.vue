@@ -13,11 +13,15 @@
                 </p>
             </div>
             <div class="rounded-md p-2 font-bold bg-orange-500 text-white">
-                <Button>
-                    <a href="Booking">Manage Table</a>
+                <Button
+                   
+                    @click="goToReservations"
+                    >
+                    Create
                 </Button>
             </div>
-        </div>
+            
+            </div>          
         <!-- Icon -->
         <div class="w-full h-16 my-6 flex justify-center items-center">
             <div class="grid grid-cols-5 gap-6">
@@ -124,8 +128,14 @@
     </div>
 </template>
 
-<script setup>
-// Your script logic here
+<script >
+export default {
+    methods: {
+        goToReservations() {
+            this.$router.index('/Admin/Reservation/List');  
+        }
+    }
+};
 </script>
 
 <style>

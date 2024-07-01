@@ -6,6 +6,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\TableController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReserveTableController;
 use App\Models\Menu;
 use Illuminate\Console\View\Components\Task;
 use Illuminate\Foundation\Application;
@@ -15,17 +16,17 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('HomePage');
 });
-Route::get('/Menu', function () {
-    return Inertia::render('PublicLayout');
-});
 
 
 Route::get('/Admin/Menu', function () {
     return Inertia::render('Dashboard', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -69,7 +70,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/Admin/Area/List{id}', [AreaController::class, 'destroy'])->name('area.destroy');
     Route::get('/Admin/Area/Show/{id}', [AreaController::class, 'show'])->name('area.show');
 
-    
+    //Reservation
+    Route::get('/Admin/Reservation/List', [ReserveTableController::class, 'index'])->name('reservation.list');
+    Route::get('/Admin/Reservation/Create', [ReserveTableController::class, 'create'])->name('reservation.create');
 });
 Route::get('/dbconn', function () {
     return view('dbconn');

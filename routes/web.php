@@ -17,6 +17,9 @@ Route::get('/', function () {
     return Inertia::render('HomePage');
 });
 
+Route::get('/Menu', function () {
+    return Inertia::render('PublicLayout');
+});
 
 Route::get('/Admin/Menu', function () {
     return Inertia::render('Dashboard', [

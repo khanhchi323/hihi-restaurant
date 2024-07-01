@@ -13,13 +13,15 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return Inertia::render('Home');
+    return Inertia::render('HomePage');
 });
+Route::get('/Menu', function () {
+    return Inertia::render('PublicLayout');
+});
+
 
 Route::get('/Admin/Menu', function () {
     return Inertia::render('Dashboard', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);

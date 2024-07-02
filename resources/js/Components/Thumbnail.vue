@@ -1,11 +1,3 @@
-<template>
-    <div
-        class="thumbnail max-w-xs rounded overflow-hidden shadow-lg m-2 bg-white"
-    >
-        <img class="w-full" :src="thumbnailImage" alt="Thumbnail" />
-    </div>
-</template>
-
 <script setup>
 const props = defineProps({
     thumbnailImage: {
@@ -18,14 +10,8 @@ const props = defineProps({
     },
 });
 </script>
-
-<style scoped>
-.thumbnail {
-    position: relative;
-    transition: transform 0.3s ease; /* Hiệu ứng khi hover */
-}
-
-.thumbnail:hover {
-    transform: scale(1.05); /* Phóng to khi hover */
-}
-</style>
+<template>
+    <div class="group relative rounded-md shadow-lg m-2 bg-white">
+        <img class="w-full transition-transform duration-500 ease-in-out transform group-hover:scale-125" :src="thumbnailImage" alt="Thumbnail" />
+    </div>
+</template>

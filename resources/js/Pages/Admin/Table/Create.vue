@@ -1,15 +1,17 @@
-<script setup>
+=<script setup>
 import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
 
-const form = useForm({
+const props = defineProps(["areas"]);
+
+const { data: form, post } = useForm({
     table_name: "",
     area_name: "",
 });
 
-function submit() {
-    form.post(route("table.store"));
-}
+const submit = () => {
+    post(route("table.store"), form); // Thêm tham số form để gửi dữ liệu lên phpadmin
+};
 </script>
 
 <template>
@@ -26,11 +28,9 @@ function submit() {
                     <div class="p-6 bg-white border-b border-gray-200">
                         <form @submit.prevent="submit">
                             <div class="mb-4">
-                                <label
-                                    for="table_name"
-                                    class="block text-gray-700"
-                                    >Table</label
-                                >
+                                <label for="table_name" class="block text-gray-700">
+                                    Table
+                                </label>
                                 <input
                                     v-model="form.table_name"
                                     type="text"
@@ -40,18 +40,24 @@ function submit() {
                                 />
                             </div>
                             <div class="mb-4">
-                                <label
-                                    for="area_name"
-                                    class="block text-gray-700"
-                                    >Area</label
-                                >
-                                <input
+                                <label for="area_name" class="block text-gray-700">
+                                    Area
+                                </label>
+                                <select
                                     v-model="form.area_name"
-                                    type="text"
                                     id="area_name"
                                     name="area_name"
                                     class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                />
+                                >
+                                    <option value="">Select an area</option>
+                                    <option
+                                        v-for="area in props.areas"
+                                        :key="area.id"
+                                        :value="area.id"
+                                    >
+                                        {{ area.area_name }}
+                                    </option>
+                                </select>
                             </div>
                             <div class="flex items-center justify-between mb-6">
                                 <Link

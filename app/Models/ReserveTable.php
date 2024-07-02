@@ -17,12 +17,12 @@ class ReserveTable extends Model
         'reservation_date',
         'reservation_time',
         'number_of_guests',
-        'table_id',
+        'id_table',
         
     ];
 
     public function table()
     {
-        return $this->belongsTo(Table::class, 'id');
+        return $this->belongsTo(Table::class, 'id_table');
     }
 }

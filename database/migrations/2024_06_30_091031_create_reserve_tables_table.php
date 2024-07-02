@@ -18,9 +18,8 @@ return new class extends Migration
             $table->date('reservation_date');
             $table->time('reservation_time');
             $table->integer('number_of_guests');
-            $table->unsignedBigInteger('table_id');
-            $table->string('assigned_staff');
-            $table->foreign('table_id')->references('id')->on('tables');
+            $table->unsignedBigInteger('table_id'); 
+            $table->foreign('table_id')->references('id')->on('tables')->onDelete('cascade');
             $table->timestamps();
         });
     }

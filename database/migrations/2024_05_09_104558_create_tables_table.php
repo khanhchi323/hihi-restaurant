@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('tables', function (Blueprint $table) {
             $table->id();
-            $table->string('table_name')->default('default_table_name'); // Added default value for 'table_name'
-            $table->string('area_name');
+            $table->string('table_name')->default('default_table_name');
+            $table->unsignedBigInteger('area_id'); // Foreign key reference to areas table
             $table->timestamps();
+
+            // Set the foreign key constraint
+            $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade');
         });
     }
 

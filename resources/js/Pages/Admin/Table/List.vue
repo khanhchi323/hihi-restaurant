@@ -3,7 +3,7 @@ import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, useForm, Inertia } from "@inertiajs/inertia-vue3";
 import { onMounted } from "vue";
 
-const props = defineProps(["tables"]);
+const props = defineProps(["tables", "areas"]);
 const form = useForm();
 
 function destroy(id) {
@@ -60,7 +60,9 @@ onMounted(() => {});
                                         {{ table.table_name }}
                                     </td>
                                     <td class="border px-4 py-2">
-                                        {{ table.area_name }}
+                                       <span v-if="areas && areas[table.area_id]">
+                                            {{ areas[table.area_id].area_name }}
+                                        </span>
                                     </td>
                                     <td class="border px-4 py-2">
                                         <div class="flex flex-col space-y-2">

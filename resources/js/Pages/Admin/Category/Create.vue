@@ -25,7 +25,7 @@ const submit = () => {
 
     form.post(route("category.store"), {
         data: formData,
-        onSuccess: () => {
+        onSuccess: () => {      
             form.reset();
             imagePreview.value = "";
         },

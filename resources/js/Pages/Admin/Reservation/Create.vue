@@ -11,19 +11,40 @@ const form = useForm({
     table_id: "",
 });
 
-function submit() {
-    form.post(route("reservation.store"));
-}
-</script>
+const submit = () => {
+    const formData = new FormData();
+    formData.append("customer_name", form.customer_name);
+    formData.append("phone_number", form.phone_number);
+    formData.append("reservation_date", form.reservation_date);
+    formData.append("reservation_time", form.reservation_time);
+    formData.append("number_of_guests", form.number_of_guests);
+   
 
+  form.post(route("reservation.store"), {
+    data: formData,
+    onSuccess: () => {
+        form.reset(); // Reset form sau khi lưu thành công
+        // Chuyển hướng đến trang reservation.list sau khi lưu thành công
+        window.location.href = route('reservation.list');
+    },
+    onError: (errors) => {
+        // Xử lý lỗi nếu cần
+        console.error(errors);
+    },
+    preserveState: false, // Không giữ lại trạng thái của form sau khi post
+    forceFormData: true, // Bắt buộc sử dụng FormData
+});
+
+};
+</script>
 <template>
     <Head title="Create Reservation" />
 
     <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Create Reservation
-            </h2>
+                Edit Reservation
+            </h2>   
         </template>
         <div class="py-6 flex justify-center items-center">
             <div class="w-full max-w-2xl">
@@ -81,16 +102,6 @@ function submit() {
                                         required
                                     />
                                 </div>
-                                <div class="mb-4">
-                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="table_id">ID Bàn:</label>
-                                    <input
-                                        type="text"
-                                        id="table_id"
-                                        v-model="form.table_id"
-                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                        required
-                                    />
-                                </div>
                                 <div class="flex items-center justify-between mb-6">
                                     <Link
                                         class="px-6 py-2 text-white bg-red-500 rounded-md focus:outline-none"
@@ -103,7 +114,7 @@ function submit() {
                                         type="submit"
                                         class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
                                     >
-                                        Create
+                                        Save
                                     </button>
                                 </div>
                             </div>  

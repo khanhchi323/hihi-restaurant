@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reserve_tables', function (Blueprint $table) {
+        Schema::create('reservation', function (Blueprint $table) {
             $table->id('reservation_id');
             $table->string('customer_name');
             $table->string('phone_number');
@@ -26,9 +26,11 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
+
+     * 
      */
     public function down(): void
     {
-        Schema::dropIfExists('reserve_tables');
+        Schema::dropIfExists('reservation');
     }
 };

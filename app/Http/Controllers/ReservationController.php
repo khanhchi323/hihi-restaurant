@@ -1,16 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\ReserveTable;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class ReserveTableController extends Controller
+class ReservationController extends Controller
 {
     // Hiển thị danh sách đặt bàn
     public function index()
     {
-        $reservations = ReserveTable::all();
+        $reservations = Reservation::all();
         return Inertia::render('Admin/Reservation/List', [
             'reservations' => $reservations
         ]);
@@ -34,7 +34,7 @@ class ReserveTableController extends Controller
             'table_id' => 'required|exists:tables,table_id',
         ]);
 
-        ReserveTable::create($request->all());
+        Reservation::create($request->all());
 
         return redirect()->route('reservation.list')->with('success', 'Đặt bàn thành công.');
     }
@@ -42,7 +42,7 @@ class ReserveTableController extends Controller
     // Hiển thị form chỉnh sửa đặt bàn
     public function edit($id)
     {
-        $reservation = ReserveTable::findOrFail($id);
+        $reservation = Reservation::findOrFail($id);
         return Inertia::render('Admin/Reservation/Edit', [
             'reservation' => $reservation
         ]);
@@ -60,7 +60,7 @@ class ReserveTableController extends Controller
             'id_table' => 'required|exists:tables,id_table',
         ]);
 
-        $reservation = ReserveTable::findOrFail($id);
+        $reservation = Reservation::findOrFail($id);
         $reservation->update($request->all());
 
         return redirect()->route('reservation.list')->with('success', 'Cập nhật đặt bàn thành công.');
@@ -69,7 +69,7 @@ class ReserveTableController extends Controller
     // Xóa đặt bàn
     public function destroy($id)
     {
-        $reservation = ReserveTable::findOrFail($id);
+        $reservation = Reservation::findOrFail($id);
         $reservation->delete();
 
         return redirect()->route('reservation.list')->with('success', 'Xóa đặt bàn thành công.');

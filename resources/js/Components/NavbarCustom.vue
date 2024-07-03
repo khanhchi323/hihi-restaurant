@@ -6,7 +6,7 @@ import Logo from "/public/images/logohihi.png";
         <!-- Image Logo -->
         <div class="flex flex-col items-center">
             <div>
-                <a href="http://127.0.0.1:8000">
+                <a href="/Homepage">
                     <img :src="Logo" alt="Logo" class="w-16 h-14 mt-4 mb-2" />
                 </a>
             </div>
@@ -14,7 +14,7 @@ import Logo from "/public/images/logohihi.png";
             <div class="flex flex-col items-center my-4">
                 <!-- Icon Home -->
                 <a
-                    href="http://127.0.0.1:8000"
+                    href="/HomePage"
                     class="group relative flex items-center justify-center mb-2 icon"
                 >
                     <svg

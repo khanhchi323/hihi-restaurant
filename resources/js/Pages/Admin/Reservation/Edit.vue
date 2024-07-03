@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div class="container mx-auto mt-10">
         <h1 class="text-2xl mb-6">Chỉnh Sửa Đặt Bàn</h1>
         <form @submit.prevent="submitForm">
@@ -37,4 +37,9 @@
                 <input
                     type="time"
                     id="reservation_time"
-                    v
+                    v -->
+<script>
+export default {
+    
+}
+</script>c

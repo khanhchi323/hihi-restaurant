@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
-use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -59,7 +58,7 @@ class MenuController extends Controller
         $menu->category_name = $request->category_name;
         $menu->price = $request->price;
         $menu->image = $imagePath;
-        $menu->save();      
+        $menu->save();
 
         return redirect()->route('menu.list')->with('success', 'Menu created successfully!');
     }
@@ -92,7 +91,7 @@ class MenuController extends Controller
             //lấy tên file ảnh mới và upload lên serve
             $imagePath = $request->file('image')->store('menus', 'public');
 
-            Category::find($id)->update([
+            Menu::find($id)->update([
                 'menu_name' => $request->menu_name,
                 'category_name' => $request->category_name,
                 'price' => $request->price,

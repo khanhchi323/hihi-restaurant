@@ -5,3 +5,6 @@
         <slot />
     </button>
 </template>
+<script>
+
+</script>

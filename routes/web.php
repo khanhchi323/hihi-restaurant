@@ -30,6 +30,10 @@ Route::get('/Admin/Menu', function () {
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/{any}', function () {
+    return view('index');
+})->where('any', '.*');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

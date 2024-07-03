@@ -20,7 +20,6 @@ export default defineConfig({
     ],
     build: {
         esbuildOptions: {
-            // Set esmExternals to true if all your external dependencies are ES modules
             esmExternals: true,
         },
     },

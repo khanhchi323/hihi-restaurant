@@ -86,11 +86,11 @@ class MenuController extends Controller
     public function update($id, Request $request)
     {
         Validator::make($request->all(), [
-            'menu_name' => ['required'],
-            'category_name' => ['required'],
-            'description' => ['required'],
-            'price' => ['required'],
-            'image' => ['required'],
+            'menu_name',
+            'category_name',
+            'description',
+            'price',
+            'image'
         ])->validate();
 
         if ($request->hasFile('image')) {
@@ -99,7 +99,7 @@ class MenuController extends Controller
             Menu::find($id)->update([
                 'menu_name' => $request->menu_name,
                 'category_name' => $request->category_name,
-                'description' => $request->description,
+                'description',
                 'price' => $request->price,
                 'image' => $imagePath,
             ]);

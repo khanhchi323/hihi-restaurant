@@ -1,6 +1,7 @@
 <template>
     <Head title="Create Table" />
     <BreezeAuthenticatedLayout>
+    
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Create Table
@@ -35,9 +36,9 @@
                                 >
                                     <option value="">Select an area</option>
                                     <option
-                                        v-for="area in props.areas"
-                                        :key="area.id"
-                                        :value="area.id"
+                                        v-for="area in areas"
+                                        :key="area.area_id"
+                                        :value="area.area_id"
                                     >
                                         {{ area.area_name }}
                                     </option>
@@ -70,6 +71,7 @@ import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
 import { onMounted, defineProps } from "vue";
 const props = defineProps(["tables"]);
+
 
 const form = useForm({
     table_name: "",

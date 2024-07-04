@@ -1,6 +1,7 @@
 <script setup>
 import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
+import { ref } from "vue";
 
 const form = useForm({
     customer_name: "",
@@ -18,33 +19,26 @@ const submit = () => {
     formData.append("reservation_date", form.reservation_date);
     formData.append("reservation_time", form.reservation_time);
     formData.append("number_of_guests", form.number_of_guests);
-   
 
-  form.post(route("reservation.store"), {
-    data: formData,
-    onSuccess: () => {
-        form.reset(); // Reset form sau khi lưu thành công
-        // Chuyển hướng đến trang reservation.list sau khi lưu thành công
-        window.location.href = route('reservation.list');
-    },
-    onError: (errors) => {
-        // Xử lý lỗi nếu cần
-        console.error(errors);
-    },
-    preserveState: false, // Không giữ lại trạng thái của form sau khi post
-    forceFormData: true, // Bắt buộc sử dụng FormData
-});
-
+    form.post(route("reservation.store"), {
+        data: formData,
+        onSuccess: () => {
+            form.reset();
+        },
+        onError: () => {},
+        preserveState: false,
+        forceFormData: true,
+    });
 };
 </script>
+
 <template>
     <Head title="Create Reservation" />
-
     <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Edit Reservation
-            </h2>   
+            </h2>
         </template>
         <div class="py-6 flex justify-center items-center">
             <div class="w-full max-w-2xl">
@@ -53,17 +47,24 @@ const submit = () => {
                         <form name="createForm" @submit.prevent="submit">
                             <div class="flex flex-col">
                                 <div class="mb-4">
-                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="customer_name">Tên Khách Hàng:</label>
+                                    <label
+                                        class="block text-gray-700 text-sm font-bold mb-2"
+                                        for="customer_name"
+                                        >Customer Name:</label
+                                    >
                                     <input
                                         type="text"
                                         id="customer_name"
                                         v-model="form.customer_name"
                                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                        required
                                     />
                                 </div>
                                 <div class="mb-4">
-                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="phone_number">Số Điện Thoại:</label>
+                                    <label
+                                        class="block text-gray-700 text-sm font-bold mb-2"
+                                        for="phone_number"
+                                        >Phone Number:</label
+                                    >
                                     <input
                                         type="text"
                                         id="phone_number"
@@ -73,7 +74,11 @@ const submit = () => {
                                     />
                                 </div>
                                 <div class="mb-4">
-                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="reservation_date">Ngày Đặt:</label>
+                                    <label
+                                        class="block text-gray-700 text-sm font-bold mb-2"
+                                        for="reservation_date"
+                                        >Reservation Date:</label
+                                    >
                                     <input
                                         type="date"
                                         id="reservation_date"
@@ -83,7 +88,11 @@ const submit = () => {
                                     />
                                 </div>
                                 <div class="mb-4">
-                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="reservation_time">Giờ Đặt:</label>
+                                    <label
+                                        class="block text-gray-700 text-sm font-bold mb-2"
+                                        for="reservation_time"
+                                        >Reservation Time:</label
+                                    >
                                     <input
                                         type="time"
                                         id="reservation_time"
@@ -93,7 +102,11 @@ const submit = () => {
                                     />
                                 </div>
                                 <div class="mb-4">
-                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="number_of_guests">Số Khách:</label>
+                                    <label
+                                        class="block text-gray-700 text-sm font-bold mb-2"
+                                        for="number_of_guests"
+                                        >Slots:</label
+                                    >
                                     <input
                                         type="number"
                                         id="number_of_guests"
@@ -102,7 +115,9 @@ const submit = () => {
                                         required
                                     />
                                 </div>
-                                <div class="flex items-center justify-between mb-6">
+                                <div
+                                    class="flex items-center justify-between mb-6"
+                                >
                                     <Link
                                         class="px-6 py-2 text-white bg-red-500 rounded-md focus:outline-none"
                                         :href="route('reservation.list')"
@@ -114,10 +129,10 @@ const submit = () => {
                                         type="submit"
                                         class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
                                     >
-                                        Save
+                                        Create
                                     </button>
                                 </div>
-                            </div>  
+                            </div>
                         </form>
                     </div>
                 </div>

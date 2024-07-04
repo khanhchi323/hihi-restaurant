@@ -69,13 +69,6 @@ class CategoryController extends Controller
         ])->validate();
 
         if ($request->hasFile('image')) {
-
-            // //xóa file ảnh cũ
-            // $images=Store::select('select image from posts where id= :id', ['id' => $id]);
-            // foreach ($images as $image) {
-            //     File::delete(public_path(path_delete.$image->image));
-            // }   
-            //lấy tên file ảnh mới và upload lên serve
             $imagePath = $request->file('image')->store('categories', 'public');
 
             Category::find($id)->update([

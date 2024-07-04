@@ -1,6 +1,7 @@
 <script setup>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
+import { onMounted } from "vue";
 
 const props = defineProps(["reservations"]);
 const form = useForm();
@@ -13,7 +14,7 @@ function destroy(id) {
 </script>
 <template>
     <Head title="Reservation" />
-    <AuthenticatedLayout>
+    <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Reservation Management
@@ -123,5 +124,5 @@ function destroy(id) {
                 </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </BreezeAuthenticatedLayout>
 </template>

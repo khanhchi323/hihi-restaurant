@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 
 class ReservationController extends Controller
 {
@@ -35,15 +38,23 @@ class ReservationController extends Controller
             'table_id' => 'required|exists:tables,table_id',
         ]);
 
-        Reservation::create($request->all());
-
+        $reservation = new Reservation();
+        $reservation->customer_name = $request->customer_name;
+        $reservation->phone_number = $request->phone_number;
+        $reservation->reservation_date = $request->reservation_date;
+        $reservation->reservation_time = $request->reservation_time;
+        $reservation->number_of_guests = $request->number_of_guests;
+        $reservation->table_id = $request->table_id;
+        $reservation->save();
+        
         return redirect()->route('reservation.list')->with('success', 'Đặt bàn thành công.');
     }
 
-    // Hiển thị form chỉnh sửa đặt bàn
-    public function edit($id)
+    public function edit(Reservation $reservation)
     {
-        $reservation = Reservation::findOrFail($id);
+        if (!$reservation) {
+            abort(404);
+        }
         return Inertia::render('Admin/Reservation/Edit', [
             'reservation' => $reservation
         ]);
@@ -52,27 +63,30 @@ class ReservationController extends Controller
     // Cập nhật thông tin đặt bàn
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'customer_name' => 'required|string|max:255',
-            'phone_number' => 'required|string|max:15',
-            'reservation_date' => 'required|date',
-            'reservation_time' => 'required',
-            'number_of_guests' => 'required|integer',
-            'id_table' => 'required|exists:tables,id_table',
+        Validator::make($request->all(), [
+            'customer_name' => ['required'],
+            'phone_number' => ['required'],
+            'reservation_date' => ['required'],
+            'reservation_time' => ['required'],
+            'number_of_guests' => ['required'],
+            'table_id' => ['required'],
+        ])->validate();
+
+        Reservation::find($id)->update([
+            'customer_name' => $request->customer_name,
+            'phone_number' => $request->phone_number,
+            'reservation_date' => $request->reservation_date,
+            'reservation_time' => $request->reservation_time,
+            'number_of_guests' => $request->number_of_guests,
+            'table_id' => $request->table_id,
         ]);
 
-        $reservation = Reservation::findOrFail($id);
-        $reservation->update($request->all());
-
-        return redirect()->route('reservation.list')->with('success', 'Cập nhật đặt bàn thành công.');
+        return redirect()->route('reservation.list');
     }
 
-    // Xóa đặt bàn
-    public function destroy($id)
+    public function destroy($id): RedirectResponse
     {
-        $reservation = Reservation::findOrFail($id);
-        $reservation->delete();
-
-        return redirect()->route('reservation.list')->with('success', 'Xóa đặt bàn thành công.');
+        Reservation::find($id)->delete();
+        return Redirect::route('reservation.list');
     }
 }

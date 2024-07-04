@@ -38,7 +38,6 @@ const submit = () => {
 
 <template>
     <Head title="Create Category" />
-
     <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -68,7 +67,7 @@ const submit = () => {
                                     <label
                                         for="image"
                                         class="block text-sm font-medium text-gray-700"
-                                        >Ảnh:</label
+                                        >Image:</label
                                     >
                                     <input
                                         type="file"

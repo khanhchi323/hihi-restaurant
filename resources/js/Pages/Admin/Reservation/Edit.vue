@@ -38,8 +38,3 @@
                     type="time"
                     id="reservation_time"
                     v -->
-<script>
-export default {
-    
-}
-</script>c

@@ -9,7 +9,7 @@ class Table extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'number', 'area_id'
+        'name', 'area_name'
        ];
     public function area()
     {

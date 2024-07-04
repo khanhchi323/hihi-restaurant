@@ -1,19 +1,3 @@
-=<script setup>
-import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
-
-const props = defineProps(["areas"]);
-
-const { data: form, post } = useForm({
-    table_name: "",
-    area_name: "",
-});
-
-const submit = () => {
-    post(route("table.store"), form); // Thêm tham số form để gửi dữ liệu lên phpadmin
-};
-</script>
-
 <template>
     <Head title="Create Table" />
     <BreezeAuthenticatedLayout>
@@ -29,7 +13,7 @@ const submit = () => {
                         <form @submit.prevent="submit">
                             <div class="mb-4">
                                 <label for="table_name" class="block text-gray-700">
-                                    Table
+                                    Table Name
                                 </label>
                                 <input
                                     v-model="form.table_name"
@@ -40,13 +24,13 @@ const submit = () => {
                                 />
                             </div>
                             <div class="mb-4">
-                                <label for="area_name" class="block text-gray-700">
+                                <label for="area_id" class="block text-gray-700">
                                     Area
                                 </label>
                                 <select
-                                    v-model="form.area_name"
-                                    id="area_name"
-                                    name="area_name"
+                                    v-model="form.area_id"
+                                    id="area_id"
+                                    name="area_id"
                                     class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                 >
                                     <option value="">Select an area</option>
@@ -80,3 +64,23 @@ const submit = () => {
         </div>
     </BreezeAuthenticatedLayout>
 </template>
+
+<script setup>
+import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
+import { onMounted, defineProps } from "vue";
+const props = defineProps(["tables"]);
+
+const form = useForm({
+    table_name: "",
+    area_id: "", // Sử dụng area_id để lưu ID của khu vực
+});
+
+const submit = () => {
+    post(route("table.store"), form);
+};
+
+onMounted(() => {
+    console.log(props.areas);
+});
+</script>

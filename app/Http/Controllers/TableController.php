@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Table;
+use App\Models\Area;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -14,10 +15,13 @@ class TableController extends Controller
 {
     public function index()
     {
-        $tables = Table::all(); // hoặc paginate() nếu bạn muốn phân trang
+        $tables = Table::all(); 
+        $areas = Area::all();
 
         return Inertia::render('Admin/Table/List', [
-            'tables' => $tables
+            'tables' => $tables,
+            'areas' => $areas
+            
         ]);
     }
     public function edit(Table $table)
@@ -34,37 +38,54 @@ class TableController extends Controller
     {
         return Inertia::render('Admin/Table/Create');
     }
+
     public function store(Request $request)
-    {
-        $request->validate([
-            'table_name' => 'required|string|max:255',
-            'area_name' => 'required|string|max:255',
-        ]);
+{
+    $request->validate([
+        'table_name' => 'required|string|max:255',
+        'area_id' => 'required|exists:areas,id', // Đảm bảo area_id hợp lệ
+    ]);
 
-        $table = new Table();
-        $table->table_name = $request->table_name;
-        $table->area_name = $request->area_name;
-        $table->save();
+    // Lấy khu vực từ ID
+    $area = Area::where('id', $request->area_id)->first();
 
-        return redirect()->route('table.list')->with('success', 'Table created successfully!');
+    if (!$area) {
+        return redirect()->route('table.list')->with('error', 'Area not found!');
     }
+
+    // Tạo bảng mới và lưu area_name từ area_id
+    $table = new Table();
+    $table->table_name = $request->table_name;
+    $table->area_name = $area->name; // Lưu tên khu vực vào cột area_name của bảng tables
+    $table->area_id = $request->area_id; // Lưu area_id
+    $table->save();
+
+    return redirect()->route('table.list')->with('success', 'Table created successfully!');
+}
+
+
+
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'area_name' => 'required|string|max:255',
+            'table_name' => 'required|string|max:255',
+            'area_id' => 'required|exists:areas,id', // Đảm bảo area_id hợp lệ
         ]);
-        $table = Table::find($id);
-        if (!$table) {
+
+        try {
+            $table = Table::findOrFail($id);
+        } catch (\Exception $e) {
             return redirect()->route('table.list')->with('error', 'Table not found!');
         }
 
         $table->table_name = $request->table_name;
-        $table->area_name = $request->area_name;
+        $table->area_id = $request->area_id;
         $table->save();
 
         return redirect()->route('table.list')->with('success', 'Table updated successfully!');
     }
+
     public function destroy($id): RedirectResponse
     {   
         Table::find($id)->delete();

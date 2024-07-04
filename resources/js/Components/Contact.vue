@@ -1,4 +1,3 @@
-<!-- components/Contact.vue -->
 <script setup>
 import PublicLayout from "@/Layouts/PublicLayout.vue";
 import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
@@ -6,7 +5,7 @@ import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
 const form = useForm({
     user_name: "",
     email: "",
-    phonenumber: "", 
+    phonenumber: "",
     message: "",
 });
 
@@ -20,15 +19,24 @@ function submit() {
 
     <PublicLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Contact Us
-            </h2>
+            <div class="">
+                <h2
+                    class="font-semibold text-3xl text-gray-800 leading-tight items-center p-4"
+                >
+                    Contact Us
+                </h2>
+                <p class="pl-4 text-md text-slate-500">Quý khách để lại thông tin liên lạc - Chúng tôi sẽ liên hệ bạn sớm nhất có thể</p>
+            </div>
         </template>
         <div class="py-6 flex">
             <div class="w-2/3 max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
-                        <form name="createForm" @submit.prevent="submit" method="POST">
+                        <form
+                            name="createForm"
+                            @submit.prevent="submit"
+                            method="POST"
+                        >
                             <div class="mb-4">
                                 <label
                                     for="user_name"

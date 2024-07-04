@@ -4,7 +4,10 @@ import NavbarCustom from "@/Components/NavbarCustom.vue";
 </script>
 
 <template>
-        <div class="flex">
+    <header >
+        <slot name="header"></slot>
+    </header>
+    <div class="flex">
         <div class="fixed top-0 left-0 w-[6%] bg-white h-[100vh]">
             <NavbarCustom />
         </div>

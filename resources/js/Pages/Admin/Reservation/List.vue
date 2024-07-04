@@ -62,7 +62,7 @@ function destroy(id) {
                                 class="text-center"
                             >
                                 <td class="border px-4 py-2">
-                                    {{ reservation.reservation_id }}
+                                    {{ reservation.id }}
                                 </td>
                                 <td class="border px-4 py-2">
                                     {{ reservation.customer_name }}

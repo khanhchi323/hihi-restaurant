@@ -6,7 +6,7 @@ import Logo from "/public/images/logohihi.png";
         <!-- Image Logo -->
         <div class="flex flex-col items-center">
             <div>
-                <a href="/Homepage">
+                <a href="/">
                     <img :src="Logo" alt="Logo" class="w-16 h-14 mt-4 mb-2" />
                 </a>
             </div>
@@ -14,7 +14,7 @@ import Logo from "/public/images/logohihi.png";
             <div class="flex flex-col items-center my-4">
                 <!-- Icon Home -->
                 <a
-                    href="/HomePage"
+                    href="/"
                     class="group relative flex items-center justify-center mb-2 icon"
                 >
                     <svg
@@ -79,7 +79,7 @@ import Logo from "/public/images/logohihi.png";
                     </svg>
 
                     <div
-                    class="absolute top-0 left-12 w-[3px] h-0 bg-red-500 bg-line transition-all"
+                        class="absolute top-0 left-12 w-[3px] h-0 bg-red-500 bg-line transition-all"
                     ></div>
                 </a>
 

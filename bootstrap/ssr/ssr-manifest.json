@@ -4,8 +4,8 @@
   ],
   "node_modules/laravel-vite-plugin/inertia-helpers/index.js": [],
   "public/images/logohihi.png": [
-    "/build/assets/NavbarCustom-C0eHW9sC.js",
-    "/build/assets/NavbarCustom-CeO32_Fb.css",
+    "/build/assets/NavbarCustom-Dtm_faHj.js",
+    "/build/assets/NavbarCustom-D2dvqkdW.css",
     "/build/assets/logohihi-CPnWUKt3.png"
   ],
   "resources/js/Components/ApplicationLogo.vue": [
@@ -24,7 +24,7 @@
     "/build/assets/AuthenticatedLayout-CE-vXLbb.js"
   ],
   "resources/js/Components/Footer.vue": [
-    "/build/assets/HomePage-CCyqw_lm.js"
+    "/build/assets/HomePage-DJGiWvFh.js"
   ],
   "resources/js/Components/HomeforStaff.vue": [
     "/build/assets/Dashboard-DVfRkXKp.js",
@@ -41,11 +41,11 @@
     "/build/assets/TextInput-Bq3bXff-.js"
   ],
   "resources/js/Components/MenuforGuest.vue": [
-    "/build/assets/PublicLayout-DFz9KvY5.js",
+    "/build/assets/PublicLayout-D3MXp3Zg.js",
     "/build/assets/Dashboard-BaDip-qa.css"
   ],
   "resources/js/Components/MenuforGuest.vue?vue&type=style&index=0&lang.css": [
-    "/build/assets/PublicLayout-DFz9KvY5.js",
+    "/build/assets/PublicLayout-D3MXp3Zg.js",
     "/build/assets/Dashboard-BaDip-qa.css"
   ],
   "resources/js/Components/Modal.vue": [
@@ -55,13 +55,13 @@
     "/build/assets/AuthenticatedLayout-CE-vXLbb.js"
   ],
   "resources/js/Components/NavbarCustom.vue": [
-    "/build/assets/NavbarCustom-C0eHW9sC.js",
-    "/build/assets/NavbarCustom-CeO32_Fb.css",
+    "/build/assets/NavbarCustom-Dtm_faHj.js",
+    "/build/assets/NavbarCustom-D2dvqkdW.css",
     "/build/assets/logohihi-CPnWUKt3.png"
   ],
-  "resources/js/Components/NavbarCustom.vue?vue&type=style&index=0&scoped=c1f84737&lang.css": [
-    "/build/assets/NavbarCustom-C0eHW9sC.js",
-    "/build/assets/NavbarCustom-CeO32_Fb.css",
+  "resources/js/Components/NavbarCustom.vue?vue&type=style&index=0&scoped=4a46ea04&lang.css": [
+    "/build/assets/NavbarCustom-Dtm_faHj.js",
+    "/build/assets/NavbarCustom-D2dvqkdW.css",
     "/build/assets/logohihi-CPnWUKt3.png"
   ],
   "resources/js/Components/Order.vue": [
@@ -81,7 +81,7 @@
     "/build/assets/TextInput-Bq3bXff-.js"
   ],
   "resources/js/Components/Thumbnail.vue": [
-    "/build/assets/HomePage-CCyqw_lm.js"
+    "/build/assets/HomePage-DJGiWvFh.js"
   ],
   "resources/js/Layouts/AuthenticatedLayout.vue": [
     "/build/assets/AuthenticatedLayout-CE-vXLbb.js"
@@ -120,7 +120,7 @@
     "/build/assets/List-bZzMy39F.js"
   ],
   "resources/js/Pages/Admin/Reservation/Create.vue": [
-    "/build/assets/Create-CUw0RomY.js"
+    "/build/assets/Create-iB-s1fdQ.js"
   ],
   "resources/js/Pages/Admin/Reservation/Edit.vue": [
     "/build/assets/Edit-BKcsjv7Z.js"
@@ -135,7 +135,7 @@
     "/build/assets/Edit-D5qnnno0.js"
   ],
   "resources/js/Pages/Admin/Table/List.vue": [
-    "/build/assets/List-CKorajbJ.js"
+    "/build/assets/List-BdAzq4Zo.js"
   ],
   "resources/js/Pages/Auth/ConfirmPassword.vue": [
     "/build/assets/ConfirmPassword-BwyRnc1c.js"
@@ -160,7 +160,7 @@
     "/build/assets/Dashboard-BaDip-qa.css"
   ],
   "resources/js/Pages/HomePage.vue": [
-    "/build/assets/HomePage-CCyqw_lm.js"
+    "/build/assets/HomePage-DJGiWvFh.js"
   ],
   "resources/js/Pages/Profile/Edit.vue": [
     "/build/assets/Edit-w7Eutfjh.js"
@@ -178,7 +178,7 @@
     "/build/assets/Booking-CmQO2B2I.js"
   ],
   "resources/js/Pages/PublicLayout.vue": [
-    "/build/assets/PublicLayout-DFz9KvY5.js",
+    "/build/assets/PublicLayout-D3MXp3Zg.js",
     "/build/assets/Dashboard-BaDip-qa.css"
   ],
   "resources/js/ssr.js": [],

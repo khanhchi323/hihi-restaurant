@@ -30,9 +30,10 @@ Route::get('/Admin/Menu', function () {
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/{any}', function () {
-    return view('index');
-})->where('any', '.*');
+Route::get('/', function () {
+    return inertia('HomePage');
+});
+
 
 
 Route::middleware('auth')->group(function () {
@@ -81,7 +82,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/Admin/Reservation/List', [ReservationController::class, 'index'])->name('reservation.list');
     Route::get('/Admin/Reservation/Create', [ReservationController::class, 'create'])->name('reservation.create');
     Route::post('/Admin/Reservation/Create', [ReservationController::class, 'store'])->name('reservation.store');
-    Route::get('/Admin/Reservation/Edit/{id}', [ReservationController::class, 'edit'])->name('reservation.edit');
+    Route::get('/Admin/Reservation/Edit/{reservation}', [ReservationController::class, 'edit'])->name('reservation.edit');
     Route::put('/Admin/Reservation/Edit/{id}', [ReservationController::class, 'update'])->name('reservation.update');
     Route::get('/Admin/Reservation/Show/{id}', [ReservationController::class, 'show'])->name('area.show');
     Route::get('/Admin/Reservation/Show{id}', [ReservationController::class, 'show'])->name('reservation.show');

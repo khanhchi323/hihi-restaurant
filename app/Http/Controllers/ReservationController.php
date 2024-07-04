@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Redirect;
 
 class ReservationController extends Controller
 {
-    // Hiển thị danh sách đặt bàn
     public function index()
     {
         $reservations = Reservation::all();
@@ -20,13 +19,11 @@ class ReservationController extends Controller
         ]);
     }
 
-    // Hiển thị form thêm đặt bàn
     public function create()
     {
         return Inertia::render('Admin/Reservation/Create');
     }
 
-    // Lưu thông tin đặt bàn mới
     public function store(Request $request)
     {
         $request->validate([

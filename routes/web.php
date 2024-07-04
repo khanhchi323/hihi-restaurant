@@ -6,6 +6,8 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\TableController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\ContactController;
+use App\Models\Contact;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -31,9 +33,6 @@ Route::get('/', function () {
     return inertia('HomePage');
 })->name('HomePage');
 
-Route::get('/BookingforGuest', function () {
-    return Inertia::render('BookingforGuest');
-})->name('BookingforGuest');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -46,7 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/Admin/Category/Create', [CategoryController::class, 'store'])->name('category.store');
     Route::get('/Admin/Category/Edit/{cate}', [CategoryController::class, 'edit'])->name('category.edit');
     Route::post('/Admin/Category/Edit/{id}', [CategoryController::class, 'update'])->name('category.update');
-    Route::delete('/Admin/Category/List{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
+    Route::delete('/Admin/Category/List/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
     Route::get('/Admin/Category/Show/{id}', [CategoryController::class, 'show'])->name('category.show');
 
     //MENU
@@ -85,7 +84,16 @@ Route::middleware('auth')->group(function () {
     Route::post('/Admin/Reservation/Edit/{id}', [ReservationController::class, 'update'])->name('reservation.update');
     Route::delete('/Admin/Reservation/List{id}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
     Route::get('/Admin/Reservation/Show/{id}', [ReservationController::class, 'show'])->name('reservation.show');
+
+    //Contact
+    Route::get('/Admin/Contact/List', [ContactController::class, 'index'])->name('contact.list');
+    Route::get('/Admin/Contact/Show/{id}', [ContactController::class, 'show'])->name('contact.show');
+    Route::delete('/Admin/Contact/List{id}', [ContactController::class, 'destroy'])->name('contact.destroy');
+
 });
+
+Route::post('/Contact', [ContactController::class, 'store'])->name('contact.store');
+Route::get('/Contact', [ContactController::class, 'create'])->name('contact.create');
 
 
 Route::get('/dbconn', function () {

@@ -60,7 +60,9 @@ onMounted(() => {});
                                         {{ table.table_name }}
                                     </td>
                                     <td class="border px-4 py-2">
-                                       <span v-if="areas && areas[table.area_id]">
+                                        <span
+                                            v-if="areas && areas[table.area_id]"
+                                        >
                                             {{ areas[table.area_id].area_name }}
                                         </span>
                                     </td>

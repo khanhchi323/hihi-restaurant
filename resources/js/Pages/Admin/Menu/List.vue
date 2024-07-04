@@ -5,7 +5,7 @@ import { ref, onMounted } from "vue";
 
 const props = defineProps(["menus", "categories"]);
 const form = useForm();
-const selectedCategory = ref(''); // Thêm dòng này
+const selectedCategory = ref("");
 
 function destroy(id) {
     if (confirm("Bạn có chắc chắn muốn xóa không?")) {

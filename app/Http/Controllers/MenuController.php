@@ -43,6 +43,7 @@ class MenuController extends Controller
         $request->validate([
             'menu_name' => 'required|string|max:255',
             'category_name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
             'price' => 'required|string|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -56,6 +57,7 @@ class MenuController extends Controller
         $menu = new Menu();
         $menu->menu_name = $request->menu_name;
         $menu->category_name = $request->category_name;
+        $menu->description = $request->description;
         $menu->price = $request->price;
         $menu->image = $imagePath;
         $menu->save();
@@ -77,6 +79,7 @@ class MenuController extends Controller
         Validator::make($request->all(), [
             'menu_name' => ['required'],
             'category_name' => ['required'],
+            'description' => ['required'],
             'price' => ['required'],
             'image' => ['required'],
         ])->validate();
@@ -94,6 +97,7 @@ class MenuController extends Controller
             Menu::find($id)->update([
                 'menu_name' => $request->menu_name,
                 'category_name' => $request->category_name,
+                'description' => $request->description,
                 'price' => $request->price,
                 'image' => $imagePath,
             ]);
@@ -101,6 +105,7 @@ class MenuController extends Controller
             Menu::find($id)->update([
                 'menu_name' => $request->menu_name,
                 'category_name' => $request->category_name,
+                'description' => $request->description,
                 'price' => $request->price,
             ]);
         return redirect()->route('menu.list');

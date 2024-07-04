@@ -4,8 +4,9 @@ import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
 import { ref } from "vue";
 
 const form = useForm({
-    name: "",
+    menu_name: "",
     category_name: "",
+    description: "",
     price: "",
     image: null,
 });
@@ -22,6 +23,7 @@ const submit = () => {
     const formData = new FormData();
     formData.append("menu_name", form.menu_name);
     formData.append("category_name", form.category_name);
+    formData.append("description", form.description);
     formData.append("price", form.price);
     if (form.image) {
         formData.append("image", form.image);
@@ -68,14 +70,27 @@ const submit = () => {
                             </div>
                             <div class="mb-4">
                                 <label
-                                    for="name"
+                                    for="category"
                                     class="block text-sm font-medium text-gray-700"
                                     >Category</label
                                 >
                                 <input
                                     type="text"
-                                    id="name"
+                                    id="category"
                                     v-model="form.category_name"
+                                    class="mt-1 p-2 border rounded-md w-full"
+                                />
+                            </div>
+                            <div class="mb-4">
+                                <label
+                                    for="description"
+                                    class="block text-sm font-medium text-gray-700"
+                                    >Description</label
+                                >
+                                <input
+                                    type="text"
+                                    id="description"
+                                    v-model="form.description"
                                     class="mt-1 p-2 border rounded-md w-full"
                                 />
                             </div>

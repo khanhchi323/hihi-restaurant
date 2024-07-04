@@ -1,10 +1,11 @@
 <script setup>
 import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, Link, useForm, Inertia } from "@inertiajs/inertia-vue3";
-import { onMounted } from "vue";
+import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
+import { ref, onMounted } from "vue";
 
-const props = defineProps(["menus","categories"]);
+const props = defineProps(["menus", "categories"]);
 const form = useForm();
+const selectedCategory = ref(''); // Thêm dòng này
 
 function destroy(id) {
     if (confirm("Bạn có chắc chắn muốn xóa không?")) {
@@ -20,7 +21,7 @@ onMounted(() => {});
     <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Reservation Management
+                Menu Management
             </h2>
         </template>
         <div class="py-6">
@@ -41,12 +42,14 @@ onMounted(() => {});
                             >
                                 <option value="">All</option>
                                 <option
-                                    v-for="(category_name, index) in props.categories"
+                                    v-for="(
+                                        category_name, index
+                                    ) in props.categories"
                                     :key="index"
-                                    :value="category"
+                                    :value="category_name"
                                 >
                                     {{ category_name }}
-                                </option>   
+                                </option>
                             </select>
                         </div>
                         <div class="flex mb-6">
@@ -108,7 +111,7 @@ onMounted(() => {});
                                     <div class="flex flex-col space-y-2">
                                         <Link
                                             tabIndex="1"
-                                            className="px-4 py-2 text-sm text-white bg-blue-500 rounded"
+                                            class="px-4 py-2 text-sm text-white bg-blue-500 rounded"
                                             :href="route('menu.edit', menu.id)"
                                         >
                                             Edit

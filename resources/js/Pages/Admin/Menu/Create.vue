@@ -31,6 +31,7 @@ const submit = () => {
         data: formData,
         onSuccess: () => {
             form.reset();
+            imagePreview.value = "";
         },
         onError: () => {},
         preserveState: false,
@@ -61,7 +62,7 @@ const submit = () => {
                                 <input
                                     type="text"
                                     id="name"
-                                    v-model="form.name"
+                                    v-model="form.menu_name"
                                     class="mt-1 p-2 border rounded-md w-full"
                                 />
                             </div>
@@ -108,10 +109,7 @@ const submit = () => {
                                     :src="imagePreview"
                                     alt="Ảnh Danh Mục"
                                     class="mt-2"
-                                    style="
-                                        max-width: 100px;
-                                        max-height: 100px;
-                                    "
+                                    style="max-width: 100px; max-height: 100px"
                                 />
                             </div>
                             <div class="flex items-center justify-between mb-6">

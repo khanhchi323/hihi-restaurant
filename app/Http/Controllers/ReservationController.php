@@ -46,9 +46,15 @@ class ReservationController extends Controller
         $reservation->number_of_guests = $request->number_of_guests;
         // $reservation->table_id = $request->table_id;
         $reservation->save();
+        // if ($request->path() === 'Admin/Reservation/Create') {
+            return redirect()->route('reservation.list')->with('success', 'Đặt bàn thành công.');
+        // } elseif ($request->path() === '/BookingforGuest')  {
+            // return redirect()->route('HomePage')->with('success', 'Đặt bàn thành công.');
+        }
 
-        return redirect()->route('reservation.list')->with('success', 'Đặt bàn thành công.');
-    }
+        // Default redirect to reservation list if no specific conditions are met
+        // return redirect()->route('HomePage')->with('success', 'Đặt bàn thành công.');
+    // }
 
     public function edit(Reservation $reservation)
     {

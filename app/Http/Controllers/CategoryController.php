@@ -82,19 +82,8 @@ class CategoryController extends Controller
         return redirect()->route('category.list');
     }
 
-    // public function destroy($id)
-    // {
-    //     $category = Category::findOrFail($id);
-    //     $category->delete();
-    //     return redirect()->route('category.list')->with('success', 'Category deleted successfully!');
-    // }
     public function destroy($id): RedirectResponse
     {
-
-        // $images=DB::select('select image from posts where id= :id', ['id' => $id]);
-        // foreach ($images as $image) {
-        //     File::delete(public_path(path_delete.$image->image));
-        // }   
         Category::find($id)->delete();
         return Redirect::route('category.list');
     }

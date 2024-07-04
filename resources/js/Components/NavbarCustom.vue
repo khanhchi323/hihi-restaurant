@@ -60,7 +60,7 @@ import Logo from "/public/images/logohihi.png";
                 </a>
                 <!-- Booking -->
                 <a
-                    href="#"
+                    href="/BookingforGuest"
                     class="group relative flex items-center justify-center mb-2 icon"
                 >
                     <svg

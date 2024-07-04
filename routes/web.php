@@ -5,19 +5,17 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\TableController;
 use App\Http\Controllers\AreaController;
-use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReservationController;
-use Illuminate\Console\View\Components\Task;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('HomePage');
-});
+})->name('HomePage');
 
 Route::get('/Menu', function () {
-    return Inertia::render('PublicLayout');
+    return Inertia::render('MenuforGuest');
 });
 
 Route::get('/Admin/Menu', function () {
@@ -31,9 +29,11 @@ Route::get('/Admin/Menu', function () {
 
 Route::get('/', function () {
     return inertia('HomePage');
-});
+})->name('HomePage');
 
-
+Route::get('/BookingforGuest', function () {
+    return Inertia::render('BookingforGuest');
+})->name('BookingforGuest');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -86,6 +86,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/Admin/Reservation/List{id}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
     Route::get('/Admin/Reservation/Show/{id}', [ReservationController::class, 'show'])->name('reservation.show');
 });
+
+
 Route::get('/dbconn', function () {
     return view('dbconn');
 });

@@ -1,20 +1,22 @@
 <script setup>
 import { defineProps, useForm } from "@inertiajs/inertia-vue3";
 import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Link } from "@inertiajs/inertia-vue3";
-import Head from "@inertiajs/inertia-vue3";
+import { Link, Head } from "@inertiajs/inertia-vue3";
 import { ref } from "vue";
 
 const props = defineProps({
     menu: Object,
 });
+
 const form = useForm({
     menu_name: props.menu.menu_name,
     category_name: props.menu.category_name,
     price: props.menu.price,
     description: props.menu.description,
-    image: props.menu.image,
+    image: null,
 });
+
+const imagePreview = ref(null);
 
 const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -25,12 +27,27 @@ const handleImageChange = (event) => {
 };
 
 const submit = () => {
+    const formData = new FormData();
+    formData.append("menu_name", form.menu_name);
+    formData.append("category_name", form.category_name);
+    formData.append("description", form.description);
+    formData.append("price", form.price);
+    if (form.image) {
+        formData.append("image", form.image);
+    }
+
     form.post(route("menu.update", props.menu.id), {
+        data: formData,
         forceFormData: true,
+        onSuccess: () => {
+            imagePreview.value = null;
+        },
+        onError: () => {},
+        preserveState: false,
     });
 };
-const imagePreview = ref(null);
 </script>
+
 <template>
     <Head title="Edit Menu" />
     <BreezeAuthenticatedLayout>
@@ -43,31 +60,44 @@ const imagePreview = ref(null);
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 w-2/3">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
-                        <form name="createForm" @submit.prevent="submit">
+                        <form name="editForm" @submit.prevent="submit">
                             <div class="flex flex-col">
                                 <div class="mb-4">
                                     <label
-                                        for="price"
+                                        for="menu_name"
                                         class="block text-sm font-medium text-gray-700"
-                                        >Name</label
+                                        >Menu Name</label
                                     >
                                     <input
                                         type="text"
-                                        id="price"
+                                        id="menu_name"
                                         v-model="form.menu_name"
                                         class="mt-1 p-2 border rounded-md w-full"
                                     />
                                 </div>
                                 <div class="mb-4">
                                     <label
-                                        for="price"
+                                        for="category_name"
                                         class="block text-sm font-medium text-gray-700"
                                         >Category</label
                                     >
                                     <input
                                         type="text"
-                                        id="price"
+                                        id="category_name"
                                         v-model="form.category_name"
+                                        class="mt-1 p-2 border rounded-md w-full"
+                                    />
+                                </div>
+                                <div class="mb-4">
+                                    <label
+                                        for="description"
+                                        class="block text-sm font-medium text-gray-700"
+                                        >Description</label
+                                    >
+                                    <input
+                                        type="text"
+                                        id="description"
+                                        v-model="form.description"
                                         class="mt-1 p-2 border rounded-md w-full"
                                     />
                                 </div>
@@ -84,7 +114,6 @@ const imagePreview = ref(null);
                                         class="mt-1 p-2 border rounded-md w-full"
                                     />
                                 </div>
-
                                 <div class="mb-4">
                                     <label
                                         for="image"
@@ -92,11 +121,12 @@ const imagePreview = ref(null);
                                         >Image</label
                                     >
                                     <img
-                                        className="px-4 py-2 text-blue-800"
+                                        v-if="props.menu.image"
                                         :src="`/storage/${props.menu.image}`"
-                                        alt="image"
+                                        alt="Current Image"
                                         width="150"
                                         height="150"
+                                        class="mt-2 mb-2"
                                     />
                                     <input
                                         type="file"
@@ -107,7 +137,7 @@ const imagePreview = ref(null);
                                     <img
                                         v-if="imagePreview"
                                         :src="imagePreview"
-                                        alt="Ảnh Danh Mục"
+                                        alt="Image Preview"
                                         class="mt-2"
                                         style="
                                             max-width: 100px;
@@ -121,9 +151,8 @@ const imagePreview = ref(null);
                                     <Link
                                         class="px-6 py-2 text-white bg-red-500 rounded-md focus:outline-none"
                                         :href="route('menu.list')"
+                                        >Back</Link
                                     >
-                                        Back
-                                    </Link>
                                     <button
                                         type="submit"
                                         class="px-6 py-2 font-bold text-white bg-green-500 rounded"

@@ -51,19 +51,28 @@ class MenuController extends Controller
         $imagePath = null;
 
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('menus', 'public');
+            try {
+                $imagePath = $request->file('image')->store('menus', 'public');
+            } catch (\Exception $e) {
+                return back()->withErrors(['image' => 'Failed to upload image. ' . $e->getMessage()]);
+            }
         }
 
-        $menu = new Menu();
-        $menu->menu_name = $request->menu_name;
-        $menu->category_name = $request->category_name;
-        $menu->description = $request->description;
-        $menu->price = $request->price;
-        $menu->image = $imagePath;
-        $menu->save();
+        try {
+            $menu = new Menu();
+            $menu->menu_name = $request->menu_name;
+            $menu->category_name = $request->category_name;
+            $menu->description = $request->description;
+            $menu->price = $request->price;
+            $menu->image = $imagePath;
+            $menu->save();
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => 'Failed to save menu. ' . $e->getMessage()]);
+        }
 
         return redirect()->route('menu.list')->with('success', 'Menu created successfully!');
     }
+
 
     public function edit(Menu $menu)
     {
@@ -85,13 +94,6 @@ class MenuController extends Controller
         ])->validate();
 
         if ($request->hasFile('image')) {
-
-            // //xóa file ảnh cũ
-            // $images=Store::select('select image from posts where id= :id', ['id' => $id]);
-            // foreach ($images as $image) {
-            //     File::delete(public_path(path_delete.$image->image));
-            // }   
-            //lấy tên file ảnh mới và upload lên serve
             $imagePath = $request->file('image')->store('menus', 'public');
 
             Menu::find($id)->update([

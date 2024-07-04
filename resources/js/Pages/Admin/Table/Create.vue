@@ -34,12 +34,7 @@
                                     name="area_id"
                                     class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                 >
-                                    <option value="">Select an area</option>
-                                    <option
-                                        v-for="area in areas"
-                                        :key="area.area_id"
-                                        :value="area.area_id"
-                                    >
+                                    <option v-for="area in areas" :key="area.id" :value="area.id">
                                         {{ area.area_name }}
                                     </option>
                                 </select>
@@ -69,20 +64,17 @@
 <script setup>
 import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
-import { onMounted, defineProps } from "vue";
-const props = defineProps(["tables"]);
+import { defineProps } from "vue";
 
-
+const props = defineProps(["areas"]);
 const form = useForm({
     table_name: "",
-    area_id: "", // Sử dụng area_id để lưu ID của khu vực
+    area_id: "", 
 });
 
 const submit = () => {
-    post(route("table.store"), form);
-};
-
-onMounted(() => {
-    console.log(props.areas);
-});
+    form.post(route("table.store"), {
+        forceFormData: true,
+    });
+}
 </script>

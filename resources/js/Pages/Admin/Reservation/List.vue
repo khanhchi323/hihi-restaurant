@@ -51,7 +51,7 @@ function destroy(id) {
                                 <th class="px-4 py-2 w-1/4">
                                     Number of Guests
                                 </th>
-                                <th class="px-4 py-2 w-16">Table ID</th>
+                                <!-- <th class="px-4 py-2 w-16">Table ID</th> -->
                                 <th class="px-4 py-2">Actions</th>
                             </tr>
                         </thead>
@@ -79,9 +79,9 @@ function destroy(id) {
                                 <td class="border px-4 py-2">
                                     {{ reservation.number_of_guests }}
                                 </td>
-                                <td class="border px-4 py-2">
+                                <!-- <td class="border px-4 py-2">
                                     {{ reservation.table_id }}
-                                </td>
+                                </td> -->
                                 <td class="border px-4 py-2">
                                     <div
                                         class="flex items-center justify-center space-x-2"

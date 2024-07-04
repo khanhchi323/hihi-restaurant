@@ -7,7 +7,6 @@ use App\Http\Controllers\TableController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReservationController;
-use App\Models\Menu;
 use Illuminate\Console\View\Components\Task;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -83,16 +82,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/Admin/Reservation/Create', [ReservationController::class, 'create'])->name('reservation.create');
     Route::post('/Admin/Reservation/Create', [ReservationController::class, 'store'])->name('reservation.store');
     Route::get('/Admin/Reservation/Edit/{reservation}', [ReservationController::class, 'edit'])->name('reservation.edit');
-    Route::put('/Admin/Reservation/Edit/{id}', [ReservationController::class, 'update'])->name('reservation.update');
-    Route::get('/Admin/Reservation/Show/{id}', [ReservationController::class, 'show'])->name('area.show');
-    Route::get('/Admin/Reservation/Show{id}', [ReservationController::class, 'show'])->name('reservation.show');
+    Route::post('/Admin/Reservation/Edit/{id}', [ReservationController::class, 'update'])->name('reservation.update');
+    Route::delete('/Admin/Reservation/List{id}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
+    Route::get('/Admin/Reservation/Show/{id}', [ReservationController::class, 'show'])->name('reservation.show');
 });
 Route::get('/dbconn', function () {
     return view('dbconn');
 });
 
-Route::get('/123', function () {
-    return Inertia::render('Menu');
-});
 
 require __DIR__ . '/auth.php';

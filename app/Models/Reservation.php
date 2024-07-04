@@ -17,7 +17,7 @@ class Reservation extends Model
         'reservation_date',
         'reservation_time',
         'number_of_guests',
-        'id_table',
+        // 'id_table',
         
     ];
 

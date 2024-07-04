@@ -9,7 +9,6 @@ const form = useForm({
     reservation_date: "",
     reservation_time: "",
     number_of_guests: "",
-    table_id: "",
 });
 
 const submit = () => {
@@ -37,7 +36,7 @@ const submit = () => {
     <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Edit Reservation
+                Create Reservation
             </h2>
         </template>
         <div class="py-6 flex justify-center items-center">

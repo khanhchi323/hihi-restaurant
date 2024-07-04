@@ -58,7 +58,7 @@ const submit = () => {
                                     >
                                     <input
                                         type="text"
-                                        id="name"
+                                        id="category_name"
                                         v-model="form.category_name"
                                         class="mt-1 p-2 border rounded-md w-full"
                                     />

@@ -35,7 +35,7 @@ class ReservationController extends Controller
             'reservation_date' => 'required|date',
             'reservation_time' => 'required',
             'number_of_guests' => 'required|integer',
-            'table_id' => 'required|exists:tables,table_id',
+            // 'table_id' => 'required|exists:tables,table_id',
         ]);
 
         $reservation = new Reservation();
@@ -44,9 +44,9 @@ class ReservationController extends Controller
         $reservation->reservation_date = $request->reservation_date;
         $reservation->reservation_time = $request->reservation_time;
         $reservation->number_of_guests = $request->number_of_guests;
-        $reservation->table_id = $request->table_id;
+        // $reservation->table_id = $request->table_id;
         $reservation->save();
-        
+
         return redirect()->route('reservation.list')->with('success', 'Đặt bàn thành công.');
     }
 
@@ -69,7 +69,7 @@ class ReservationController extends Controller
             'reservation_date' => ['required'],
             'reservation_time' => ['required'],
             'number_of_guests' => ['required'],
-            'table_id' => ['required'],
+            // 'table_id' => ['required'],
         ])->validate();
 
         Reservation::find($id)->update([
@@ -78,7 +78,7 @@ class ReservationController extends Controller
             'reservation_date' => $request->reservation_date,
             'reservation_time' => $request->reservation_time,
             'number_of_guests' => $request->number_of_guests,
-            'table_id' => $request->table_id,
+            // 'table_id' => $request->table_id,
         ]);
 
         return redirect()->route('reservation.list');
